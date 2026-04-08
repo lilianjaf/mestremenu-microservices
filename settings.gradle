@@ -1,0 +1,6 @@
+rootProject.name = 'mestremenu-microservices'
+
+include 'usuario-service'
+include 'restaurante-service'
+include 'pedido-service'
+include 'pagamento-service'
