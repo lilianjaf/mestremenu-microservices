@@ -30,5 +30,6 @@ RUN chown app:app app.jar
 USER app:app
 
 ENV TZ=America/Sao_Paulo
+ENV JAVA_OPTS=""
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
