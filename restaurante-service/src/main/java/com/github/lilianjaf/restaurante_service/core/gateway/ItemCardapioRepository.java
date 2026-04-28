@@ -1,6 +1,6 @@
 package com.github.lilianjaf.restaurante_service.core.gateway;
 
-import com.github.lilianjaf.mestremenuclean.cardapio.core.domain.ItemCardapio;
+import com.github.lilianjaf.restaurante_service.core.domain.ItemCardapio;
 
 import java.util.List;
 import java.util.Optional;

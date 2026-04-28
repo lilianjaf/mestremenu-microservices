@@ -1,6 +1,6 @@
 package com.github.lilianjaf.restaurante_service.core.rules;
 
-import com.github.lilianjaf.mestremenuclean.restaurante.core.exception.CriacaoRestauranteNaoAutorizadaException;
+import com.github.lilianjaf.restaurante_service.core.exception.CriacaoRestauranteNaoAutorizadaException;
 
 public class ApenasDonoPodeCriarRestauranteRule implements ValidadorCriacaoRestauranteRule {
     @Override

@@ -1,8 +1,10 @@
 package com.github.lilianjaf.restaurante_service.core.dto;
 
-import com.github.lilianjaf.mestremenuclean.cardapio.core.domain.Restaurante;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.domain.TipoNativo;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.domain.Usuario;
+import com.github.lilianjaf.restaurante_service.core.domain.Restaurante;
+import com.github.lilianjaf.restaurante_service.core.domain.TipoNativo;
+import com.github.lilianjaf.restaurante_service.core.domain.Usuario;
+
+import com.github.lilianjaf.restaurante_service.core.rules.CardapioRuleContext;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,7 +14,7 @@ public record CriarCardapioRuleContextDto(
         Restaurante restaurante,
         DadosCriacaoCardapio dados,
         boolean nomeUnico
-) {
+) implements CardapioRuleContext, PermissionRuleContext {
     public boolean isUsuarioDonoDoRestaurante() {
         return usuarioLogado != null &&
                restaurante != null &&
@@ -30,6 +32,10 @@ public record CriarCardapioRuleContextDto(
 
     public boolean hasPeloMenosUmItem() {
         return dados != null && dados.itens() != null && !dados.itens().isEmpty();
+    }
+
+    public boolean alterouItens() {
+        return true;
     }
 
     public boolean hasItensDuplicados() {

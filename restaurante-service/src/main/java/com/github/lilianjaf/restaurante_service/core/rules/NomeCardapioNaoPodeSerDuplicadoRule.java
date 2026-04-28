@@ -1,7 +1,7 @@
 package com.github.lilianjaf.restaurante_service.core.rules;
 
-import com.github.lilianjaf.mestremenuclean.cardapio.core.exception.CardapioException;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.gateway.CardapioRepository;
+import com.github.lilianjaf.restaurante_service.core.exception.CardapioException;
+import com.github.lilianjaf.restaurante_service.core.gateway.CardapioRepository;
 
 public class NomeCardapioNaoPodeSerDuplicadoRule implements ValidadorCardapioRule<CriacaoCardapioContext> {
 

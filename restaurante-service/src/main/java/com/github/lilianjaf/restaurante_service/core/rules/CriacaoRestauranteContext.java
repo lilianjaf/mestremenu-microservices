@@ -1,7 +1,7 @@
 package com.github.lilianjaf.restaurante_service.core.rules;
 
-import com.github.lilianjaf.mestremenuclean.restaurante.core.domain.Usuario;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.dto.DadosCriacaoRestaurante;
+import com.github.lilianjaf.restaurante_service.core.domain.Usuario;
+import com.github.lilianjaf.restaurante_service.core.dto.DadosCriacaoRestaurante;
 
 public record CriacaoRestauranteContext(
         Usuario usuarioLogado,

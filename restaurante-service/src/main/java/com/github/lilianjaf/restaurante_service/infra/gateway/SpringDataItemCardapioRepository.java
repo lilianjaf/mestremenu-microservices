@@ -1,6 +1,6 @@
 package com.github.lilianjaf.restaurante_service.infra.gateway;
 
-import com.github.lilianjaf.mestremenuclean.cardapio.infra.gateway.entity.ItemCardapioEntity;
+import com.github.lilianjaf.restaurante_service.infra.gateway.entity.ItemCardapioEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

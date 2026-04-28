@@ -1,9 +1,9 @@
 package com.github.lilianjaf.restaurante_service.infra.controller;
 
-import com.github.lilianjaf.mestremenuclean.cardapio.core.domain.ItemCardapio;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.dto.DadosAtualizacaoItemCardapio;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.dto.DadosCriacaoItemCardapio;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.usecase.*;
+import com.github.lilianjaf.restaurante_service.core.domain.ItemCardapio;
+import com.github.lilianjaf.restaurante_service.core.dto.DadosAtualizacaoItemCardapio;
+import com.github.lilianjaf.restaurante_service.core.dto.DadosCriacaoItemCardapio;
+import com.github.lilianjaf.restaurante_service.core.usecase.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

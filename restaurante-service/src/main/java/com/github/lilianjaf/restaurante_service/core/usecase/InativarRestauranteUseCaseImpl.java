@@ -1,14 +1,14 @@
 package com.github.lilianjaf.restaurante_service.core.usecase;
 
-import com.github.lilianjaf.mestremenuclean.restaurante.core.domain.Restaurante;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.domain.Usuario;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.exception.DomainException;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.exception.UsuarioLogadoNaoEncontradoException;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.gateway.ObterUsuarioLogadoRestauranteGateway;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.gateway.RestauranteRepository;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.gateway.TransactionGateway;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.rules.InativacaoRestauranteContext;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.rules.InativarRestauranteRule;
+import com.github.lilianjaf.restaurante_service.core.domain.Restaurante;
+import com.github.lilianjaf.restaurante_service.core.domain.Usuario;
+import com.github.lilianjaf.restaurante_service.core.exception.DomainException;
+import com.github.lilianjaf.restaurante_service.core.exception.UsuarioLogadoNaoEncontradoException;
+import com.github.lilianjaf.restaurante_service.core.gateway.ObterUsuarioLogadoGateway;
+import com.github.lilianjaf.restaurante_service.core.gateway.RestauranteRepository;
+import com.github.lilianjaf.restaurante_service.core.gateway.TransactionGateway;
+import com.github.lilianjaf.restaurante_service.core.rules.InativacaoRestauranteContext;
+import com.github.lilianjaf.restaurante_service.core.rules.InativarRestauranteRule;
 
 import java.util.List;
 import java.util.UUID;
@@ -16,13 +16,13 @@ import java.util.UUID;
 public class InativarRestauranteUseCaseImpl implements InativarRestauranteUseCase {
 
     private final RestauranteRepository restauranteRepository;
-    private final ObterUsuarioLogadoRestauranteGateway obterUsuarioLogadoRestauranteGateway;
+    private final ObterUsuarioLogadoGateway obterUsuarioLogadoRestauranteGateway;
     private final TransactionGateway transactionGateway;
     private final List<InativarRestauranteRule> permissaoRules;
     private final List<InativarRestauranteRule> rules;
 
     public InativarRestauranteUseCaseImpl(RestauranteRepository restauranteRepository,
-                                         ObterUsuarioLogadoRestauranteGateway obterUsuarioLogadoRestauranteGateway,
+                                         ObterUsuarioLogadoGateway obterUsuarioLogadoRestauranteGateway,
                                          TransactionGateway transactionGateway,
                                          List<InativarRestauranteRule> permissaoRules,
                                          List<InativarRestauranteRule> rules) {

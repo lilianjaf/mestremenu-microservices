@@ -1,6 +1,6 @@
 package com.github.lilianjaf.restaurante_service.core.dto;
 
-import com.github.lilianjaf.mestremenuclean.restaurante.core.domain.Endereco;
+import com.github.lilianjaf.restaurante_service.core.domain.Endereco;
 
 public record DadosAtualizacaoRestaurante(
         String nome,

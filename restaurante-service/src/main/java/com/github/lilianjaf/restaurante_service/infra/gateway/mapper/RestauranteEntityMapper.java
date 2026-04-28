@@ -1,9 +1,9 @@
 package com.github.lilianjaf.restaurante_service.infra.gateway.mapper;
 
-import com.github.lilianjaf.mestremenuclean.restaurante.core.domain.Endereco;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.domain.Restaurante;
-import com.github.lilianjaf.mestremenuclean.restaurante.infra.gateway.entity.EnderecoEmbeddable;
-import com.github.lilianjaf.mestremenuclean.restaurante.infra.gateway.entity.RestauranteEntity;
+import com.github.lilianjaf.restaurante_service.core.domain.Endereco;
+import com.github.lilianjaf.restaurante_service.core.domain.Restaurante;
+import com.github.lilianjaf.restaurante_service.infra.gateway.entity.EnderecoEmbeddable;
+import com.github.lilianjaf.restaurante_service.infra.gateway.entity.RestauranteEntity;
 
 public class RestauranteEntityMapper {
 

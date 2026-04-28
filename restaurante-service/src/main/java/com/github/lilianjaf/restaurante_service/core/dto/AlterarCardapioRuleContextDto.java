@@ -1,9 +1,11 @@
 package com.github.lilianjaf.restaurante_service.core.dto;
 
-import com.github.lilianjaf.mestremenuclean.cardapio.core.domain.Cardapio;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.domain.Restaurante;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.domain.TipoNativo;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.domain.Usuario;
+import com.github.lilianjaf.restaurante_service.core.domain.Cardapio;
+import com.github.lilianjaf.restaurante_service.core.domain.Restaurante;
+import com.github.lilianjaf.restaurante_service.core.domain.TipoNativo;
+import com.github.lilianjaf.restaurante_service.core.domain.Usuario;
+
+import com.github.lilianjaf.restaurante_service.core.rules.CardapioRuleContext;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +17,12 @@ public record AlterarCardapioRuleContextDto(
     DadosAtualizacaoCardapio dados,
     boolean isCardapioDoProprioRestaurante,
     boolean isNomeUnico
-) {
+) implements CardapioRuleContext, PermissionRuleContext {
+    
+    @Override
+    public boolean isUsuarioDonoDoRestaurante() {
+        return isCardapioDoProprioRestaurante;
+    }
     public boolean isUsuarioTipoDono() {
         return usuarioLogado != null && usuarioLogado.getTipoNativo() == TipoNativo.DONO;
     }

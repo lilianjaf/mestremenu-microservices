@@ -1,8 +1,8 @@
 package com.github.lilianjaf.restaurante_service.infra.gateway.mapper;
 
-import com.github.lilianjaf.mestremenuclean.cardapio.core.domain.ItemCardapio;
-import com.github.lilianjaf.mestremenuclean.cardapio.infra.gateway.entity.CardapioEntity;
-import com.github.lilianjaf.mestremenuclean.cardapio.infra.gateway.entity.ItemCardapioEntity;
+import com.github.lilianjaf.restaurante_service.core.domain.ItemCardapio;
+import com.github.lilianjaf.restaurante_service.infra.gateway.entity.CardapioEntity;
+import com.github.lilianjaf.restaurante_service.infra.gateway.entity.ItemCardapioEntity;
 
 public class ItemCardapioEntityMapper {
 

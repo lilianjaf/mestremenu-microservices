@@ -3,8 +3,8 @@ package com.github.lilianjaf.restaurante_service.infra.controller;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.PropertyBindingException;
-import com.github.lilianjaf.mestremenuclean.usuario.core.exception.DomainException;
-import com.github.lilianjaf.mestremenuclean.usuario.core.exception.RegistroNaoEncontradoException;
+import com.github.lilianjaf.usuario_service.core.exception.DomainException;
+import com.github.lilianjaf.usuario_service.core.exception.RegistroNaoEncontradoException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
@@ -50,9 +50,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return problemDetail;
     }
 
-    @ExceptionHandler({DomainException.class,
-        com.github.lilianjaf.mestremenuclean.cardapio.core.exception.DomainException.class,
-        com.github.lilianjaf.mestremenuclean.restaurante.core.exception.DomainException.class
+    @ExceptionHandler({
+        com.github.lilianjaf.restaurante_service.core.exception.DomainException.class
     })
     public ProblemDetail handleRegraDeNegocio(RuntimeException ex) {
         log.warn("Violação de regra de negócio/domínio: {}", ex.getMessage());

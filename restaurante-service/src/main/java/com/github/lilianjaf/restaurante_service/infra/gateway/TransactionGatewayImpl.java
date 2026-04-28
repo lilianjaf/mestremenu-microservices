@@ -1,13 +1,13 @@
 package com.github.lilianjaf.restaurante_service.infra.gateway;
 
-import com.github.lilianjaf.mestremenuclean.cardapio.core.gateway.TransactionGateway;
+import com.github.lilianjaf.restaurante_service.core.gateway.TransactionGateway;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.function.Supplier;
 
 @Component
-public class TransactionGatewayCardapioImpl implements TransactionGateway {
+public class TransactionGatewayImpl implements TransactionGateway {
 
     @Override
     @Transactional

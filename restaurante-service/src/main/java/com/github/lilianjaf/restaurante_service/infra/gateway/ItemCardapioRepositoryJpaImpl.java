@@ -1,11 +1,11 @@
 package com.github.lilianjaf.restaurante_service.infra.gateway;
 
-import com.github.lilianjaf.mestremenuclean.cardapio.core.domain.ItemCardapio;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.exception.CardapioException;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.gateway.ItemCardapioRepository;
-import com.github.lilianjaf.mestremenuclean.cardapio.infra.gateway.entity.CardapioEntity;
-import com.github.lilianjaf.mestremenuclean.cardapio.infra.gateway.entity.ItemCardapioEntity;
-import com.github.lilianjaf.mestremenuclean.cardapio.infra.gateway.mapper.ItemCardapioEntityMapper;
+import com.github.lilianjaf.restaurante_service.core.domain.ItemCardapio;
+import com.github.lilianjaf.restaurante_service.core.exception.CardapioException;
+import com.github.lilianjaf.restaurante_service.core.gateway.ItemCardapioRepository;
+import com.github.lilianjaf.restaurante_service.infra.gateway.entity.CardapioEntity;
+import com.github.lilianjaf.restaurante_service.infra.gateway.entity.ItemCardapioEntity;
+import com.github.lilianjaf.restaurante_service.infra.gateway.mapper.ItemCardapioEntityMapper;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 

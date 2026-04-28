@@ -1,8 +1,8 @@
 package com.github.lilianjaf.restaurante_service.infra.gateway;
 
-import com.github.lilianjaf.mestremenuclean.cardapio.core.domain.Usuario;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.gateway.ObterUsuarioLogadoGateway;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.gateway.UsuarioGateway;
+import com.github.lilianjaf.restaurante_service.core.domain.Usuario;
+import com.github.lilianjaf.restaurante_service.core.gateway.ObterUsuarioLogadoGateway;
+import com.github.lilianjaf.restaurante_service.core.gateway.UsuarioGateway;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -10,11 +10,11 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class SpringSecurityUsuarioLogadoCardapioAdapter implements ObterUsuarioLogadoGateway {
+public class SpringSecurityUsuarioLogadoAdapter implements ObterUsuarioLogadoGateway {
 
     private final UsuarioGateway usuarioGateway;
 
-    public SpringSecurityUsuarioLogadoCardapioAdapter(UsuarioGateway usuarioGateway) {
+    public SpringSecurityUsuarioLogadoAdapter(UsuarioGateway usuarioGateway) {
         this.usuarioGateway = usuarioGateway;
     }
 

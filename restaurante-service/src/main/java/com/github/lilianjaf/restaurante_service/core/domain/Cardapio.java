@@ -1,6 +1,6 @@
 package com.github.lilianjaf.restaurante_service.core.domain;
 
-import com.github.lilianjaf.mestremenuclean.cardapio.core.exception.CardapioException;
+import com.github.lilianjaf.restaurante_service.core.exception.CardapioException;
 
 import java.util.ArrayList;
 import java.util.List;

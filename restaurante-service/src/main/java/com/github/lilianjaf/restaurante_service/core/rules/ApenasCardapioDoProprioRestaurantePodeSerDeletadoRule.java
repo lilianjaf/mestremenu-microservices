@@ -1,7 +1,7 @@
 package com.github.lilianjaf.restaurante_service.core.rules;
 
-import com.github.lilianjaf.mestremenuclean.cardapio.core.dto.DeletarCardapioRuleContextDto;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.exception.DelecaoCardapioNaoAutorizadaException;
+import com.github.lilianjaf.restaurante_service.core.dto.DeletarCardapioRuleContextDto;
+import com.github.lilianjaf.restaurante_service.core.exception.DelecaoCardapioNaoAutorizadaException;
 
 public class ApenasCardapioDoProprioRestaurantePodeSerDeletadoRule implements ValidadorCardapioRule<DeletarCardapioRuleContextDto> {
     @Override

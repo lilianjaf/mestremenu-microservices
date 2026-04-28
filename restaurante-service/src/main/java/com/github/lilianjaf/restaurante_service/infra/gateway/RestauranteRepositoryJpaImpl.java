@@ -1,9 +1,9 @@
 package com.github.lilianjaf.restaurante_service.infra.gateway;
 
-import com.github.lilianjaf.mestremenuclean.restaurante.core.domain.Restaurante;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.gateway.RestauranteRepository;
-import com.github.lilianjaf.mestremenuclean.restaurante.infra.gateway.entity.RestauranteEntity;
-import com.github.lilianjaf.mestremenuclean.restaurante.infra.gateway.mapper.RestauranteEntityMapper;
+import com.github.lilianjaf.restaurante_service.core.domain.Restaurante;
+import com.github.lilianjaf.restaurante_service.core.gateway.RestauranteRepository;
+import com.github.lilianjaf.restaurante_service.infra.gateway.entity.RestauranteEntity;
+import com.github.lilianjaf.restaurante_service.infra.gateway.mapper.RestauranteEntityMapper;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 

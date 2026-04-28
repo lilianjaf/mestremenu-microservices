@@ -1,9 +1,9 @@
 package com.github.lilianjaf.restaurante_service.infra.gateway;
 
-import com.github.lilianjaf.mestremenuclean.cardapio.core.domain.Restaurante;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.gateway.RestauranteGateway;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.api.RestauranteIntegrationDto;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.api.RestauranteModuleFacade;
+import com.github.lilianjaf.restaurante_service.core.domain.Restaurante;
+import com.github.lilianjaf.restaurante_service.core.gateway.RestauranteGateway;
+import com.github.lilianjaf.restaurante_service.core.api.RestauranteIntegrationDto;
+import com.github.lilianjaf.restaurante_service.core.api.RestauranteModuleFacade;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;

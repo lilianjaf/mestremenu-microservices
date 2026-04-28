@@ -1,10 +1,10 @@
 package com.github.lilianjaf.restaurante_service.infra.controller;
 
-import com.github.lilianjaf.mestremenuclean.restaurante.core.domain.Endereco;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.domain.Restaurante;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.dto.DadosAtualizacaoRestaurante;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.dto.DadosCriacaoRestaurante;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.usecase.*;
+import com.github.lilianjaf.restaurante_service.core.domain.Endereco;
+import com.github.lilianjaf.restaurante_service.core.domain.Restaurante;
+import com.github.lilianjaf.restaurante_service.core.dto.DadosAtualizacaoRestaurante;
+import com.github.lilianjaf.restaurante_service.core.dto.DadosCriacaoRestaurante;
+import com.github.lilianjaf.restaurante_service.core.usecase.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

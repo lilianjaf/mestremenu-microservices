@@ -1,6 +1,6 @@
 package com.github.lilianjaf.restaurante_service.core.rules;
 
-import com.github.lilianjaf.mestremenuclean.restaurante.core.exception.InativacaoRestauranteNaoAutorizadaException;
+import com.github.lilianjaf.restaurante_service.core.exception.InativacaoRestauranteNaoAutorizadaException;
 
 public class ApenasDonoPodeInativarProprioRestauranteRule implements InativarRestauranteRule {
     @Override

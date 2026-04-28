@@ -1,13 +1,13 @@
 package com.github.lilianjaf.restaurante_service.infra.config;
 
-import com.github.lilianjaf.mestremenuclean.restaurante.core.api.RestauranteModuleFacade;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.gateway.ObterUsuarioLogadoRestauranteGateway;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.gateway.RestauranteRepository;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.gateway.TransactionGateway;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.gateway.UsuarioGateway;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.rules.*;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.rules.UsuarioDeveEstarAutenticadoRule;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.usecase.*;
+import com.github.lilianjaf.restaurante_service.core.api.RestauranteModuleFacade;
+import com.github.lilianjaf.restaurante_service.core.gateway.ObterUsuarioLogadoGateway;
+import com.github.lilianjaf.restaurante_service.core.gateway.RestauranteRepository;
+import com.github.lilianjaf.restaurante_service.core.gateway.TransactionGateway;
+import com.github.lilianjaf.restaurante_service.core.gateway.UsuarioGateway;
+import com.github.lilianjaf.restaurante_service.core.rules.*;
+import com.github.lilianjaf.restaurante_service.core.rules.UsuarioDeveEstarAutenticadoRule;
+import com.github.lilianjaf.restaurante_service.core.usecase.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,7 +19,7 @@ public class RestauranteConfig {
     @Bean
     public CriarRestauranteUseCase criarRestauranteUseCase(RestauranteRepository restauranteRepository,
                                                            UsuarioGateway usuarioGateway,
-                                                           ObterUsuarioLogadoRestauranteGateway obterUsuarioLogadoRestauranteGateway,
+                                                           ObterUsuarioLogadoGateway obterUsuarioLogadoRestauranteGateway,
                                                            TransactionGateway transactionGateway) {
         List<ValidadorCriacaoRestauranteRule> permissaoRules = List.of(
                 new UsuarioDeveEstarAutenticadoRule(),
@@ -33,7 +33,7 @@ public class RestauranteConfig {
 
     @Bean
     public BuscarRestaurantePorIdUseCase buscarRestaurantePorIdUseCase(RestauranteRepository restauranteRepository,
-                                                                     ObterUsuarioLogadoRestauranteGateway obterUsuarioLogadoRestauranteGateway) {
+                                                                     ObterUsuarioLogadoGateway obterUsuarioLogadoRestauranteGateway) {
         List<BuscarRestauranteRule> permissaoRules = List.of(
                 new UsuarioDeveEstarAutenticadoRule()
         );
@@ -43,7 +43,7 @@ public class RestauranteConfig {
 
     @Bean
     public ListarRestaurantesUseCase listarRestaurantesUseCase(RestauranteRepository restauranteRepository,
-                                                             ObterUsuarioLogadoRestauranteGateway obterUsuarioLogadoRestauranteGateway) {
+                                                             ObterUsuarioLogadoGateway obterUsuarioLogadoRestauranteGateway) {
         List<ListarRestaurantesRule> permissaoRules = List.of(
                 new UsuarioDeveEstarAutenticadoRule()
         );
@@ -53,7 +53,7 @@ public class RestauranteConfig {
 
     @Bean
     public AtualizarRestauranteUseCase atualizarRestauranteUseCase(RestauranteRepository restauranteRepository,
-                                                                 ObterUsuarioLogadoRestauranteGateway obterUsuarioLogadoRestauranteGateway,
+                                                                 ObterUsuarioLogadoGateway obterUsuarioLogadoRestauranteGateway,
                                                                  TransactionGateway transactionGateway) {
         List<AtualizarRestauranteRule> permissaoRules = List.of(
                 new UsuarioDeveEstarAutenticadoRule(),
@@ -67,7 +67,7 @@ public class RestauranteConfig {
 
     @Bean
     public InativarRestauranteUseCase inativarRestauranteUseCase(RestauranteRepository restauranteRepository,
-                                                                 ObterUsuarioLogadoRestauranteGateway obterUsuarioLogadoRestauranteGateway,
+                                                                 ObterUsuarioLogadoGateway obterUsuarioLogadoRestauranteGateway,
                                                                  TransactionGateway transactionGateway) {
         List<InativarRestauranteRule> permissaoRules = List.of(
                 new UsuarioDeveEstarAutenticadoRule(),

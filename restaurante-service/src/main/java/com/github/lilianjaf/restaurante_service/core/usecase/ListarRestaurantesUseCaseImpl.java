@@ -1,24 +1,24 @@
 package com.github.lilianjaf.restaurante_service.core.usecase;
 
-import com.github.lilianjaf.mestremenuclean.restaurante.core.domain.Restaurante;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.domain.Usuario;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.exception.UsuarioLogadoNaoEncontradoException;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.gateway.ObterUsuarioLogadoRestauranteGateway;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.gateway.RestauranteRepository;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.rules.ListarRestaurantesRule;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.rules.ListarRestaurantesRuleContextDto;
+import com.github.lilianjaf.restaurante_service.core.domain.Restaurante;
+import com.github.lilianjaf.restaurante_service.core.domain.Usuario;
+import com.github.lilianjaf.restaurante_service.core.exception.UsuarioLogadoNaoEncontradoException;
+import com.github.lilianjaf.restaurante_service.core.gateway.ObterUsuarioLogadoGateway;
+import com.github.lilianjaf.restaurante_service.core.gateway.RestauranteRepository;
+import com.github.lilianjaf.restaurante_service.core.rules.ListarRestaurantesRule;
+import com.github.lilianjaf.restaurante_service.core.rules.ListarRestaurantesRuleContextDto;
 
 import java.util.List;
 
 public class ListarRestaurantesUseCaseImpl implements ListarRestaurantesUseCase {
 
     private final RestauranteRepository restauranteRepository;
-    private final ObterUsuarioLogadoRestauranteGateway obterUsuarioLogadoRestauranteGateway;
+    private final ObterUsuarioLogadoGateway obterUsuarioLogadoRestauranteGateway;
     private final List<ListarRestaurantesRule> permissaoRules;
     private final List<ListarRestaurantesRule> rules;
 
     public ListarRestaurantesUseCaseImpl(RestauranteRepository restauranteRepository,
-                                         ObterUsuarioLogadoRestauranteGateway obterUsuarioLogadoRestauranteGateway,
+                                         ObterUsuarioLogadoGateway obterUsuarioLogadoRestauranteGateway,
                                          List<ListarRestaurantesRule> permissaoRules,
                                          List<ListarRestaurantesRule> rules) {
         this.restauranteRepository = restauranteRepository;

@@ -1,15 +1,15 @@
 package com.github.lilianjaf.restaurante_service.core.usecase;
 
-import com.github.lilianjaf.mestremenuclean.restaurante.core.domain.Restaurante;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.domain.Usuario;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.dto.DadosCriacaoRestaurante;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.exception.UsuarioLogadoNaoEncontradoException;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.gateway.ObterUsuarioLogadoRestauranteGateway;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.gateway.RestauranteRepository;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.gateway.TransactionGateway;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.gateway.UsuarioGateway;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.rules.CriacaoRestauranteContext;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.rules.ValidadorCriacaoRestauranteRule;
+import com.github.lilianjaf.restaurante_service.core.domain.Restaurante;
+import com.github.lilianjaf.restaurante_service.core.domain.Usuario;
+import com.github.lilianjaf.restaurante_service.core.dto.DadosCriacaoRestaurante;
+import com.github.lilianjaf.restaurante_service.core.exception.UsuarioLogadoNaoEncontradoException;
+import com.github.lilianjaf.restaurante_service.core.gateway.ObterUsuarioLogadoGateway;
+import com.github.lilianjaf.restaurante_service.core.gateway.RestauranteRepository;
+import com.github.lilianjaf.restaurante_service.core.gateway.TransactionGateway;
+import com.github.lilianjaf.restaurante_service.core.gateway.UsuarioGateway;
+import com.github.lilianjaf.restaurante_service.core.rules.CriacaoRestauranteContext;
+import com.github.lilianjaf.restaurante_service.core.rules.ValidadorCriacaoRestauranteRule;
 
 import java.util.List;
 
@@ -17,14 +17,14 @@ public class CriarRestauranteUseCaseImpl implements CriarRestauranteUseCase {
 
     private final RestauranteRepository restauranteRepository;
     private final UsuarioGateway usuarioGateway;
-    private final ObterUsuarioLogadoRestauranteGateway obterUsuarioLogadoRestauranteGateway;
+    private final ObterUsuarioLogadoGateway obterUsuarioLogadoRestauranteGateway;
     private final TransactionGateway transactionGateway;
     private final List<ValidadorCriacaoRestauranteRule> permissaoRules;
     private final List<ValidadorCriacaoRestauranteRule> rules;
 
     public CriarRestauranteUseCaseImpl(RestauranteRepository restauranteRepository,
                                        UsuarioGateway usuarioGateway,
-                                       ObterUsuarioLogadoRestauranteGateway obterUsuarioLogadoRestauranteGateway,
+                                       ObterUsuarioLogadoGateway obterUsuarioLogadoRestauranteGateway,
                                        TransactionGateway transactionGateway,
                                        List<ValidadorCriacaoRestauranteRule> permissaoRules,
                                        List<ValidadorCriacaoRestauranteRule> rules) {
@@ -41,7 +41,7 @@ public class CriarRestauranteUseCaseImpl implements CriarRestauranteUseCase {
         Usuario usuarioLogado = obterUsuarioLogadoRestauranteGateway.obterUsuarioLogado()
                 .orElseThrow(() -> new UsuarioLogadoNaoEncontradoException("Usuário logado não encontrado"));
 
-        Usuario dono = usuarioGateway.buscarUsuarioPorId(dados.idDono()).orElse(null);
+        Usuario dono = usuarioGateway.buscarPorId(dados.idDono()).orElse(null);
 
         CriacaoRestauranteContext context = new CriacaoRestauranteContext(usuarioLogado, dono, dados);
 

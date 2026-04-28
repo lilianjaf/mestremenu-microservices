@@ -1,7 +1,7 @@
 package com.github.lilianjaf.restaurante_service.core.rules;
 
-import com.github.lilianjaf.mestremenuclean.cardapio.core.dto.ItemCardapioRuleContext;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.exception.RestauranteNaoVinculadoAoItemException;
+import com.github.lilianjaf.restaurante_service.core.dto.ItemCardapioRuleContext;
+import com.github.lilianjaf.restaurante_service.core.exception.RestauranteNaoVinculadoAoItemException;
 
 public class ItemDeveTerRestauranteVinculadoRule implements ValidadorPermissaoItemCardapioRule<ItemCardapioRuleContext> {
     @Override

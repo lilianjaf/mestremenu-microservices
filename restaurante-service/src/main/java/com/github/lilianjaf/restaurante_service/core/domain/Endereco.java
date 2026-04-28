@@ -1,6 +1,6 @@
 package com.github.lilianjaf.restaurante_service.core.domain;
 
-import com.github.lilianjaf.mestremenuclean.restaurante.core.exception.DomainException;
+import com.github.lilianjaf.restaurante_service.core.exception.DomainException;
 
 public record Endereco (
         String logradouro,

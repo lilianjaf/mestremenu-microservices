@@ -1,8 +1,8 @@
 package com.github.lilianjaf.restaurante_service.core.usecase;
 
-import com.github.lilianjaf.mestremenuclean.restaurante.core.api.RestauranteIntegrationDto;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.api.RestauranteModuleFacade;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.gateway.RestauranteRepository;
+import com.github.lilianjaf.restaurante_service.core.api.RestauranteIntegrationDto;
+import com.github.lilianjaf.restaurante_service.core.api.RestauranteModuleFacade;
+import com.github.lilianjaf.restaurante_service.core.gateway.RestauranteRepository;
 
 import java.util.UUID;
 

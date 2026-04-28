@@ -1,6 +1,6 @@
 package com.github.lilianjaf.restaurante_service.core.gateway;
 
-import com.github.lilianjaf.mestremenuclean.restaurante.core.domain.Restaurante;
+import com.github.lilianjaf.restaurante_service.core.domain.Restaurante;
 
 import java.util.List;
 import java.util.Optional;

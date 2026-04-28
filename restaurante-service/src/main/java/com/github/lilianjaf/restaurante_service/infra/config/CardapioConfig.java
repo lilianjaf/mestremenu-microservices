@@ -1,9 +1,9 @@
 package com.github.lilianjaf.restaurante_service.infra.config;
 
-import com.github.lilianjaf.mestremenuclean.cardapio.core.dto.*;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.gateway.*;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.rules.*;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.usecase.*;
+import com.github.lilianjaf.restaurante_service.core.dto.*;
+import com.github.lilianjaf.restaurante_service.core.gateway.*;
+import com.github.lilianjaf.restaurante_service.core.rules.*;
+import com.github.lilianjaf.restaurante_service.core.usecase.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -89,14 +89,14 @@ public class CardapioConfig {
                                                    RestauranteGateway restauranteGateway,
                                                    ObterUsuarioLogadoGateway obterUsuarioLogadoGateway,
                                                    TransactionGateway transactionGateway) {
-        List<ValidadorPermissaoCardapioRule<CriarCardapioRuleContextDto>> permissionRules = List.of(
-                new ApenasDonoPodeCriarCardapioParaProprioRestauranteRule()
+        List<ValidadorPermissaoCardapioRule<? super CriarCardapioRuleContextDto>> permissionRules = List.of(
+                new ApenasDonoPodeGerenciarCardapioRule()
         );
-        List<ValidadorCardapioRule<CriarCardapioRuleContextDto>> businessRules = List.of(
-                new CriarCardapioDeveTerNomeRule(),
-                new CriarNomeCardapioDeveSerUnicoNoRestauranteRule(),
-                new CriarCardapioDeveTerPeloMenosUmItemRule(),
-                new CriarItensCardapioNaoPodemSerDuplicadosRule()
+        List<ValidadorCardapioRule<? super CriarCardapioRuleContextDto>> businessRules = List.of(
+                new CardapioDeveTerNomeRule(),
+                new NomeCardapioDeveSerUnicoNoRestauranteRule(),
+                new CardapioDeveTerPeloMenosUmItemRule(),
+                new ItensCardapioNaoPodemSerDuplicadosRule()
         );
         return new CriarCardapioUseCaseImpl(cardapioRepository, restauranteGateway, obterUsuarioLogadoGateway, transactionGateway, permissionRules, businessRules);
     }
@@ -106,11 +106,11 @@ public class CardapioConfig {
                                                         RestauranteGateway restauranteGateway,
                                                         ObterUsuarioLogadoGateway obterUsuarioLogadoGateway,
                                                         TransactionGateway transactionGateway) {
-        List<ValidadorPermissaoCardapioRule<AlterarCardapioRuleContextDto>> permissaoRules = List.of(
-                new ApenasUsuarioDonoPodeAlterarCardapioRule()
+        List<ValidadorPermissaoCardapioRule<? super AlterarCardapioRuleContextDto>> permissaoRules = List.of(
+                new ApenasDonoPodeGerenciarCardapioRule()
         );
 
-        List<ValidadorCardapioRule<AlterarCardapioRuleContextDto>> rules = List.of(
+        List<ValidadorCardapioRule<? super AlterarCardapioRuleContextDto>> rules = List.of(
                 new ApenasCardapioDoProprioRestaurantePodeSerAlteradoRule(),
                 new CardapioDeveTerNomeRule(),
                 new NomeCardapioDeveSerUnicoNoRestauranteRule(),
@@ -133,10 +133,10 @@ public class CardapioConfig {
                                                        RestauranteGateway restauranteGateway,
                                                        ObterUsuarioLogadoGateway obterUsuarioLogadoGateway,
                                                        TransactionGateway transactionGateway) {
-        List<ValidadorPermissaoCardapioRule<DeletarCardapioRuleContextDto>> permissionRules = List.of(
-                new ApenasUsuarioDonoPodeDeletarCardapioRule()
+        List<ValidadorPermissaoCardapioRule<? super DeletarCardapioRuleContextDto>> permissionRules = List.of(
+                new ApenasDonoPodeGerenciarCardapioRule()
         );
-        List<ValidadorCardapioRule<DeletarCardapioRuleContextDto>> businessRules = List.of(
+        List<ValidadorCardapioRule<? super DeletarCardapioRuleContextDto>> businessRules = List.of(
                 new ApenasCardapioDoProprioRestaurantePodeSerDeletadoRule()
         );
         return new DeletarCardapioUseCaseImpl(cardapioRepository, restauranteGateway, obterUsuarioLogadoGateway, transactionGateway, permissionRules, businessRules);

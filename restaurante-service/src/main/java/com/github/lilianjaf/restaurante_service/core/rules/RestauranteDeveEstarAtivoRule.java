@@ -1,6 +1,6 @@
 package com.github.lilianjaf.restaurante_service.core.rules;
 
-import com.github.lilianjaf.mestremenuclean.restaurante.core.exception.RestauranteJaInativoException;
+import com.github.lilianjaf.restaurante_service.core.exception.RestauranteJaInativoException;
 
 public class RestauranteDeveEstarAtivoRule implements InativarRestauranteRule {
     @Override

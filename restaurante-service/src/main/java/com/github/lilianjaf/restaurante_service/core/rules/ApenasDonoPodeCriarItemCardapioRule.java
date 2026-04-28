@@ -1,7 +1,7 @@
 package com.github.lilianjaf.restaurante_service.core.rules;
 
-import com.github.lilianjaf.mestremenuclean.cardapio.core.domain.TipoNativo;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.exception.CardapioException;
+import com.github.lilianjaf.restaurante_service.core.domain.TipoNativo;
+import com.github.lilianjaf.restaurante_service.core.exception.CardapioException;
 
 public class ApenasDonoPodeCriarItemCardapioRule implements ValidadorPermissaoItemCardapioRule<CriacaoItemCardapioContext> {
 

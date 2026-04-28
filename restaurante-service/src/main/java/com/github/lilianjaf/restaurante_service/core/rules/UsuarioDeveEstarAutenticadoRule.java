@@ -1,6 +1,6 @@
 package com.github.lilianjaf.restaurante_service.core.rules;
 
-import com.github.lilianjaf.mestremenuclean.restaurante.core.exception.UsuarioNaoAutenticadoException;
+import com.github.lilianjaf.restaurante_service.core.exception.UsuarioNaoAutenticadoException;
 
 public class UsuarioDeveEstarAutenticadoRule implements ValidadorCriacaoRestauranteRule, AtualizarRestauranteRule, InativarRestauranteRule, ListarRestaurantesRule, BuscarRestauranteRule {
     @Override

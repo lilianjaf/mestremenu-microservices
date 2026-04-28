@@ -1,7 +1,7 @@
 package com.github.lilianjaf.restaurante_service.core.rules;
 
-import com.github.lilianjaf.mestremenuclean.cardapio.core.dto.ItemCardapioRuleContext;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.exception.AlteracaoItemNaoAutorizadaException;
+import com.github.lilianjaf.restaurante_service.core.dto.ItemCardapioRuleContext;
+import com.github.lilianjaf.restaurante_service.core.exception.AlteracaoItemNaoAutorizadaException;
 
 public class ApenasDonoDoRestaurantePodeAlterarItemRule implements ValidadorPermissaoItemCardapioRule<ItemCardapioRuleContext> {
     @Override

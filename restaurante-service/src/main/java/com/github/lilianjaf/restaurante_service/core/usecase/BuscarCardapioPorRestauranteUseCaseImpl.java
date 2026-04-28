@@ -1,13 +1,13 @@
 package com.github.lilianjaf.restaurante_service.core.usecase;
 
-import com.github.lilianjaf.mestremenuclean.cardapio.core.domain.Cardapio;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.domain.Usuario;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.dto.BuscarCardapioPorRestauranteRuleContextDto;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.exception.UsuarioLogadoNaoEncontradoException;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.gateway.CardapioRepository;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.gateway.ObterUsuarioLogadoGateway;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.gateway.TransactionGateway;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.rules.ValidadorPermissaoCardapioRule;
+import com.github.lilianjaf.restaurante_service.core.domain.Cardapio;
+import com.github.lilianjaf.restaurante_service.core.domain.Usuario;
+import com.github.lilianjaf.restaurante_service.core.dto.BuscarCardapioPorRestauranteRuleContextDto;
+import com.github.lilianjaf.restaurante_service.core.exception.UsuarioLogadoNaoEncontradoException;
+import com.github.lilianjaf.restaurante_service.core.gateway.CardapioRepository;
+import com.github.lilianjaf.restaurante_service.core.gateway.ObterUsuarioLogadoGateway;
+import com.github.lilianjaf.restaurante_service.core.gateway.TransactionGateway;
+import com.github.lilianjaf.restaurante_service.core.rules.ValidadorPermissaoCardapioRule;
 
 import java.util.List;
 import java.util.UUID;
