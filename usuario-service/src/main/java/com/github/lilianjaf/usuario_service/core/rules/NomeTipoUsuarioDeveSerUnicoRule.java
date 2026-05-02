@@ -1,6 +1,6 @@
 package com.github.lilianjaf.usuario_service.core.rules;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.exception.NomeTipoUsuarioJaEmUsoException;
+import com.github.lilianjaf.usuario_service.core.exception.NomeTipoUsuarioJaEmUsoException;
 
 public class NomeTipoUsuarioDeveSerUnicoRule implements ValidadorAtualizacaoTipoUsuarioRule {
 

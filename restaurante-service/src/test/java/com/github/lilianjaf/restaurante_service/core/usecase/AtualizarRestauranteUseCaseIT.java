@@ -1,17 +1,18 @@
 package com.github.lilianjaf.restaurante_service.core.usecase;
 
-import com.github.lilianjaf.mestremenuclean.restaurante.core.domain.Endereco;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.domain.Restaurante;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.dto.DadosAtualizacaoRestaurante;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.exception.DomainException;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.exception.EdicaoRestauranteNaoAutorizadaException;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.exception.UsuarioLogadoNaoEncontradoException;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.gateway.RestauranteRepository;
-import com.github.lilianjaf.mestremenuclean.usuario.core.domain.Dono;
-import com.github.lilianjaf.mestremenuclean.usuario.core.domain.TipoNativo;
-import com.github.lilianjaf.mestremenuclean.usuario.core.domain.TipoUsuario;
-import com.github.lilianjaf.mestremenuclean.usuario.core.gateway.TipoUsuarioRepository;
-import com.github.lilianjaf.mestremenuclean.usuario.core.gateway.UsuarioRepository;
+import com.github.lilianjaf.restaurante_service.core.domain.Endereco;
+import com.github.lilianjaf.restaurante_service.core.domain.Restaurante;
+import com.github.lilianjaf.restaurante_service.core.dto.DadosAtualizacaoRestaurante;
+import com.github.lilianjaf.restaurante_service.core.exception.DomainException;
+import com.github.lilianjaf.restaurante_service.core.exception.EdicaoRestauranteNaoAutorizadaException;
+import com.github.lilianjaf.restaurante_service.core.exception.UsuarioLogadoNaoEncontradoException;
+import com.github.lilianjaf.restaurante_service.core.gateway.RestauranteRepository;
+import com.github.lilianjaf.usuario_service.core.domain.Dono;
+import com.github.lilianjaf.usuario_service.core.domain.TipoNativo;
+import com.github.lilianjaf.usuario_service.core.domain.TipoUsuario;
+import com.github.lilianjaf.usuario_service.core.gateway.TipoUsuarioRepository;
+import com.github.lilianjaf.usuario_service.core.gateway.UsuarioRepository;
+import test.TestRestauranteServiceApplication;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,12 +23,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@SpringBootTest
+@SpringBootTest(classes = TestRestauranteServiceApplication.class)
 @ActiveProfiles("test")
 @Transactional
 @DisplayName("Teste de Integração - AtualizarRestauranteUseCase")
@@ -52,15 +55,15 @@ class AtualizarRestauranteUseCaseIT {
 
     private void autenticar(String login) {
         SecurityContextHolder.getContext().setAuthentication(
-                new UsernamePasswordAuthenticationToken(login, null)
+                new UsernamePasswordAuthenticationToken(login, null, List.of())
         );
     }
 
     private Dono criarESalvarDono(String login, String email) {
         TipoUsuario tipoDono = new TipoUsuario("DONO_" + UUID.randomUUID(), TipoNativo.DONO);
         tipoUsuarioRepository.salvar(tipoDono);
-        com.github.lilianjaf.mestremenuclean.usuario.core.domain.Endereco endereco =
-                new com.github.lilianjaf.mestremenuclean.usuario.core.domain.Endereco("Rua", "123", null, "Bairro", "Cidade", "12345678", "SP");
+        com.github.lilianjaf.usuario_service.core.domain.Endereco endereco =
+                new com.github.lilianjaf.usuario_service.core.domain.Endereco("Rua", "123", null, "Bairro", "Cidade", "12345678", "SP");
         Dono dono = new Dono("Dono Teste", email, login, "senha", tipoDono, endereco, null);
         usuarioRepository.salvar(dono);
         return dono;

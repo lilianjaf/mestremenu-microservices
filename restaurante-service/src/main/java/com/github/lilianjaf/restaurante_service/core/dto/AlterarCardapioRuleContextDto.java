@@ -6,6 +6,7 @@ import com.github.lilianjaf.restaurante_service.core.domain.TipoNativo;
 import com.github.lilianjaf.restaurante_service.core.domain.Usuario;
 
 import com.github.lilianjaf.restaurante_service.core.rules.CardapioRuleContext;
+import com.github.lilianjaf.restaurante_service.core.rules.PermissionRuleContext;
 
 import java.util.HashSet;
 import java.util.Set;

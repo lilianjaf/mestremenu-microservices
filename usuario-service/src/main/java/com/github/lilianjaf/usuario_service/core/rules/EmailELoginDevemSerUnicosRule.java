@@ -1,6 +1,6 @@
 package com.github.lilianjaf.usuario_service.core.rules;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.exception.CredenciaisJaEmUsoException;
+import com.github.lilianjaf.usuario_service.core.exception.CredenciaisJaEmUsoException;
 
 public class EmailELoginDevemSerUnicosRule implements ValidadorCriacaoUsuarioRule {
 

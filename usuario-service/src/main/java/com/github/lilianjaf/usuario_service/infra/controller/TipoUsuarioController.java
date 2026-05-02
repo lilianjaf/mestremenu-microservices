@@ -1,9 +1,9 @@
 package com.github.lilianjaf.usuario_service.infra.controller;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.domain.TipoUsuario;
-import com.github.lilianjaf.mestremenuclean.usuario.core.usecase.AtualizarTipoUsuarioUsecase;
-import com.github.lilianjaf.mestremenuclean.usuario.core.usecase.CriarTipoUsuarioUsecase;
-import com.github.lilianjaf.mestremenuclean.usuario.core.usecase.DeletarTipoUsuarioUsecase;
+import com.github.lilianjaf.usuario_service.core.domain.TipoUsuario;
+import com.github.lilianjaf.usuario_service.core.usecase.AtualizarTipoUsuarioUsecase;
+import com.github.lilianjaf.usuario_service.core.usecase.CriarTipoUsuarioUsecase;
+import com.github.lilianjaf.usuario_service.core.usecase.DeletarTipoUsuarioUsecase;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

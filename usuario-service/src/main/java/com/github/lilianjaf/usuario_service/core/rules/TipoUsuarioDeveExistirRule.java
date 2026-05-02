@@ -1,6 +1,6 @@
 package com.github.lilianjaf.usuario_service.core.rules;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.exception.TipoUsuarioNaoEncontradoException;
+import com.github.lilianjaf.usuario_service.core.exception.TipoUsuarioNaoEncontradoException;
 
 public class TipoUsuarioDeveExistirRule implements ValidadorExclusaoTipoUsuarioRule {
     @Override

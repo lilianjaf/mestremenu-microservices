@@ -1,6 +1,6 @@
 package com.github.lilianjaf.usuario_service.core.usecase;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.domain.TipoNativo;
+import com.github.lilianjaf.usuario_service.core.domain.TipoNativo;
 import java.util.UUID;
 
 public interface CriarUsuarioUsecase {

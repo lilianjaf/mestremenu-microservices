@@ -1,9 +1,9 @@
 package com.github.lilianjaf.usuario_service.infra.gateway;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.domain.TipoUsuario;
-import com.github.lilianjaf.mestremenuclean.usuario.core.gateway.TipoUsuarioRepository;
-import com.github.lilianjaf.mestremenuclean.usuario.infra.gateway.entity.TipoUsuarioEntity;
-import com.github.lilianjaf.mestremenuclean.usuario.infra.gateway.mapper.TipoUsuarioEntityMapper;
+import com.github.lilianjaf.usuario_service.core.domain.TipoUsuario;
+import com.github.lilianjaf.usuario_service.core.gateway.TipoUsuarioRepository;
+import com.github.lilianjaf.usuario_service.infra.gateway.entity.TipoUsuarioEntity;
+import com.github.lilianjaf.usuario_service.infra.gateway.mapper.TipoUsuarioEntityMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;

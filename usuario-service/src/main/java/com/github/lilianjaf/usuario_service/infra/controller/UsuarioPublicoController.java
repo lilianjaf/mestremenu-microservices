@@ -1,6 +1,6 @@
 package com.github.lilianjaf.usuario_service.infra.controller;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.usecase.CriarUsuarioPublicoUseCase;
+import com.github.lilianjaf.usuario_service.core.usecase.CriarUsuarioPublicoUseCase;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

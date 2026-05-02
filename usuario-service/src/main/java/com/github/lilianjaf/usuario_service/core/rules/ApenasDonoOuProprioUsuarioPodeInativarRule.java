@@ -1,6 +1,6 @@
 package com.github.lilianjaf.usuario_service.core.rules;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.exception.InativacaoUsuarioNaoAutorizadaException;
+import com.github.lilianjaf.usuario_service.core.exception.InativacaoUsuarioNaoAutorizadaException;
 
 public class ApenasDonoOuProprioUsuarioPodeInativarRule implements ValidadorInativacaoUsuarioRule {
 

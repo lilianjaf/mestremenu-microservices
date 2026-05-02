@@ -1,8 +1,8 @@
 package com.github.lilianjaf.usuario_service.core.dto;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.domain.Endereco;
-import com.github.lilianjaf.mestremenuclean.usuario.core.domain.TipoUsuario;
-import com.github.lilianjaf.mestremenuclean.usuario.core.exception.DomainException;
+import com.github.lilianjaf.usuario_service.core.domain.Endereco;
+import com.github.lilianjaf.usuario_service.core.domain.TipoUsuario;
+import com.github.lilianjaf.usuario_service.core.exception.DomainException;
 
 public record DadosCriacaoUsuario(
         String nome,

@@ -1,10 +1,10 @@
 package com.github.lilianjaf.usuario_service.infra.controller;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.dto.UsuarioOutput;
-import com.github.lilianjaf.mestremenuclean.usuario.core.usecase.AtualizarUsuarioUsecase;
-import com.github.lilianjaf.mestremenuclean.usuario.core.usecase.BuscarUsuarioUsecase;
-import com.github.lilianjaf.mestremenuclean.usuario.core.usecase.CriarUsuarioUsecase;
-import com.github.lilianjaf.mestremenuclean.usuario.core.usecase.InativarUsuarioUsecase;
+import com.github.lilianjaf.usuario_service.core.dto.UsuarioOutput;
+import com.github.lilianjaf.usuario_service.core.usecase.AtualizarUsuarioUsecase;
+import com.github.lilianjaf.usuario_service.core.usecase.BuscarUsuarioUsecase;
+import com.github.lilianjaf.usuario_service.core.usecase.CriarUsuarioUsecase;
+import com.github.lilianjaf.usuario_service.core.usecase.InativarUsuarioUsecase;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

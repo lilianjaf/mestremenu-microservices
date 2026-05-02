@@ -1,6 +1,6 @@
 package com.github.lilianjaf.usuario_service.infra.gateway.entity;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.domain.TipoNativo;
+import com.github.lilianjaf.usuario_service.core.domain.TipoNativo;
 import jakarta.persistence.*;
 
 import java.util.UUID;

@@ -1,16 +1,16 @@
 package com.github.lilianjaf.restaurante_service.core.usecase;
 
-import com.github.lilianjaf.mestremenuclean.restaurante.core.domain.Endereco;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.domain.Restaurante;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.domain.Usuario;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.dto.DadosCriacaoRestaurante;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.exception.UsuarioLogadoNaoEncontradoException;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.gateway.ObterUsuarioLogadoRestauranteGateway;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.gateway.RestauranteRepository;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.gateway.TransactionGateway;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.gateway.UsuarioGateway;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.rules.CriacaoRestauranteContext;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.rules.ValidadorCriacaoRestauranteRule;
+import com.github.lilianjaf.restaurante_service.core.domain.Endereco;
+import com.github.lilianjaf.restaurante_service.core.domain.Restaurante;
+import com.github.lilianjaf.restaurante_service.core.domain.Usuario;
+import com.github.lilianjaf.restaurante_service.core.dto.DadosCriacaoRestaurante;
+import com.github.lilianjaf.restaurante_service.core.exception.UsuarioLogadoNaoEncontradoException;
+import com.github.lilianjaf.restaurante_service.core.gateway.ObterUsuarioLogadoGateway;
+import com.github.lilianjaf.restaurante_service.core.gateway.RestauranteRepository;
+import com.github.lilianjaf.restaurante_service.core.gateway.TransactionGateway;
+import com.github.lilianjaf.restaurante_service.core.gateway.UsuarioGateway;
+import com.github.lilianjaf.restaurante_service.core.rules.CriacaoRestauranteContext;
+import com.github.lilianjaf.restaurante_service.core.rules.ValidadorCriacaoRestauranteRule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,6 +23,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Supplier;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
@@ -38,7 +39,7 @@ class CriarRestauranteUseCaseImplTest {
     private UsuarioGateway usuarioGateway;
 
     @Mock
-    private ObterUsuarioLogadoRestauranteGateway obterUsuarioLogadoRestauranteGateway;
+    private ObterUsuarioLogadoGateway obterUsuarioLogadoRestauranteGateway;
 
     @Mock
     private TransactionGateway transactionGateway;
@@ -81,7 +82,7 @@ class CriarRestauranteUseCaseImplTest {
         Restaurante restauranteSalvo = new Restaurante(dados.nome(), dados.endereco(), dados.tipoCozinha(), dados.horarioFuncionamento(), dados.idDono());
 
         when(obterUsuarioLogadoRestauranteGateway.obterUsuarioLogado()).thenReturn(Optional.of(usuarioLogado));
-        when(usuarioGateway.buscarUsuarioPorId(idDono)).thenReturn(Optional.of(dono));
+        when(usuarioGateway.buscarPorId(idDono)).thenReturn(Optional.of(dono));
         when(restauranteRepository.salvar(any(Restaurante.class))).thenReturn(restauranteSalvo);
 
         Restaurante restauranteCriado = criarRestauranteUseCase.executar(dados);
@@ -118,7 +119,7 @@ class CriarRestauranteUseCaseImplTest {
         DadosCriacaoRestaurante dados = new DadosCriacaoRestaurante("Restaurante Teste", endereco, "Italiana", "08:00-22:00", idDono);
 
         when(obterUsuarioLogadoRestauranteGateway.obterUsuarioLogado()).thenReturn(Optional.of(usuarioLogado));
-        when(usuarioGateway.buscarUsuarioPorId(idDono)).thenReturn(Optional.of(dono));
+        when(usuarioGateway.buscarPorId(idDono)).thenReturn(Optional.of(dono));
         doThrow(new RuntimeException("Permissão negada")).when(permissaoRule).validar(any(CriacaoRestauranteContext.class));
 
         assertThrows(RuntimeException.class, () -> criarRestauranteUseCase.executar(dados));
@@ -136,7 +137,7 @@ class CriarRestauranteUseCaseImplTest {
         DadosCriacaoRestaurante dados = new DadosCriacaoRestaurante("Restaurante Teste", endereco, "Italiana", "08:00-22:00", idDono);
 
         when(obterUsuarioLogadoRestauranteGateway.obterUsuarioLogado()).thenReturn(Optional.of(usuarioLogado));
-        when(usuarioGateway.buscarUsuarioPorId(idDono)).thenReturn(Optional.of(dono));
+        when(usuarioGateway.buscarPorId(idDono)).thenReturn(Optional.of(dono));
         doThrow(new RuntimeException("Regra de negócio violada")).when(regraDeNegocio).validar(any(CriacaoRestauranteContext.class));
 
         assertThrows(RuntimeException.class, () -> criarRestauranteUseCase.executar(dados));

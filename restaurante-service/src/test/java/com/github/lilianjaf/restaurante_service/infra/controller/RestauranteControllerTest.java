@@ -1,10 +1,10 @@
 package com.github.lilianjaf.restaurante_service.infra.controller;
 
-import com.github.lilianjaf.mestremenuclean.restaurante.core.domain.Endereco;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.domain.Restaurante;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.dto.DadosAtualizacaoRestaurante;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.dto.DadosCriacaoRestaurante;
-import com.github.lilianjaf.mestremenuclean.restaurante.core.usecase.*;
+import com.github.lilianjaf.restaurante_service.core.domain.Endereco;
+import com.github.lilianjaf.restaurante_service.core.domain.Restaurante;
+import com.github.lilianjaf.restaurante_service.core.dto.DadosAtualizacaoRestaurante;
+import com.github.lilianjaf.restaurante_service.core.dto.DadosCriacaoRestaurante;
+import com.github.lilianjaf.restaurante_service.core.usecase.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

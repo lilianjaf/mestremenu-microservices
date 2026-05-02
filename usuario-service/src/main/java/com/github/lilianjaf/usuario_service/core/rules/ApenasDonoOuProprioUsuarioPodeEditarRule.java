@@ -1,6 +1,6 @@
 package com.github.lilianjaf.usuario_service.core.rules;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.exception.EdicaoUsuarioNaoAutorizadaException;
+import com.github.lilianjaf.usuario_service.core.exception.EdicaoUsuarioNaoAutorizadaException;
 
 public class ApenasDonoOuProprioUsuarioPodeEditarRule implements ValidadorPermissaoAtualizacaoUsuarioRule, ValidadorAtualizacaoUsuarioRule {
     @Override

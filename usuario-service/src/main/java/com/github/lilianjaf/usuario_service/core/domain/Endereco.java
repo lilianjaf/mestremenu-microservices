@@ -1,6 +1,6 @@
 package com.github.lilianjaf.usuario_service.core.domain;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.exception.DomainException;
+import com.github.lilianjaf.usuario_service.core.exception.DomainException;
 
 public record Endereco (
         String logradouro,

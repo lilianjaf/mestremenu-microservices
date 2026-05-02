@@ -1,6 +1,6 @@
 package com.github.lilianjaf.usuario_service.core.rules;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.exception.LoginUsuarioJaEmUsoException;
+import com.github.lilianjaf.usuario_service.core.exception.LoginUsuarioJaEmUsoException;
 
 public class LoginUsuarioPublicoDeveSerUnicoRule implements ValidadorCriacaoUsuarioPublicoRule {
     @Override

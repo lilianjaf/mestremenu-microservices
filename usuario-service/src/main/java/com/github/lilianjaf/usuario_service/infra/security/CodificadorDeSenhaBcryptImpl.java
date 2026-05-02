@@ -1,6 +1,6 @@
 package com.github.lilianjaf.usuario_service.infra.security;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.gateway.CodificadorDeSenha;
+import com.github.lilianjaf.usuario_service.core.gateway.CodificadorDeSenha;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 

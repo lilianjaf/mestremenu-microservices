@@ -1,6 +1,6 @@
 package com.github.lilianjaf.usuario_service.core.rules;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.exception.AcessoNegadoExclusaoTipoUsuarioException;
+import com.github.lilianjaf.usuario_service.core.exception.AcessoNegadoExclusaoTipoUsuarioException;
 
 public class ApenasDonoPodeDeletarTipoUsuarioRule implements ValidadorExclusaoTipoUsuarioRule {
     @Override

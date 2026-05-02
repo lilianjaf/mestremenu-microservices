@@ -1,10 +1,10 @@
 package com.github.lilianjaf.usuario_service.infra.gateway;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.domain.UsuarioBase;
-import com.github.lilianjaf.mestremenuclean.usuario.core.dto.UsuarioOutput;
-import com.github.lilianjaf.mestremenuclean.usuario.core.gateway.UsuarioRepository;
-import com.github.lilianjaf.mestremenuclean.usuario.infra.gateway.entity.UsuarioEntity;
-import com.github.lilianjaf.mestremenuclean.usuario.infra.gateway.mapper.UsuarioEntityMapper;
+import com.github.lilianjaf.usuario_service.core.domain.UsuarioBase;
+import com.github.lilianjaf.usuario_service.core.dto.UsuarioOutput;
+import com.github.lilianjaf.usuario_service.core.gateway.UsuarioRepository;
+import com.github.lilianjaf.usuario_service.infra.gateway.entity.UsuarioEntity;
+import com.github.lilianjaf.usuario_service.infra.gateway.mapper.UsuarioEntityMapper;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 

@@ -1,8 +1,8 @@
 package com.github.lilianjaf.usuario_service.infra.controller;
 
-import com.github.lilianjaf.mestremenuclean.usuario.infra.security.LoginRequest;
-import com.github.lilianjaf.mestremenuclean.usuario.infra.security.TokenResponse;
-import com.github.lilianjaf.mestremenuclean.usuario.infra.security.TokenService;
+import com.github.lilianjaf.usuario_service.infra.security.LoginRequest;
+import com.github.lilianjaf.usuario_service.infra.security.TokenResponse;
+import com.github.lilianjaf.usuario_service.infra.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

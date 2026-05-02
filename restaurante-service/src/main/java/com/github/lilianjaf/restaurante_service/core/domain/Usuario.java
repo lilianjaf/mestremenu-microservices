@@ -13,6 +13,12 @@ public class Usuario {
         this.tipoCustomizado = tipoCustomizado;
     }
 
+    public Usuario(UUID id, TipoNativo tipoNativo) {
+        this.id = id;
+        this.ativo = true;
+        this.tipoCustomizado = new TipoUsuario(tipoNativo.name(), tipoNativo.name());
+    }
+
     public UUID getId() {
         return id;
     }
@@ -22,6 +28,10 @@ public class Usuario {
     }
 
     public boolean isDono() {
-        return tipoCustomizado.getTipoNativo().equals(TipoNativo.DONO);
+        return tipoCustomizado != null && tipoCustomizado.getTipoNativo().equals(TipoNativo.DONO);
+    }
+
+    public TipoNativo getTipoNativo() {
+        return tipoCustomizado != null ? tipoCustomizado.getTipoNativo() : null;
     }
 }

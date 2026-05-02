@@ -1,10 +1,11 @@
 package com.github.lilianjaf.restaurante_service.core.usecase;
 
-import com.github.lilianjaf.mestremenuclean.cardapio.core.domain.Cardapio;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.dto.DadosCriacaoCardapio;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.dto.DadosCriacaoItemCardapio;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.exception.CriacaoCardapioNaoAutorizadaException;
-import com.github.lilianjaf.mestremenuclean.cardapio.core.gateway.CardapioRepository;
+import test.TestRestauranteServiceApplication;
+import com.github.lilianjaf.restaurante_service.core.domain.Cardapio;
+import com.github.lilianjaf.restaurante_service.core.dto.DadosCriacaoCardapio;
+import com.github.lilianjaf.restaurante_service.core.dto.DadosCriacaoItemCardapio;
+import com.github.lilianjaf.restaurante_service.core.exception.CriacaoCardapioNaoAutorizadaException;
+import com.github.lilianjaf.restaurante_service.core.gateway.CardapioRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+@SpringBootTest(classes = TestRestauranteServiceApplication.class)
 @ActiveProfiles("test")
 @Transactional
 @AutoConfigureMockMvc

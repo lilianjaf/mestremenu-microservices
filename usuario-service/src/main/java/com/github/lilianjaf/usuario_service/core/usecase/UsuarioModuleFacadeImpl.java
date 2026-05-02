@@ -1,8 +1,8 @@
 package com.github.lilianjaf.usuario_service.core.usecase;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.api.UsuarioIntegrationDto;
-import com.github.lilianjaf.mestremenuclean.usuario.core.api.UsuarioModuleFacade;
-import com.github.lilianjaf.mestremenuclean.usuario.core.dto.UsuarioOutput;
+import com.github.lilianjaf.usuario_service.core.api.UsuarioIntegrationDto;
+import com.github.lilianjaf.usuario_service.core.api.UsuarioModuleFacade;
+import com.github.lilianjaf.usuario_service.core.dto.UsuarioOutput;
 
 import java.util.UUID;
 

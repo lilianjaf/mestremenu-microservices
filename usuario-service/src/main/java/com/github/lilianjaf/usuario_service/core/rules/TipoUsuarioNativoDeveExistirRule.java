@@ -1,6 +1,6 @@
 package com.github.lilianjaf.usuario_service.core.rules;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.exception.TipoUsuarioInvalidoException;
+import com.github.lilianjaf.usuario_service.core.exception.TipoUsuarioInvalidoException;
 
 public class TipoUsuarioNativoDeveExistirRule implements ValidadorCriacaoUsuarioRule {
 

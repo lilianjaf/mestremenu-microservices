@@ -1,6 +1,6 @@
 package com.github.lilianjaf.usuario_service.infra.gateway;
 
-import com.github.lilianjaf.mestremenuclean.usuario.infra.gateway.entity.TipoUsuarioEntity;
+import com.github.lilianjaf.usuario_service.infra.gateway.entity.TipoUsuarioEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

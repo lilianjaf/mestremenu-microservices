@@ -14,6 +14,16 @@ public class Restaurante {
     private UUID idDono;
     private boolean ativo;
 
+    public Restaurante(UUID id, UUID idDono) {
+        this.id = id;
+        this.idDono = idDono;
+        this.nome = "Placeholder";
+        this.endereco = null; // Careful here if used in validation
+        this.tipoCozinha = "Placeholder";
+        this.horarioFuncionamento = "Placeholder";
+        this.ativo = true;
+    }
+
     public Restaurante(String nome, Endereco endereco, String tipoCozinha, String horarioFuncionamento, UUID idDono) {
         this.id = UUID.randomUUID();
         this.nome = nome;

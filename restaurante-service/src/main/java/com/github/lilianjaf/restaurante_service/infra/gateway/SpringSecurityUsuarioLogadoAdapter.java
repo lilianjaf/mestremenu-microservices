@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-@Component
+@Component("restauranteSpringSecurityAdapter")
 public class SpringSecurityUsuarioLogadoAdapter implements ObterUsuarioLogadoGateway {
 
     private final UsuarioGateway usuarioGateway;

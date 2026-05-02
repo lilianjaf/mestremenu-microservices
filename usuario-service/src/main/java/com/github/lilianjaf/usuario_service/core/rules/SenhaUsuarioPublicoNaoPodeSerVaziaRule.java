@@ -1,6 +1,6 @@
 package com.github.lilianjaf.usuario_service.core.rules;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.exception.SenhaUsuarioNaoPodeSerVaziaException;
+import com.github.lilianjaf.usuario_service.core.exception.SenhaUsuarioNaoPodeSerVaziaException;
 
 public class SenhaUsuarioPublicoNaoPodeSerVaziaRule implements ValidadorCriacaoUsuarioPublicoRule {
     @Override

@@ -1,11 +1,11 @@
 package com.github.lilianjaf.usuario_service.infra.config;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.gateway.ObterUsuarioLogadoGateway;
-import com.github.lilianjaf.mestremenuclean.usuario.core.gateway.TipoUsuarioRepository;
-import com.github.lilianjaf.mestremenuclean.usuario.core.gateway.TransactionGateway;
-import com.github.lilianjaf.mestremenuclean.usuario.core.gateway.UsuarioRepository;
-import com.github.lilianjaf.mestremenuclean.usuario.core.rules.*;
-import com.github.lilianjaf.mestremenuclean.usuario.core.usecase.*;
+import com.github.lilianjaf.usuario_service.core.gateway.ObterUsuarioLogadoGateway;
+import com.github.lilianjaf.usuario_service.core.gateway.TipoUsuarioRepository;
+import com.github.lilianjaf.usuario_service.core.gateway.TransactionGateway;
+import com.github.lilianjaf.usuario_service.core.gateway.UsuarioRepository;
+import com.github.lilianjaf.usuario_service.core.rules.*;
+import com.github.lilianjaf.usuario_service.core.usecase.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

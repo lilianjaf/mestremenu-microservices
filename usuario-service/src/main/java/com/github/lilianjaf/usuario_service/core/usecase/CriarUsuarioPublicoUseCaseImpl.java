@@ -1,13 +1,13 @@
 package com.github.lilianjaf.usuario_service.core.usecase;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.domain.*;
-import com.github.lilianjaf.mestremenuclean.usuario.core.dto.DadosCriacaoUsuario;
-import com.github.lilianjaf.mestremenuclean.usuario.core.gateway.CodificadorDeSenha;
-import com.github.lilianjaf.mestremenuclean.usuario.core.gateway.TipoUsuarioRepository;
-import com.github.lilianjaf.mestremenuclean.usuario.core.gateway.TransactionGateway;
-import com.github.lilianjaf.mestremenuclean.usuario.core.gateway.UsuarioRepository;
-import com.github.lilianjaf.mestremenuclean.usuario.core.rules.CriacaoUsuarioPublicoContext;
-import com.github.lilianjaf.mestremenuclean.usuario.core.rules.ValidadorCriacaoUsuarioPublicoRule;
+import com.github.lilianjaf.usuario_service.core.domain.*;
+import com.github.lilianjaf.usuario_service.core.dto.DadosCriacaoUsuario;
+import com.github.lilianjaf.usuario_service.core.gateway.CodificadorDeSenha;
+import com.github.lilianjaf.usuario_service.core.gateway.TipoUsuarioRepository;
+import com.github.lilianjaf.usuario_service.core.gateway.TransactionGateway;
+import com.github.lilianjaf.usuario_service.core.gateway.UsuarioRepository;
+import com.github.lilianjaf.usuario_service.core.rules.CriacaoUsuarioPublicoContext;
+import com.github.lilianjaf.usuario_service.core.rules.ValidadorCriacaoUsuarioPublicoRule;
 
 import java.util.List;
 import java.util.UUID;

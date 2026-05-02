@@ -1,6 +1,6 @@
 # MestreMenu Microservices
 
-Este projeto é uma arquitetura de microserviços para o sistema MestreMenu, construído com **Spring Boot 3**, **Java 21**, **Gradle** e **Docker**.
+Este projeto é uma arquitetura de microserviços que seguem o princípio da Clean Architecture para o sistema MestreMenu, construído com **Spring Boot 3**, **Java 21**, **Gradle** e **Docker**.
 
 ## Arquitetura
 

@@ -1,7 +1,7 @@
 package com.github.lilianjaf.usuario_service.core.gateway;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.domain.UsuarioBase;
-import com.github.lilianjaf.mestremenuclean.usuario.core.dto.UsuarioOutput;
+import com.github.lilianjaf.usuario_service.core.domain.UsuarioBase;
+import com.github.lilianjaf.usuario_service.core.dto.UsuarioOutput;
 
 import java.util.Optional;
 import java.util.UUID;

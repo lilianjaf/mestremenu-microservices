@@ -1,6 +1,6 @@
 package com.github.lilianjaf.usuario_service.core.rules;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.exception.TipoUsuarioJaCadastradoException;
+import com.github.lilianjaf.usuario_service.core.exception.TipoUsuarioJaCadastradoException;
 
 public class TipoUsuarioNomeDeveSerUnicoRule implements ValidadorCriacaoTipoUsuarioRule {
     @Override

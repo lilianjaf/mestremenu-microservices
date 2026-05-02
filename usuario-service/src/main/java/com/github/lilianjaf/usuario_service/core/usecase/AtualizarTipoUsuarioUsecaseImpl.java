@@ -1,14 +1,14 @@
 package com.github.lilianjaf.usuario_service.core.usecase;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.domain.TipoUsuario;
-import com.github.lilianjaf.mestremenuclean.usuario.core.domain.UsuarioBase;
-import com.github.lilianjaf.mestremenuclean.usuario.core.exception.TipoUsuarioNaoEncontradoException;
-import com.github.lilianjaf.mestremenuclean.usuario.core.gateway.ObterUsuarioLogadoGateway;
-import com.github.lilianjaf.mestremenuclean.usuario.core.gateway.TipoUsuarioRepository;
-import com.github.lilianjaf.mestremenuclean.usuario.core.gateway.TransactionGateway;
-import com.github.lilianjaf.mestremenuclean.usuario.core.rules.AtualizacaoTipoUsuarioContext;
-import com.github.lilianjaf.mestremenuclean.usuario.core.rules.ValidadorAtualizacaoTipoUsuarioRule;
-import com.github.lilianjaf.mestremenuclean.usuario.core.rules.ValidadorPermissaoRule;
+import com.github.lilianjaf.usuario_service.core.domain.TipoUsuario;
+import com.github.lilianjaf.usuario_service.core.domain.UsuarioBase;
+import com.github.lilianjaf.usuario_service.core.exception.TipoUsuarioNaoEncontradoException;
+import com.github.lilianjaf.usuario_service.core.gateway.ObterUsuarioLogadoGateway;
+import com.github.lilianjaf.usuario_service.core.gateway.TipoUsuarioRepository;
+import com.github.lilianjaf.usuario_service.core.gateway.TransactionGateway;
+import com.github.lilianjaf.usuario_service.core.rules.AtualizacaoTipoUsuarioContext;
+import com.github.lilianjaf.usuario_service.core.rules.ValidadorAtualizacaoTipoUsuarioRule;
+import com.github.lilianjaf.usuario_service.core.rules.ValidadorPermissaoRule;
 
 import java.util.List;
 import java.util.UUID;

@@ -1,7 +1,7 @@
 package com.github.lilianjaf.usuario_service.infra.gateway.mapper;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.domain.TipoUsuario;
-import com.github.lilianjaf.mestremenuclean.usuario.infra.gateway.entity.TipoUsuarioEntity;
+import com.github.lilianjaf.usuario_service.core.domain.TipoUsuario;
+import com.github.lilianjaf.usuario_service.infra.gateway.entity.TipoUsuarioEntity;
 
 public class TipoUsuarioEntityMapper {
 

@@ -1,10 +1,10 @@
 package com.github.lilianjaf.usuario_service.infra.gateway.mapper;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.domain.*;
-import com.github.lilianjaf.mestremenuclean.usuario.core.dto.UsuarioOutput;
-import com.github.lilianjaf.mestremenuclean.usuario.infra.gateway.entity.EnderecoEmbeddable;
-import com.github.lilianjaf.mestremenuclean.usuario.infra.gateway.entity.TipoUsuarioEntity;
-import com.github.lilianjaf.mestremenuclean.usuario.infra.gateway.entity.UsuarioEntity;
+import com.github.lilianjaf.usuario_service.core.domain.*;
+import com.github.lilianjaf.usuario_service.core.dto.UsuarioOutput;
+import com.github.lilianjaf.usuario_service.infra.gateway.entity.EnderecoEmbeddable;
+import com.github.lilianjaf.usuario_service.infra.gateway.entity.TipoUsuarioEntity;
+import com.github.lilianjaf.usuario_service.infra.gateway.entity.UsuarioEntity;
 
 import java.util.ArrayList;
 

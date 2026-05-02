@@ -1,7 +1,7 @@
 package com.github.lilianjaf.usuario_service.core.domain;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.dto.DadosCriacaoUsuario;
-import com.github.lilianjaf.mestremenuclean.usuario.core.exception.DomainException;
+import com.github.lilianjaf.usuario_service.core.dto.DadosCriacaoUsuario;
+import com.github.lilianjaf.usuario_service.core.exception.DomainException;
 
 import java.util.Map;
 import java.util.function.Function;

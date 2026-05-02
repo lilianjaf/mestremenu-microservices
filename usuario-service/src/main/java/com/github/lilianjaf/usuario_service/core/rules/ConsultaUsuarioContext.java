@@ -1,7 +1,7 @@
 package com.github.lilianjaf.usuario_service.core.rules;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.domain.Dono;
-import com.github.lilianjaf.mestremenuclean.usuario.core.domain.UsuarioBase;
+import com.github.lilianjaf.usuario_service.core.domain.Dono;
+import com.github.lilianjaf.usuario_service.core.domain.UsuarioBase;
 
 public record ConsultaUsuarioContext(UsuarioBase usuarioLogado, UsuarioBase usuarioBuscado) {
     public boolean isUsuarioLogadoAutenticado() {

@@ -1,6 +1,6 @@
 package com.github.lilianjaf.usuario_service.core.rules;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.exception.UsuarioPossuiRestauranteAtivoException;
+import com.github.lilianjaf.usuario_service.core.exception.UsuarioPossuiRestauranteAtivoException;
 
 public class UsuarioSemRestauranteVinculadoRule implements ValidadorInativacaoUsuarioRule {
 

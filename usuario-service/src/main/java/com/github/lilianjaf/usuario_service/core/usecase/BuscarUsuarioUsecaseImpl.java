@@ -1,12 +1,12 @@
 package com.github.lilianjaf.usuario_service.core.usecase;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.domain.UsuarioBase;
-import com.github.lilianjaf.mestremenuclean.usuario.core.dto.UsuarioOutput;
-import com.github.lilianjaf.mestremenuclean.usuario.core.exception.UsuarioNaoEncontradoException;
-import com.github.lilianjaf.mestremenuclean.usuario.core.gateway.ObterUsuarioLogadoGateway;
-import com.github.lilianjaf.mestremenuclean.usuario.core.gateway.UsuarioRepository;
-import com.github.lilianjaf.mestremenuclean.usuario.core.rules.ConsultaUsuarioContext;
-import com.github.lilianjaf.mestremenuclean.usuario.core.rules.ValidadorConsultaUsuarioRule;
+import com.github.lilianjaf.usuario_service.core.domain.UsuarioBase;
+import com.github.lilianjaf.usuario_service.core.dto.UsuarioOutput;
+import com.github.lilianjaf.usuario_service.core.exception.UsuarioNaoEncontradoException;
+import com.github.lilianjaf.usuario_service.core.gateway.ObterUsuarioLogadoGateway;
+import com.github.lilianjaf.usuario_service.core.gateway.UsuarioRepository;
+import com.github.lilianjaf.usuario_service.core.rules.ConsultaUsuarioContext;
+import com.github.lilianjaf.usuario_service.core.rules.ValidadorConsultaUsuarioRule;
 
 import java.util.List;
 import java.util.UUID;

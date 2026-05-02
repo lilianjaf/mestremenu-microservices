@@ -1,13 +1,13 @@
 package com.github.lilianjaf.usuario_service.core.usecase;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.domain.Endereco;
-import com.github.lilianjaf.mestremenuclean.usuario.core.domain.UsuarioBase;
-import com.github.lilianjaf.mestremenuclean.usuario.core.gateway.ObterUsuarioLogadoGateway;
-import com.github.lilianjaf.mestremenuclean.usuario.core.gateway.TransactionGateway;
-import com.github.lilianjaf.mestremenuclean.usuario.core.gateway.UsuarioRepository;
-import com.github.lilianjaf.mestremenuclean.usuario.core.rules.AtualizacaoUsuarioContext;
-import com.github.lilianjaf.mestremenuclean.usuario.core.rules.ValidadorAtualizacaoUsuarioRule;
-import com.github.lilianjaf.mestremenuclean.usuario.core.rules.ValidadorPermissaoAtualizacaoUsuarioRule;
+import com.github.lilianjaf.usuario_service.core.domain.Endereco;
+import com.github.lilianjaf.usuario_service.core.domain.UsuarioBase;
+import com.github.lilianjaf.usuario_service.core.gateway.ObterUsuarioLogadoGateway;
+import com.github.lilianjaf.usuario_service.core.gateway.TransactionGateway;
+import com.github.lilianjaf.usuario_service.core.gateway.UsuarioRepository;
+import com.github.lilianjaf.usuario_service.core.rules.AtualizacaoUsuarioContext;
+import com.github.lilianjaf.usuario_service.core.rules.ValidadorAtualizacaoUsuarioRule;
+import com.github.lilianjaf.usuario_service.core.rules.ValidadorPermissaoAtualizacaoUsuarioRule;
 
 import java.util.List;
 import java.util.UUID;

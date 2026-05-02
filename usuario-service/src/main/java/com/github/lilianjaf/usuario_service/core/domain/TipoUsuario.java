@@ -1,6 +1,6 @@
 package com.github.lilianjaf.usuario_service.core.domain;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.exception.RegraDeNegocioException;
+import com.github.lilianjaf.usuario_service.core.exception.RegraDeNegocioException;
 
 import java.util.UUID;
 

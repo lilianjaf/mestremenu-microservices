@@ -1,8 +1,8 @@
 package com.github.lilianjaf.usuario_service.core.rules;
 
-import com.github.lilianjaf.mestremenuclean.usuario.core.domain.Dono;
-import com.github.lilianjaf.mestremenuclean.usuario.core.domain.TipoNativo;
-import com.github.lilianjaf.mestremenuclean.usuario.core.domain.UsuarioBase;
+import com.github.lilianjaf.usuario_service.core.domain.Dono;
+import com.github.lilianjaf.usuario_service.core.domain.TipoNativo;
+import com.github.lilianjaf.usuario_service.core.domain.UsuarioBase;
 
 import java.util.function.BooleanSupplier;
 
