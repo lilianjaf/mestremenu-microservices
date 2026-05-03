@@ -1,12 +1,14 @@
 package com.github.lilianjaf.usuario_service.infra.controller;
 
+import jakarta.validation.constraints.NotBlank;
+
 public record EnderecoJson(
-        String logradouro,
-        String numero,
+        @NotBlank String logradouro,
+        @NotBlank String numero,
         String complemento,
-        String bairro,
-        String cidade,
-        String cep,
-        String uf
+        @NotBlank String bairro,
+        @NotBlank String cidade,
+        @NotBlank String cep,
+        @NotBlank String uf
 ) {
 }

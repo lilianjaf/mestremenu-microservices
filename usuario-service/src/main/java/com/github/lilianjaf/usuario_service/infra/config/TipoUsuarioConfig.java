@@ -23,7 +23,7 @@ public class TipoUsuarioConfig {
                 tipoUsuarioRepository,
                 obterUsuarioLogadoGateway,
                 transactionGateway,
-                List.of(new UsuarioDeveEstarAutenticadoRule()),
+                List.of(),
                 List.of(
                         new ApenasDonoPodeCriarTipoUsuarioRule(),
                         new TipoUsuarioNomeDeveSerUnicoRule()
@@ -41,7 +41,6 @@ public class TipoUsuarioConfig {
                 transactionGateway,
                 List.of(new NomeTipoUsuarioDeveSerUnicoRule()),
                 List.of(
-                        new UsuarioDeveEstarAutenticadoRule(),
                         new ValidarPermissaoDonoRule()
                 ),
                 obterUsuarioLogadoGateway
@@ -60,7 +59,6 @@ public class TipoUsuarioConfig {
                 transactionGateway,
                 obterUsuarioLogadoGateway,
                 List.of(
-                        new UsuarioDeveEstarAutenticadoRule(),
                         new ApenasDonoPodeDeletarTipoUsuarioRule()
                 ),
                 List.of(

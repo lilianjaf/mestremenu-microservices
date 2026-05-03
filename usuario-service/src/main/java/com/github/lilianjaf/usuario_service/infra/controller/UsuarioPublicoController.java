@@ -1,6 +1,7 @@
 package com.github.lilianjaf.usuario_service.infra.controller;
 
 import com.github.lilianjaf.usuario_service.core.usecase.CriarUsuarioPublicoUseCase;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ public class UsuarioPublicoController {
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, UUID>> criarUsuario(@RequestBody CriarUsuarioPublicoJson json) {
+    public ResponseEntity<Map<String, UUID>> criarUsuario(@Valid @RequestBody CriarUsuarioPublicoJson json) {
         UUID idGerado = criarUsuarioPublicoUseCase.criar(
                 json.nome(),
                 json.email(),

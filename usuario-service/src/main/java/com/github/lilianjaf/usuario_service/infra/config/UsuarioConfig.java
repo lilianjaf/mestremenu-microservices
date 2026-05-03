@@ -42,7 +42,6 @@ public class UsuarioConfig {
             ObterUsuarioLogadoGateway obterUsuarioLogadoGateway) {
 
         List<ValidadorCriacaoUsuarioRule> permissaoRules = List.of(
-                new UsuarioDeveEstarAutenticadoRule(),
                 new ApenasDonoPodeCriarNovosUsuariosRule()
         );
 
@@ -68,9 +67,7 @@ public class UsuarioConfig {
             UsuarioRepository usuarioRepository,
             ObterUsuarioLogadoGateway obterUsuarioLogadoGateway) {
 
-        List<ValidadorConsultaUsuarioRule> permissaoRules = List.of(
-                new UsuarioDeveEstarAutenticadoRule()
-        );
+        List<ValidadorConsultaUsuarioRule> permissaoRules = List.of();
 
         List<ValidadorConsultaUsuarioRule> rules = List.of(
                 new ConsultaUsuarioDeveExistirRule(),
@@ -91,9 +88,7 @@ public class UsuarioConfig {
             TransactionGateway transactionGateway,
             ObterUsuarioLogadoGateway obterUsuarioLogadoGateway) {
 
-        List<ValidadorPermissaoAtualizacaoUsuarioRule> permissaoRules = List.of(
-                new UsuarioDeveEstarAutenticadoRule()
-        );
+        List<ValidadorPermissaoAtualizacaoUsuarioRule> permissaoRules = List.of();
 
         List<ValidadorAtualizacaoUsuarioRule> rules = List.of(
                 new UsuarioDeveExistirRule(),
@@ -118,7 +113,6 @@ public class UsuarioConfig {
             ObterUsuarioLogadoGateway obterUsuarioLogadoGateway) {
 
         List<ValidadorInativacaoUsuarioRule> permissaoRules = List.of(
-                new UsuarioDeveEstarAutenticadoRule(),
                 new ApenasDonoOuProprioUsuarioPodeInativarRule()
         );
 

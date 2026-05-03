@@ -6,7 +6,6 @@ import com.github.lilianjaf.restaurante_service.core.gateway.RestauranteReposito
 import com.github.lilianjaf.restaurante_service.core.gateway.TransactionGateway;
 import com.github.lilianjaf.restaurante_service.core.gateway.UsuarioGateway;
 import com.github.lilianjaf.restaurante_service.core.rules.*;
-import com.github.lilianjaf.restaurante_service.core.rules.UsuarioDeveEstarAutenticadoRule;
 import com.github.lilianjaf.restaurante_service.core.usecase.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +21,6 @@ public class RestauranteConfig {
                                                            ObterUsuarioLogadoGateway obterUsuarioLogadoRestauranteGateway,
                                                            TransactionGateway transactionGateway) {
         List<ValidadorCriacaoRestauranteRule> permissaoRules = List.of(
-                new UsuarioDeveEstarAutenticadoRule(),
                 new ApenasDonoPodeCriarRestauranteRule()
         );
         List<ValidadorCriacaoRestauranteRule> rules = List.of(
@@ -34,9 +32,7 @@ public class RestauranteConfig {
     @Bean
     public BuscarRestaurantePorIdUseCase buscarRestaurantePorIdUseCase(RestauranteRepository restauranteRepository,
                                                                      ObterUsuarioLogadoGateway obterUsuarioLogadoRestauranteGateway) {
-        List<BuscarRestauranteRule> permissaoRules = List.of(
-                new UsuarioDeveEstarAutenticadoRule()
-        );
+        List<BuscarRestauranteRule> permissaoRules = List.of();
         List<BuscarRestauranteRule> rules = List.of();
         return new BuscarRestaurantePorIdUseCaseImpl(restauranteRepository, obterUsuarioLogadoRestauranteGateway, permissaoRules, rules);
     }
@@ -44,9 +40,7 @@ public class RestauranteConfig {
     @Bean
     public ListarRestaurantesUseCase listarRestaurantesUseCase(RestauranteRepository restauranteRepository,
                                                              ObterUsuarioLogadoGateway obterUsuarioLogadoRestauranteGateway) {
-        List<ListarRestaurantesRule> permissaoRules = List.of(
-                new UsuarioDeveEstarAutenticadoRule()
-        );
+        List<ListarRestaurantesRule> permissaoRules = List.of();
         List<ListarRestaurantesRule> rules = List.of();
         return new ListarRestaurantesUseCaseImpl(restauranteRepository, obterUsuarioLogadoRestauranteGateway, permissaoRules, rules);
     }
@@ -56,7 +50,6 @@ public class RestauranteConfig {
                                                                  ObterUsuarioLogadoGateway obterUsuarioLogadoRestauranteGateway,
                                                                  TransactionGateway transactionGateway) {
         List<AtualizarRestauranteRule> permissaoRules = List.of(
-                new UsuarioDeveEstarAutenticadoRule(),
                 new ApenasDonoDoRestaurantePodeAtualizarRule()
         );
         List<AtualizarRestauranteRule> rules = List.of(
@@ -70,7 +63,6 @@ public class RestauranteConfig {
                                                                  ObterUsuarioLogadoGateway obterUsuarioLogadoRestauranteGateway,
                                                                  TransactionGateway transactionGateway) {
         List<InativarRestauranteRule> permissaoRules = List.of(
-                new UsuarioDeveEstarAutenticadoRule(),
                 new ApenasDonoPodeInativarProprioRestauranteRule()
         );
         List<InativarRestauranteRule> rules = List.of(

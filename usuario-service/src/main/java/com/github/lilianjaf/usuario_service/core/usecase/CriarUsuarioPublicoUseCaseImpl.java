@@ -2,6 +2,7 @@ package com.github.lilianjaf.usuario_service.core.usecase;
 
 import com.github.lilianjaf.usuario_service.core.domain.*;
 import com.github.lilianjaf.usuario_service.core.dto.DadosCriacaoUsuario;
+import com.github.lilianjaf.usuario_service.core.exception.RegistroNaoEncontradoException;
 import com.github.lilianjaf.usuario_service.core.gateway.CodificadorDeSenha;
 import com.github.lilianjaf.usuario_service.core.gateway.TipoUsuarioRepository;
 import com.github.lilianjaf.usuario_service.core.gateway.TransactionGateway;
@@ -39,7 +40,9 @@ public class CriarUsuarioPublicoUseCaseImpl implements CriarUsuarioPublicoUseCas
             String logradouro, String numero, String complemento, String bairro, String cidade, String cep, String uf) {
 
         return transactionGateway.execute(() -> {
-            TipoUsuario tipoCustomizado = tipoUsuarioRepository.findByNome("cliente").orElseThrow();
+            TipoUsuario tipoCustomizado = tipoUsuarioRepository.findByNome("cliente")
+                    .orElseThrow(() -> new RegistroNaoEncontradoException(
+                            "Tipo de usuário 'cliente' não encontrado. Execute as migrations do banco de dados."));
 
             var context = new CriacaoUsuarioPublicoContext(
                     nome, email, login, senhaPura, tipoCustomizado.getNome(),

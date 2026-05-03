@@ -8,10 +8,6 @@ public record AtualizacaoUsuarioContext(
         UsuarioBase usuarioComMesmoEmail,
         UsuarioBase usuarioLogado
 ) {
-    public boolean isUsuarioLogadoAutenticado() {
-        return usuarioLogado != null;
-    }
-
     public boolean isConflitoDeEmail() {
         return usuarioComMesmoEmail != null &&
                 usuarioSendoEditado != null &&

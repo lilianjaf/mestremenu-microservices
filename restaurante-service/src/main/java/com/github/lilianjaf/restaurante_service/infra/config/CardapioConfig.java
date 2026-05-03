@@ -80,7 +80,7 @@ public class CardapioConfig {
                 itemRepository,
                 obterUsuarioLogadoGateway,
                 transactionGateway,
-                List.of(UsuarioDeveEstarAutenticadoRule.paraBuscarItem())
+                List.of()
         );
     }
 
@@ -150,7 +150,7 @@ public class CardapioConfig {
                 cardapioRepository,
                 obterUsuarioLogadoGateway,
                 transactionGateway,
-                List.of(UsuarioDeveEstarAutenticadoRule.paraBuscarCardapio())
+                List.of()
         );
     }
 }

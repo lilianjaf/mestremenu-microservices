@@ -7,11 +7,7 @@ public record CriacaoRestauranteContext(
         Usuario usuarioLogado,
         Usuario dono,
         DadosCriacaoRestaurante dados
-) implements RestauranteContextBase {
-    public boolean isUsuarioAutenticado() {
-        return usuarioLogado != null;
-    }
-
+) {
     public boolean isUsuarioLogadoTipoDono() {
         return usuarioLogado != null && usuarioLogado.isDono();
     }

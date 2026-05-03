@@ -8,11 +8,7 @@ import java.util.Objects;
 public record InativacaoRestauranteContext(
         Usuario usuarioLogado,
         Restaurante restaurante
-) implements RestauranteContextBase {
-    public boolean isUsuarioAutenticado() {
-        return usuarioLogado != null;
-    }
-
+) {
     public boolean isUsuarioDonoDoRestaurante() {
         return usuarioLogado != null &&
                usuarioLogado.isDono() &&
