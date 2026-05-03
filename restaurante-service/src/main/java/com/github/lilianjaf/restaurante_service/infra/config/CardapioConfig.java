@@ -90,7 +90,7 @@ public class CardapioConfig {
                                                    ObterUsuarioLogadoGateway obterUsuarioLogadoGateway,
                                                    TransactionGateway transactionGateway) {
         List<ValidadorPermissaoCardapioRule<? super CriarCardapioRuleContextDto>> permissionRules = List.of(
-                new ApenasDonoPodeGerenciarCardapioRule()
+                new ApenasDonoPodeCriarCardapioRule()
         );
         List<ValidadorCardapioRule<? super CriarCardapioRuleContextDto>> businessRules = List.of(
                 new CardapioDeveTerNomeRule(),
