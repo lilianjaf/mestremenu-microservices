@@ -18,7 +18,7 @@ public class Restaurante {
         this.id = id;
         this.idDono = idDono;
         this.nome = "Placeholder";
-        this.endereco = null; // Careful here if used in validation
+        this.endereco = null;
         this.tipoCozinha = "Placeholder";
         this.horarioFuncionamento = "Placeholder";
         this.ativo = true;

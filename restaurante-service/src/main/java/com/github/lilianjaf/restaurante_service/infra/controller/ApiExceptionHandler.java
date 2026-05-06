@@ -3,7 +3,6 @@ package com.github.lilianjaf.restaurante_service.infra.controller;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.PropertyBindingException;
-import com.github.lilianjaf.usuario_service.core.exception.DomainException;
 import com.github.lilianjaf.usuario_service.core.exception.RegistroNaoEncontradoException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -87,7 +86,6 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                     "The request body contains invalid data."
             );
             problemDetail.setDetail(message);
-            // You can add extra properties to the JSON response
             problemDetail.setProperty("invalidValue", invalidExp.getValue());
             problemDetail.setProperty("acceptedValues", invalidExp.getTargetType().getEnumConstants());
             return handleExceptionInternal(ex, problemDetail, headers, status, request) ;
