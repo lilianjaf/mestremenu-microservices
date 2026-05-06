@@ -1,4 +1,4 @@
-package com.github.lilianjaf.pedido_service;
+package com.github.lilianjaf.pedido_service.infra.config;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;
