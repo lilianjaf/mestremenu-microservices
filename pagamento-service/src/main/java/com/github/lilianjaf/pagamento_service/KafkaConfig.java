@@ -7,11 +7,24 @@ import org.springframework.kafka.config.TopicBuilder;
 
 @Configuration
 public class KafkaConfig {
+
     @Bean
-    public NewTopic pagamentosTopic() {
-        return TopicBuilder.name("pagamentos-topic")
-                .partitions(1)
-                .replicas(1)
-                .build();
+    public NewTopic pedidoCriadoTopic() {
+        return TopicBuilder.name("pedido.criado").partitions(1).replicas(1).build();
+    }
+
+    @Bean
+    public NewTopic pagamentoAprovadoTopic() {
+        return TopicBuilder.name("pagamento.aprovado").partitions(1).replicas(1).build();
+    }
+
+    @Bean
+    public NewTopic pagamentoPendenteTopic() {
+        return TopicBuilder.name("pagamento.pendente").partitions(1).replicas(1).build();
+    }
+
+    @Bean
+    public NewTopic pagamentoFalhouTopic() {
+        return TopicBuilder.name("pagamento.falhou").partitions(1).replicas(1).build();
     }
 }
