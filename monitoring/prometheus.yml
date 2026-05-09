@@ -1,0 +1,29 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'usuario-service'
+    metrics_path: /actuator/prometheus
+    static_configs:
+      - targets: ['usuario-service:8080']
+
+  - job_name: 'restaurante-service'
+    metrics_path: /actuator/prometheus
+    static_configs:
+      - targets: ['restaurante-service:8080']
+
+  - job_name: 'pedido-service'
+    metrics_path: /actuator/prometheus
+    static_configs:
+      - targets: ['pedido-service:8080']
+
+  - job_name: 'pagamento-service'
+    metrics_path: /actuator/prometheus
+    static_configs:
+      - targets: ['pagamento-service:8080']
+
+  - job_name: 'gateway-service'
+    metrics_path: /actuator/prometheus
+    static_configs:
+      - targets: ['gateway-service:8080']
