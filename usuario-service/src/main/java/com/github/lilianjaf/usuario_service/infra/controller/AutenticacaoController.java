@@ -3,6 +3,7 @@ package com.github.lilianjaf.usuario_service.infra.controller;
 import com.github.lilianjaf.usuario_service.infra.security.LoginRequest;
 import com.github.lilianjaf.usuario_service.infra.security.TokenResponse;
 import com.github.lilianjaf.usuario_service.infra.security.TokenService;
+import com.github.lilianjaf.usuario_service.infra.security.UsuarioDetailsAdapter;
 import jakarta.validation.Valid;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -32,7 +33,8 @@ public class AutenticacaoController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        String token = tokenService.gerarToken(authentication.getName());
+        UsuarioDetailsAdapter principal = (UsuarioDetailsAdapter) authentication.getPrincipal();
+        String token = tokenService.gerarToken(authentication.getName(), principal.getUsuario().getId());
 
         return new TokenResponse(token);
     }

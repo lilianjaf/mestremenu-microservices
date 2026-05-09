@@ -1,6 +1,9 @@
 package com.github.lilianjaf.pedido_service.core.usecase;
 
-public class ConsultarPedidoPorClienteUseCase {
+import com.github.lilianjaf.pedido_service.core.domain.Pedido;
 
-    //cliente autenticado
+import java.util.List;
+
+public interface ConsultarPedidoPorClienteUseCase {
+    List<Pedido> executar();
 }
