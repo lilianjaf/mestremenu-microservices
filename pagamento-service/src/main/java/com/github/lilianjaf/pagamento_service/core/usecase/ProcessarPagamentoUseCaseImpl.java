@@ -18,17 +18,20 @@ public class ProcessarPagamentoUseCaseImpl implements ProcessarPagamentoUseCase 
     private final OutboxGateway outboxGateway;
     private final TransactionGateway transactionGateway;
     private final DomainLogger log;
+    private final int maxTentativas;
 
     public ProcessarPagamentoUseCaseImpl(PagamentoRepository pagamentoRepository,
                                          ProcessadorPagamentoGateway processadorGateway,
                                          OutboxGateway outboxGateway,
                                          TransactionGateway transactionGateway,
-                                         DomainLogger log) {
+                                         DomainLogger log,
+                                         int maxTentativas) {
         this.pagamentoRepository = pagamentoRepository;
         this.processadorGateway = processadorGateway;
         this.outboxGateway = outboxGateway;
         this.transactionGateway = transactionGateway;
         this.log = log;
+        this.maxTentativas = maxTentativas;
     }
 
     @Override
@@ -42,7 +45,10 @@ public class ProcessarPagamentoUseCaseImpl implements ProcessarPagamentoUseCase 
                 transactionGateway.execute(() -> outboxGateway.salvarEventoPagamentoAprovado(p));
                 return;
             }
-            // PENDENTE/AGUARDANDO -> retry com pagamento existente
+            if (p.getStatus() == StatusPagamento.FALHOU) {
+                log.warn("Pedido {} já marcado como FALHOU. Ignorando reprocessamento.", dados.pedidoId());
+                return;
+            }
             log.info("Reprocessando pagamento existente para pedido {}", dados.pedidoId());
             tentarProcessar(p);
         } else {
@@ -53,7 +59,7 @@ public class ProcessarPagamentoUseCaseImpl implements ProcessarPagamentoUseCase 
     private void tentarProcessar(Pagamento pagamento) {
         boolean aprovado = processadorGateway.processar(pagamento.getPedidoId(), pagamento.getValorTotal());
 
-        // Gateway retornou false pode ser um timeout por isso verifica se processou o pagamento pra marcar como pendente
+        // Gateway retornou false pode ser um timeout: verifica se pagamento já foi salvo como APROVADO
         if (!aprovado) {
             Optional<Pagamento> verificacao = pagamentoRepository.buscarPorPedidoId(pagamento.getPedidoId());
             if (verificacao.isPresent() && verificacao.get().getStatus() == StatusPagamento.APROVADO) {
@@ -71,10 +77,20 @@ public class ProcessarPagamentoUseCaseImpl implements ProcessarPagamentoUseCase 
                 outboxGateway.salvarEventoPagamentoAprovado(pagamento);
                 log.info("Pagamento do pedido {} APROVADO.", pagamento.getPedidoId());
             } else {
-                pagamento.marcarPendente();
-                pagamentoRepository.salvar(pagamento);
-                outboxGateway.salvarEventoPagamentoPendente(pagamento);
-                log.warn("Pagamento do pedido {} marcado como PENDENTE.", pagamento.getPedidoId());
+                pagamento.incrementarTentativa();
+                if (pagamento.getTentativas() >= maxTentativas) {
+                    pagamento.falhar();
+                    pagamentoRepository.salvar(pagamento);
+                    outboxGateway.salvarEventoPagamentoFalhou(pagamento);
+                    log.warn("Pagamento do pedido {} FALHOU após {} tentativa(s). Cancelando pedido.",
+                            pagamento.getPedidoId(), pagamento.getTentativas());
+                } else {
+                    pagamento.marcarPendente();
+                    pagamentoRepository.salvar(pagamento);
+                    outboxGateway.salvarEventoPagamentoPendente(pagamento);
+                    log.warn("Pagamento do pedido {} PENDENTE (tentativa {}/{}).",
+                            pagamento.getPedidoId(), pagamento.getTentativas(), maxTentativas);
+                }
             }
         });
     }

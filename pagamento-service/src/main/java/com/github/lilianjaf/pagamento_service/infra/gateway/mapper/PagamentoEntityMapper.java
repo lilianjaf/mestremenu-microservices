@@ -11,6 +11,7 @@ public class PagamentoEntityMapper {
                 entity.getPedidoId(),
                 entity.getValorTotal(),
                 entity.getStatus(),
+                entity.getTentativas(),
                 entity.getCriadoEm(),
                 entity.getProcessadoEm()
         );
@@ -22,6 +23,7 @@ public class PagamentoEntityMapper {
                 domain.getPedidoId(),
                 domain.getValorTotal(),
                 domain.getStatus(),
+                domain.getTentativas(),
                 domain.getCriadoEm(),
                 domain.getProcessadoEm()
         );

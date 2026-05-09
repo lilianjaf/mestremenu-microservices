@@ -25,6 +25,9 @@ public class PagamentoEntity implements Persistable<UUID> {
     @Column(nullable = false)
     private StatusPagamento status;
 
+    @Column(nullable = false)
+    private int tentativas;
+
     @Column(name = "criado_em", nullable = false)
     private LocalDateTime criadoEm;
 
@@ -37,11 +40,13 @@ public class PagamentoEntity implements Persistable<UUID> {
     protected PagamentoEntity() {}
 
     public PagamentoEntity(UUID id, UUID pedidoId, BigDecimal valorTotal,
-                           StatusPagamento status, LocalDateTime criadoEm, LocalDateTime processadoEm) {
+                           StatusPagamento status, int tentativas,
+                           LocalDateTime criadoEm, LocalDateTime processadoEm) {
         this.id = id;
         this.pedidoId = pedidoId;
         this.valorTotal = valorTotal;
         this.status = status;
+        this.tentativas = tentativas;
         this.criadoEm = criadoEm;
         this.processadoEm = processadoEm;
     }
@@ -60,6 +65,8 @@ public class PagamentoEntity implements Persistable<UUID> {
     public BigDecimal getValorTotal() { return valorTotal; }
     public StatusPagamento getStatus() { return status; }
     public void setStatus(StatusPagamento status) { this.status = status; }
+    public int getTentativas() { return tentativas; }
+    public void setTentativas(int tentativas) { this.tentativas = tentativas; }
     public LocalDateTime getCriadoEm() { return criadoEm; }
     public LocalDateTime getProcessadoEm() { return processadoEm; }
     public void setProcessadoEm(LocalDateTime processadoEm) { this.processadoEm = processadoEm; }

@@ -32,6 +32,11 @@ public class OutboxGatewayImpl implements OutboxGateway {
         salvar(pagamento, "pagamento.pendente");
     }
 
+    @Override
+    public void salvarEventoPagamentoFalhou(Pagamento pagamento) {
+        salvar(pagamento, "pagamento.falhou");
+    }
+
     private void salvar(Pagamento pagamento, String eventType) {
         String payload = serializarPayload(pagamento);
         OutboxEventEntity entity = new OutboxEventEntity(

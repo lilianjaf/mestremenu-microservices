@@ -27,6 +27,7 @@ public class PagamentoRepositoryJpaImpl implements PagamentoRepository {
         if (existing.isPresent()) {
             PagamentoEntity entity = existing.get();
             entity.setStatus(domain.getStatus());
+            entity.setTentativas(domain.getTentativas());
             entity.setProcessadoEm(domain.getProcessadoEm());
             return PagamentoEntityMapper.toDomain(springDataRepository.save(entity));
         }
