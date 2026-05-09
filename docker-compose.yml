@@ -166,6 +166,38 @@ services:
     networks:
       - mestremenu-network
 
+  gateway-service:
+    build:
+      context: .
+      args:
+        MODULE_NAME: gateway-service
+    container_name: gateway-service
+    ports:
+      - "8090:8080"
+      - "5005:5005"
+    environment:
+      USUARIO_SERVICE_URL: http://usuario-service:8080
+      RESTAURANTE_SERVICE_URL: http://restaurante-service:8080
+      PEDIDO_SERVICE_URL: http://pedido-service:8080
+      JWT_SECRET: ${JWT_SECRET:-my-secret-key}
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-docker}
+      JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -Duser.timezone=America/Sao_Paulo"
+      TZ: America/Sao_Paulo
+    depends_on:
+      usuario-service:
+        condition: service_healthy
+      restaurante-service:
+        condition: service_healthy
+      pedido-service:
+        condition: service_started
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8080/actuator/health | grep -q '\"status\":\"UP\"' "]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    networks:
+      - mestremenu-network
+
 volumes:
   pgdata:
     driver: local

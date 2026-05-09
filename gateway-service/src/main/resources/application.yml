@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+        - id: usuario-service
+          uri: ${USUARIO_SERVICE_URL:http://localhost:8081}
+          predicates:
+            - Path=/api/v1/login/**, /api/v1/publico/**, /api/v1/usuarios/**
+
+        - id: restaurante-service
+          uri: ${RESTAURANTE_SERVICE_URL:http://localhost:8082}
+          predicates:
+            - Path=/api/v1/restaurantes/**, /api/v1/cardapios/**, /api/v1/itens-cardapio/**
+
+        - id: pedido-service
+          uri: ${PEDIDO_SERVICE_URL:http://localhost:8083}
+          predicates:
+            - Path=/api/v1/pedidos/**
+
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET:my-secret-key}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus
+  endpoint:
+    health:
+      show-details: always
