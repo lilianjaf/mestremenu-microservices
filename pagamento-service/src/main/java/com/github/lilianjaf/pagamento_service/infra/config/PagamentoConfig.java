@@ -6,6 +6,7 @@ import com.github.lilianjaf.pagamento_service.core.gateway.ProcessadorPagamentoG
 import com.github.lilianjaf.pagamento_service.core.gateway.TransactionGateway;
 import com.github.lilianjaf.pagamento_service.core.usecase.ProcessarPagamentoUseCase;
 import com.github.lilianjaf.pagamento_service.core.usecase.ProcessarPagamentoUseCaseImpl;
+import com.github.lilianjaf.pagamento_service.infra.gateway.Slf4jDomainLoggerAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,6 +20,10 @@ public class PagamentoConfig {
             OutboxGateway outboxGateway,
             TransactionGateway transactionGateway) {
         return new ProcessarPagamentoUseCaseImpl(
-                pagamentoRepository, processadorPagamentoGateway, outboxGateway, transactionGateway);
+                pagamentoRepository,
+                processadorPagamentoGateway,
+                outboxGateway,
+                transactionGateway,
+                new Slf4jDomainLoggerAdapter(ProcessarPagamentoUseCaseImpl.class));
     }
 }

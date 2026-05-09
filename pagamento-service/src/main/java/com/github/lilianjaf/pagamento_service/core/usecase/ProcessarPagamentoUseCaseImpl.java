@@ -3,32 +3,32 @@ package com.github.lilianjaf.pagamento_service.core.usecase;
 import com.github.lilianjaf.pagamento_service.core.domain.Pagamento;
 import com.github.lilianjaf.pagamento_service.core.domain.StatusPagamento;
 import com.github.lilianjaf.pagamento_service.core.dto.DadosProcessamentoPagamento;
+import com.github.lilianjaf.pagamento_service.core.gateway.DomainLogger;
 import com.github.lilianjaf.pagamento_service.core.gateway.OutboxGateway;
 import com.github.lilianjaf.pagamento_service.core.gateway.PagamentoRepository;
 import com.github.lilianjaf.pagamento_service.core.gateway.ProcessadorPagamentoGateway;
 import com.github.lilianjaf.pagamento_service.core.gateway.TransactionGateway;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
 public class ProcessarPagamentoUseCaseImpl implements ProcessarPagamentoUseCase {
 
-    private static final Logger log = LoggerFactory.getLogger(ProcessarPagamentoUseCaseImpl.class);
-
     private final PagamentoRepository pagamentoRepository;
     private final ProcessadorPagamentoGateway processadorGateway;
     private final OutboxGateway outboxGateway;
     private final TransactionGateway transactionGateway;
+    private final DomainLogger log;
 
     public ProcessarPagamentoUseCaseImpl(PagamentoRepository pagamentoRepository,
                                          ProcessadorPagamentoGateway processadorGateway,
                                          OutboxGateway outboxGateway,
-                                         TransactionGateway transactionGateway) {
+                                         TransactionGateway transactionGateway,
+                                         DomainLogger log) {
         this.pagamentoRepository = pagamentoRepository;
         this.processadorGateway = processadorGateway;
         this.outboxGateway = outboxGateway;
         this.transactionGateway = transactionGateway;
+        this.log = log;
     }
 
     @Override
@@ -46,8 +46,7 @@ public class ProcessarPagamentoUseCaseImpl implements ProcessarPagamentoUseCase 
             log.info("Reprocessando pagamento existente para pedido {}", dados.pedidoId());
             tentarProcessar(p);
         } else {
-            Pagamento pagamento = new Pagamento(dados.pedidoId(), dados.valorTotal());
-            tentarProcessar(pagamento);
+            tentarProcessar(new Pagamento(dados.pedidoId(), dados.valorTotal()));
         }
     }
 
