@@ -50,9 +50,9 @@
 							"raw": "{\n    \"login\": \"admin\",\n    \"senha\": \"admin\"\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/login",
+							"raw": "{{gateway_base_url}}/api/v1/login",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -104,9 +104,9 @@
 							"raw": "{\n    \"nome\": \"Visitante\",\n    \"email\": \"visitante@email.com\",\n    \"login\": \"visitante123\",\n    \"senha\": \"senhaForte123\",\n    \"endereco\": {\n        \"logradouro\": \"Rua das Flores\",\n        \"numero\": \"123\",\n        \"complemento\": \"Casa\",\n        \"bairro\": \"Centro\",\n        \"cidade\": \"Atibaia\",\n        \"cep\": \"12940-000\",\n        \"uf\": \"SP\"\n    }\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/publico/usuarios",
+							"raw": "{{gateway_base_url}}/api/v1/publico/usuarios",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -149,9 +149,9 @@
 							"raw": "{\n    \"login\": \"visitante123\",\n    \"senha\": \"123\"\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/publico/usuarios",
+							"raw": "{{gateway_base_url}}/api/v1/publico/usuarios",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -194,9 +194,9 @@
 							"raw": "{\n    \"nome\": \"V\",\n    \"email\": \"v@email.com\",\n    \"login\": \"v123\",\n    \"senha\": \"123\",\n    \"endereco\": {\n        \"logradouro\": \"Rua\"\n    }\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/publico/usuarios",
+							"raw": "{{gateway_base_url}}/api/v1/publico/usuarios",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -239,9 +239,9 @@
 							"raw": "{\n    \"nome\": \"V\",\n    \"email\": \"visitante@email.com\",\n    \"login\": \"visitante123\",\n    \"senha\": \"123\",\n    \"endereco\": {\n        \"logradouro\": \"Rua das Flores\",\n        \"numero\": \"123\",\n        \"bairro\": \"Centro\",\n        \"cidade\": \"Atibaia\",\n        \"cep\": \"12940-000\",\n        \"uf\": \"SP\"\n    }\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/publico/usuarios",
+							"raw": "{{gateway_base_url}}/api/v1/publico/usuarios",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -291,9 +291,9 @@
 							"raw": "{\n    \"nome\": \"GERENTE\",\n    \"tipoNativo\": \"DONO\"\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/tipos-usuario",
+							"raw": "{{gateway_base_url}}/api/v1/tipos-usuario",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -332,9 +332,9 @@
 							"raw": "{\n    \"nome\": \"SUPER_GERENTE\"\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/tipos-usuario/{{tipo_usuario_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/tipos-usuario/{{tipo_usuario_id}}",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -378,9 +378,9 @@
 							"raw": "{\n    \"nome\": \"AUXILIAR\",\n    \"tipoNativo\": \"DONO\"\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/tipos-usuario",
+							"raw": "{{gateway_base_url}}/api/v1/tipos-usuario",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -422,9 +422,9 @@
 							"raw": "{\n    \"nome\": \"TESTE\"\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/tipos-usuario/{{tipo_usuario_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/tipos-usuario/{{tipo_usuario_id}}",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -474,9 +474,9 @@
 							"raw": "{\n    \"nome\": \"TESTE\"\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/tipos-usuario/{{tipo_usuario_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/tipos-usuario/{{tipo_usuario_id}}",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -516,9 +516,9 @@
 							"raw": "{\n    \"nome\": \"TESTE_INEXISTENTE\"\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/tipos-usuario/00000000-0000-0000-0000-000000000000",
+							"raw": "{{gateway_base_url}}/api/v1/tipos-usuario/00000000-0000-0000-0000-000000000000",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -558,9 +558,9 @@
 							"raw": "{\n    \"nome\": \"SUPER_GERENTE\"\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/tipos-usuario/{{tipo_aux_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/tipos-usuario/{{tipo_aux_id}}",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -603,9 +603,9 @@
 							"raw": "{\n    \"nome\": \"NOVO\",\n    \"tipoNativo\": \"CLIENTE\"\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/tipos-usuario",
+							"raw": "{{gateway_base_url}}/api/v1/tipos-usuario",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -654,9 +654,9 @@
 							"raw": "{\n    \"nome\": \"NOVO\",\n    \"tipoNativo\": \"CLIENTE\"\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/tipos-usuario",
+							"raw": "{{gateway_base_url}}/api/v1/tipos-usuario",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -695,9 +695,9 @@
 							"raw": "{\n    \"nome\": \"SUPER_GERENTE\",\n    \"tipoNativo\": \"CLIENTE\"\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/tipos-usuario",
+							"raw": "{{gateway_base_url}}/api/v1/tipos-usuario",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -756,9 +756,9 @@
 							"raw": "{\n    \"nome\": \"Lilian\",\n    \"email\": \"lilian@mestremenu.com.br\",\n    \"login\": \"lilian.admin\",\n    \"senha\": \"senhaForte123\",\n    \"nomeTipoDesejado\": \"SUPER_GERENTE\",\n    \"tipoNativo\": \"DONO\",\n    \"endereco\": {\n        \"logradouro\": \"Rua das Cerejeiras\",\n        \"numero\": \"100\",\n        \"complemento\": \"Apto 2\",\n        \"bairro\": \"Jardim Paulista\",\n        \"cidade\": \"Atibaia\",\n        \"cep\": \"12940-000\",\n        \"uf\": \"SP\"\n    }\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/usuarios",
+							"raw": "{{gateway_base_url}}/api/v1/usuarios",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -793,9 +793,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/usuarios/{{usuario_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/usuarios/{{usuario_id}}",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -835,9 +835,9 @@
 							"raw": "{\n    \"nome\": \"Lilian Atualizada\",\n    \"email\": \"lilian.novoemail@mestremenu.com.br\",\n    \"endereco\": {\n        \"logradouro\": \"Avenida Carvalho Pinto\",\n        \"numero\": \"500\",\n        \"complemento\": \"\",\n        \"bairro\": \"Centro\",\n        \"cidade\": \"Atibaia\",\n        \"cep\": \"12940-000\",\n        \"uf\": \"SP\"\n    }\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/usuarios/{{usuario_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/usuarios/{{usuario_id}}",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -871,9 +871,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/usuarios/{{usuario_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/usuarios/{{usuario_id}}",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -914,9 +914,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/usuarios/{{usuario_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/usuarios/{{usuario_id}}",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -947,9 +947,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/usuarios/00000000-0000-0000-0000-000000000000",
+							"raw": "{{gateway_base_url}}/api/v1/usuarios/00000000-0000-0000-0000-000000000000",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -992,9 +992,9 @@
 							"raw": "{\n    \"nome\": \"Teste\"\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/usuarios/{{usuario_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/usuarios/{{usuario_id}}",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -1044,9 +1044,9 @@
 							"raw": "{\n    \"nome\": \"Teste\"\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/usuarios/{{usuario_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/usuarios/{{usuario_id}}",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -1086,9 +1086,9 @@
 							"raw": "{\n    \"nome\": \"Teste\"\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/usuarios/00000000-0000-0000-0000-000000000000",
+							"raw": "{{gateway_base_url}}/api/v1/usuarios/00000000-0000-0000-0000-000000000000",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -1128,9 +1128,9 @@
 							"raw": "{\n    \"nome\": \"Teste\",\n    \"email\": \"visitante@email.com\"\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/usuarios/{{usuario_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/usuarios/{{usuario_id}}",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -1173,9 +1173,9 @@
 							"raw": "{\n    \"nome\": \"Teste\"\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/usuarios",
+							"raw": "{{gateway_base_url}}/api/v1/usuarios",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -1224,9 +1224,9 @@
 							"raw": "{\n    \"nome\": \"Teste\"\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/usuarios",
+							"raw": "{{gateway_base_url}}/api/v1/usuarios",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -1265,9 +1265,9 @@
 							"raw": "{\n    \"email\": \"testando@email.com\",\n    \"login\": \"testando\",\n    \"senha\": \"123\",\n    \"tipoNativo\": \"DONO\",\n    \"endereco\": {\n        \"logradouro\": \"Rua\",\n        \"numero\": \"1\",\n        \"bairro\": \"B\",\n        \"cidade\": \"C\",\n        \"cep\": \"1\",\n        \"uf\": \"SP\"\n    }\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/usuarios",
+							"raw": "{{gateway_base_url}}/api/v1/usuarios",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -1306,9 +1306,9 @@
 							"raw": "{\n    \"nome\": \"O\",\n    \"email\": \"testando@email.com\",\n    \"login\": \"testando\",\n    \"senha\": \"123\",\n    \"tipoNativo\": \"DONO\",\n    \"endereco\": {\n        \"logradouro\": \"Rua\"\n    }\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/usuarios",
+							"raw": "{{gateway_base_url}}/api/v1/usuarios",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -1347,9 +1347,9 @@
 							"raw": "{\n    \"nome\": \"O\",\n    \"email\": \"o@email.com\",\n    \"login\": \"ologin\",\n    \"senha\": \"123\",\n    \"tipoNativo\": \"INEXISTENTE\",\n    \"endereco\": {\n        \"logradouro\": \"Rua\",\n        \"numero\": \"1\",\n        \"bairro\": \"B\",\n        \"cidade\": \"C\",\n        \"cep\": \"1\",\n        \"uf\": \"SP\"\n    }\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/usuarios",
+							"raw": "{{gateway_base_url}}/api/v1/usuarios",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -1388,9 +1388,9 @@
 							"raw": "{\n    \"nome\": \"O\",\n    \"email\": \"visitante@email.com\",\n    \"login\": \"visitante123\",\n    \"senha\": \"123\",\n    \"tipoNativo\": \"DONO\",\n    \"endereco\": {\n        \"logradouro\": \"Rua\",\n        \"numero\": \"1\",\n        \"bairro\": \"B\",\n        \"cidade\": \"C\",\n        \"cep\": \"1\",\n        \"uf\": \"SP\"\n    }\n}"
 						},
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/usuarios",
+							"raw": "{{gateway_base_url}}/api/v1/usuarios",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -1420,9 +1420,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/usuarios/{{usuario_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/usuarios/{{usuario_id}}",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -1456,9 +1456,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/usuarios/{{usuario_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/usuarios/{{usuario_id}}",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -1499,9 +1499,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/usuarios/{{usuario_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/usuarios/{{usuario_id}}",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -1532,9 +1532,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/usuarios/{{usuario_id_com_restaurante}}",
+							"raw": "{{gateway_base_url}}/api/v1/usuarios/{{usuario_id_com_restaurante}}",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -1568,9 +1568,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/tipos-usuario/{{tipo_usuario_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/tipos-usuario/{{tipo_usuario_id}}",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -1611,9 +1611,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/tipos-usuario/{{tipo_usuario_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/tipos-usuario/{{tipo_usuario_id}}",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -1644,9 +1644,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/tipos-usuario/00000000-0000-0000-0000-000000000000",
+							"raw": "{{gateway_base_url}}/api/v1/tipos-usuario/00000000-0000-0000-0000-000000000000",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -1677,9 +1677,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/tipos-usuario/{{tipo_usuario_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/tipos-usuario/{{tipo_usuario_id}}",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -1710,9 +1710,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{usuario_base_url}}/api/v1/tipos-usuario/{{tipo_aux_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/tipos-usuario/{{tipo_aux_id}}",
 							"host": [
-								"{{usuario_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -1774,9 +1774,9 @@
 							"raw": "{\n    \"nome\": \"Restaurante do Teste\",\n    \"tipoCozinha\": \"Brasileira\",\n    \"horarioFuncionamento\": \"08:00 - 22:00\",\n    \"idDono\": \"8c9c7e0c-84d4-4a4e-862d-0b70c3c54d3d\",\n    \"endereco\": {\n        \"logradouro\": \"Rua de Teste\",\n        \"numero\": \"123\",\n        \"bairro\": \"Centro\",\n        \"cidade\": \"Atibaia\",\n        \"cep\": \"12940-000\",\n        \"uf\": \"SP\"\n    }\n}"
 						},
 						"url": {
-							"raw": "{{restaurante_base_url}}/api/v1/restaurantes",
+							"raw": "{{gateway_base_url}}/api/v1/restaurantes",
 							"host": [
-								"{{restaurante_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -1806,9 +1806,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{restaurante_base_url}}/api/v1/restaurantes/{{restaurante_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/restaurantes/{{restaurante_id}}",
 							"host": [
-								"{{restaurante_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -1848,9 +1848,9 @@
 							"raw": "{\n    \"nome\": \"Restaurante do Teste Atualizado\",\n    \"tipoCozinha\": \"Italiana\"\n}"
 						},
 						"url": {
-							"raw": "{{restaurante_base_url}}/api/v1/restaurantes/{{restaurante_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/restaurantes/{{restaurante_id}}",
 							"host": [
-								"{{restaurante_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -1912,9 +1912,9 @@
 							"raw": "{\n    \"nome\": \"Cardápio de Verão\",\n    \"idRestaurante\": \"{{restaurante_id}}\",\n    \"itens\": [\n        {\n            \"nome\": \"Suco de Laranja\",\n            \"descricao\": \"Suco natural de laranja\",\n            \"preco\": 10.50,\n            \"disponibilidadeRestaurante\": true,\n            \"caminhoFoto\": \"suco.jpg\"\n        }\n    ]\n}"
 						},
 						"url": {
-							"raw": "{{restaurante_base_url}}/api/v1/cardapios",
+							"raw": "{{gateway_base_url}}/api/v1/cardapios",
 							"host": [
-								"{{restaurante_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -1948,9 +1948,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{restaurante_base_url}}/api/v1/cardapios/restaurante/{{restaurante_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/cardapios/restaurante/{{restaurante_id}}",
 							"host": [
-								"{{restaurante_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -1993,9 +1993,9 @@
 							"raw": "{\n    \"nome\": \"Cardápio de Outono\"\n}"
 						},
 						"url": {
-							"raw": "{{restaurante_base_url}}/api/v1/cardapios/{{cardapio_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/cardapios/{{cardapio_id}}",
 							"host": [
-								"{{restaurante_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -2042,9 +2042,9 @@
 							"raw": "{\n    \"nome\": \"Hambúrguer\",\n    \"descricao\": \"Hambúrguer artesanal\",\n    \"preco\": 25.90,\n    \"disponibilidadeRestaurante\": true,\n    \"caminhoFoto\": \"burger.jpg\",\n    \"idCardapio\": \"{{cardapio_id}}\"\n}"
 						},
 						"url": {
-							"raw": "{{restaurante_base_url}}/api/v1/itens-cardapio",
+							"raw": "{{gateway_base_url}}/api/v1/itens-cardapio",
 							"host": [
-								"{{restaurante_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -2074,9 +2074,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{restaurante_base_url}}/api/v1/itens-cardapio/{{item_cardapio_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/itens-cardapio/{{item_cardapio_id}}",
 							"host": [
-								"{{restaurante_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -2118,9 +2118,9 @@
 							"raw": "{\n    \"nome\": \"Hambúrguer Especial\",\n    \"descricao\": \"Hambúrguer artesanal com queijo duplo\",\n    \"preco\": 29.90,\n    \"disponibilidadeRestaurante\": true,\n    \"caminhoFoto\": \"burger_especial.jpg\"\n}"
 						},
 						"url": {
-							"raw": "{{restaurante_base_url}}/api/v1/itens-cardapio/{{item_cardapio_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/itens-cardapio/{{item_cardapio_id}}",
 							"host": [
-								"{{restaurante_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -2151,9 +2151,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{restaurante_base_url}}/api/v1/itens-cardapio/{{item_cardapio_id}}?idUsuarioLogado={{usuario_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/itens-cardapio/{{item_cardapio_id}}?idUsuarioLogado={{usuario_id}}",
 							"host": [
-								"{{restaurante_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -2190,9 +2190,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{restaurante_base_url}}/api/v1/cardapios/{{cardapio_id}}?idUsuarioLogado={{usuario_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/cardapios/{{cardapio_id}}?idUsuarioLogado={{usuario_id}}",
 							"host": [
-								"{{restaurante_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -2229,9 +2229,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{restaurante_base_url}}/api/v1/restaurantes/{{restaurante_id}}",
+							"raw": "{{gateway_base_url}}/api/v1/restaurantes/{{restaurante_id}}",
 							"host": [
-								"{{restaurante_base_url}}"
+								"{{gateway_base_url}}"
 							],
 							"path": [
 								"api",
@@ -2254,17 +2254,607 @@
 					}
 				]
 			}
+		},
+		{
+			"name": "7. Pedidos",
+			"item": [
+				{
+					"name": "Criar Pedido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code deve ser 201 Created\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"pm.test(\"Salvar UUID do pedido na variável\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property(\"id\");",
+									"    pm.collectionVariables.set(\"pedido_id\", jsonData.id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"restauranteId\": \"{{restaurante_id}}\",\n    \"itens\": [\n        {\n            \"descricao\": \"Hambúrguer Artesanal\",\n            \"quantidade\": 2,\n            \"preco\": 25.90\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{gateway_base_url}}/api/v1/pedidos",
+							"host": [
+								"{{gateway_base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirmar Pedido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code deve ser 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Pedido confirmado retorna dados\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property(\"id\");",
+									"    pm.expect(jsonData).to.have.property(\"status\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{gateway_base_url}}/api/v1/pedidos/{{pedido_id}}/confirmar",
+							"host": [
+								"{{gateway_base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pedidos",
+								"{{pedido_id}}",
+								"confirmar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Pedido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code deve ser 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Verificar ID do pedido retornado\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(pm.collectionVariables.get(\"pedido_id\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway_base_url}}/api/v1/pedidos/{{pedido_id}}",
+							"host": [
+								"{{gateway_base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pedidos",
+								"{{pedido_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Meus Pedidos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code deve ser 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Resposta é uma lista\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.an(\"array\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway_base_url}}/api/v1/pedidos/meus-pedidos",
+							"host": [
+								"{{gateway_base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pedidos",
+								"meus-pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar: Criar Pedido - Sem Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code deve ser 401 ou 403\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([401, 403]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"auth": {
+							"type": "noauth"
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"restauranteId\": \"{{restaurante_id}}\",\n    \"itens\": [\n        {\n            \"descricao\": \"Hambúrguer Artesanal\",\n            \"quantidade\": 2,\n            \"preco\": 25.90\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{gateway_base_url}}/api/v1/pedidos",
+							"host": [
+								"{{gateway_base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar: Criar Pedido - Sem Itens",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code deve ser 400 ou 422\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400, 422]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"restauranteId\": \"{{restaurante_id}}\",\n    \"itens\": []\n}"
+						},
+						"url": {
+							"raw": "{{gateway_base_url}}/api/v1/pedidos",
+							"host": [
+								"{{gateway_base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar: Confirmar Pedido - Sem Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code deve ser 401 ou 403\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([401, 403]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"auth": {
+							"type": "noauth"
+						},
+						"url": {
+							"raw": "{{gateway_base_url}}/api/v1/pedidos/{{pedido_id}}/confirmar",
+							"host": [
+								"{{gateway_base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pedidos",
+								"{{pedido_id}}",
+								"confirmar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar: Confirmar Pedido - Não Encontrado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code deve ser 404 Not Found\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([404, 400, 422]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{gateway_base_url}}/api/v1/pedidos/00000000-0000-0000-0000-000000000000/confirmar",
+							"host": [
+								"{{gateway_base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pedidos",
+								"00000000-0000-0000-0000-000000000000",
+								"confirmar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar: Consultar Pedido - Sem Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code deve ser 401 ou 403\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([401, 403]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"auth": {
+							"type": "noauth"
+						},
+						"url": {
+							"raw": "{{gateway_base_url}}/api/v1/pedidos/{{pedido_id}}",
+							"host": [
+								"{{gateway_base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pedidos",
+								"{{pedido_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar: Consultar Pedido - Não Encontrado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code deve ser 404 Not Found\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([404, 400, 422]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway_base_url}}/api/v1/pedidos/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{gateway_base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pedidos",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar: Consultar Pedido - Pedido de Outro Cliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code deve ser 403 Forbidden\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([401, 403]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{cliente_jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{gateway_base_url}}/api/v1/pedidos/{{pedido_id}}",
+							"host": [
+								"{{gateway_base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pedidos",
+								"{{pedido_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validar: Listar Meus Pedidos - Sem Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code deve ser 401 ou 403\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([401, 403]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"auth": {
+							"type": "noauth"
+						},
+						"url": {
+							"raw": "{{gateway_base_url}}/api/v1/pedidos/meus-pedidos",
+							"host": [
+								"{{gateway_base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pedidos",
+								"meus-pedidos"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{jwt_token}}",
+						"type": "string"
+					}
+				]
+			}
+		},
+		{
+			"name": "9. Actuator / Health",
+			"item": [
+				{
+					"name": "Health - gateway-service",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Health deve ser UP\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.status).to.eql(\"UP\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway_base_url}}/actuator/health",
+							"host": [
+								"{{gateway_base_url}}"
+							],
+							"path": [
+								"actuator",
+								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Metrics - usuario-service (Prometheus)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code deve ser 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Resposta contém métricas Prometheus\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"jvm_\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway_base_url}}/actuator/prometheus",
+							"host": [
+								"{{gateway_base_url}}"
+							],
+							"path": [
+								"actuator",
+								"prometheus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Prometheus - Targets (todos UP)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code deve ser 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Todos os targets estão UP\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var targets = jsonData.data.activeTargets;",
+									"    targets.forEach(function(t) {",
+									"        pm.expect(t.health).to.eql(\"up\");",
+									"    });",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/api/v1/targets",
+							"host": [
+								"http://localhost:9090"
+							],
+							"path": [
+								"api",
+								"v1",
+								"targets"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"variable": [
-		{
-			"key": "usuario_base_url",
-			"value": "http://localhost:8081"
-		},
-		{
-			"key": "restaurante_base_url",
-			"value": "http://localhost:8082"
-		},
 		{
 			"key": "jwt_token",
 			"value": ""
@@ -2307,6 +2897,14 @@
 		},
 		{
 			"key": "item_cardapio_id",
+			"value": ""
+		},
+		{
+			"key": "gateway_base_url",
+			"value": "http://localhost:8090"
+		},
+		{
+			"key": "pedido_id",
 			"value": ""
 		}
 	]

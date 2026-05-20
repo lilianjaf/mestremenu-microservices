@@ -8,6 +8,7 @@ import com.github.lilianjaf.pedido_service.core.exception.PedidoNaoEncontradoExc
 import com.github.lilianjaf.pedido_service.core.exception.UsuarioNaoAutenticadoException;
 import com.github.lilianjaf.pedido_service.core.gateway.ObterUsuarioLogadoGateway;
 import com.github.lilianjaf.pedido_service.core.gateway.PedidoRepository;
+import com.github.lilianjaf.pedido_service.core.gateway.TransactionGateway;
 import com.github.lilianjaf.pedido_service.core.rules.ConsultarPedidoContext;
 import com.github.lilianjaf.pedido_service.core.rules.ConsultarPedidoRule;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +23,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Supplier;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -32,6 +34,7 @@ class ConsultarPedidoUseCaseImplTest {
 
     @Mock private PedidoRepository pedidoRepository;
     @Mock private ObterUsuarioLogadoGateway obterUsuarioLogadoGateway;
+    @Mock private TransactionGateway transactionGateway;
     @Mock private ConsultarPedidoRule permissaoRule;
     @Mock private ConsultarPedidoRule businessRule;
 
@@ -42,8 +45,10 @@ class ConsultarPedidoUseCaseImplTest {
 
     @BeforeEach
     void setUp() {
+        lenient().doAnswer(inv -> ((Supplier<?>) inv.getArgument(0)).get())
+                .when(transactionGateway).execute(any(Supplier.class));
         useCase = new ConsultarPedidoUseCaseImpl(
-                pedidoRepository, obterUsuarioLogadoGateway,
+                pedidoRepository, obterUsuarioLogadoGateway, transactionGateway,
                 List.of(permissaoRule), List.of(businessRule));
     }
 

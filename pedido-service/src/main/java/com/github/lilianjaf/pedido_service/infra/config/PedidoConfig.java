@@ -47,26 +47,28 @@ public class PedidoConfig {
 
     @Bean
     public ConsultarPedidoUseCase consultarPedidoUseCase(PedidoRepository pedidoRepository,
-                                                         ObterUsuarioLogadoGateway obterUsuarioLogadoGateway) {
+                                                         ObterUsuarioLogadoGateway obterUsuarioLogadoGateway,
+                                                         TransactionGateway transactionGateway) {
         List<ConsultarPedidoRule> permissaoRules = List.of(
                 new UsuarioDeveEstarAutenticadoParaConsultarPedidoRule(),
                 new ApenasProprioClientePodeConsultarPedidoRule()
         );
         List<ConsultarPedidoRule> businessRules = List.of();
         return new ConsultarPedidoUseCaseImpl(
-                pedidoRepository, obterUsuarioLogadoGateway, permissaoRules, businessRules);
+                pedidoRepository, obterUsuarioLogadoGateway, transactionGateway, permissaoRules, businessRules);
     }
 
     @Bean
     public ConsultarPedidoPorClienteUseCase consultarPedidoPorClienteUseCase(
             PedidoRepository pedidoRepository,
-            ObterUsuarioLogadoGateway obterUsuarioLogadoGateway) {
+            ObterUsuarioLogadoGateway obterUsuarioLogadoGateway,
+            TransactionGateway transactionGateway) {
         List<ConsultarPedidoPorClienteRule> permissaoRules = List.of(
                 new UsuarioDeveEstarAutenticadoParaListarPedidosRule()
         );
         List<ConsultarPedidoPorClienteRule> businessRules = List.of();
         return new ConsultarPedidoPorClienteUseCaseImpl(
-                pedidoRepository, obterUsuarioLogadoGateway, permissaoRules, businessRules);
+                pedidoRepository, obterUsuarioLogadoGateway, transactionGateway, permissaoRules, businessRules);
     }
 
     @Bean

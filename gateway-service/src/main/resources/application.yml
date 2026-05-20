@@ -10,7 +10,7 @@ spring:
         - id: usuario-service
           uri: ${USUARIO_SERVICE_URL:http://localhost:8081}
           predicates:
-            - Path=/api/v1/login/**, /api/v1/publico/**, /api/v1/usuarios/**
+            - Path=/api/v1/login/**, /api/v1/publico/**, /api/v1/usuarios/**, /api/v1/tipos-usuario/**
 
         - id: restaurante-service
           uri: ${RESTAURANTE_SERVICE_URL:http://localhost:8082}

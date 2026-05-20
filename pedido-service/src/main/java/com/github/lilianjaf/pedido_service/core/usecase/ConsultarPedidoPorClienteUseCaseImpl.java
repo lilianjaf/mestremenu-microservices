@@ -5,6 +5,7 @@ import com.github.lilianjaf.pedido_service.core.domain.Usuario;
 import com.github.lilianjaf.pedido_service.core.exception.UsuarioNaoAutenticadoException;
 import com.github.lilianjaf.pedido_service.core.gateway.ObterUsuarioLogadoGateway;
 import com.github.lilianjaf.pedido_service.core.gateway.PedidoRepository;
+import com.github.lilianjaf.pedido_service.core.gateway.TransactionGateway;
 import com.github.lilianjaf.pedido_service.core.rules.ConsultarPedidoPorClienteContext;
 import com.github.lilianjaf.pedido_service.core.rules.ConsultarPedidoPorClienteRule;
 
@@ -14,15 +15,18 @@ public class ConsultarPedidoPorClienteUseCaseImpl implements ConsultarPedidoPorC
 
     private final PedidoRepository pedidoRepository;
     private final ObterUsuarioLogadoGateway obterUsuarioLogadoGateway;
+    private final TransactionGateway transactionGateway;
     private final List<ConsultarPedidoPorClienteRule> permissaoRules;
     private final List<ConsultarPedidoPorClienteRule> businessRules;
 
     public ConsultarPedidoPorClienteUseCaseImpl(PedidoRepository pedidoRepository,
                                                 ObterUsuarioLogadoGateway obterUsuarioLogadoGateway,
+                                                TransactionGateway transactionGateway,
                                                 List<ConsultarPedidoPorClienteRule> permissaoRules,
                                                 List<ConsultarPedidoPorClienteRule> businessRules) {
         this.pedidoRepository = pedidoRepository;
         this.obterUsuarioLogadoGateway = obterUsuarioLogadoGateway;
+        this.transactionGateway = transactionGateway;
         this.permissaoRules = permissaoRules;
         this.businessRules = businessRules;
     }
@@ -33,10 +37,9 @@ public class ConsultarPedidoPorClienteUseCaseImpl implements ConsultarPedidoPorC
                 .orElseThrow(() -> new UsuarioNaoAutenticadoException("Usuário não autenticado."));
 
         ConsultarPedidoPorClienteContext context = new ConsultarPedidoPorClienteContext(usuarioLogado);
-
         permissaoRules.forEach(rule -> rule.validar(context));
         businessRules.forEach(rule -> rule.validar(context));
 
-        return pedidoRepository.buscarPorClienteId(usuarioLogado.getId());
+        return transactionGateway.execute(() -> pedidoRepository.buscarPorClienteId(usuarioLogado.getId()));
     }
 }

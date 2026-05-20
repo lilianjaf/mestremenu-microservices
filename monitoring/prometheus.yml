@@ -2,6 +2,9 @@ global:
   scrape_interval: 15s
   evaluation_interval: 15s
 
+rule_files:
+  - /etc/prometheus/alerting_rules.yml
+
 scrape_configs:
   - job_name: 'usuario-service'
     metrics_path: /actuator/prometheus
@@ -27,3 +30,10 @@ scrape_configs:
     metrics_path: /actuator/prometheus
     static_configs:
       - targets: ['gateway-service:8080']
+
+# Grafana Cloud remote write — preencha .env e descomente quando tiver as credenciais
+# remote_write:
+#   - url: ${GRAFANA_CLOUD_URL}
+#     basic_auth:
+#       username: "${GRAFANA_CLOUD_USER}"
+#       password: "${GRAFANA_CLOUD_KEY}"

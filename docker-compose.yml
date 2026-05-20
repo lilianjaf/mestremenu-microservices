@@ -66,8 +66,7 @@ services:
         MODULE_NAME: usuario-service
     container_name: usuario-service
     ports:
-      - "8081:8080"
-      - "5001:5005" # Porta de Debug Isolada
+      - "5005:5005" # Porta de Debug Isolada
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
@@ -84,6 +83,7 @@ services:
       interval: 15s
       timeout: 5s
       retries: 5
+      start_period: 60s
     networks:
       - mestremenu-network
 
@@ -94,8 +94,7 @@ services:
         MODULE_NAME: restaurante-service
     container_name: restaurante-service
     ports:
-      - "8082:8080"
-      - "5002:5005"
+      - "5006:5005"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
@@ -112,6 +111,7 @@ services:
       interval: 15s
       timeout: 5s
       retries: 5
+      start_period: 60s
     networks:
       - mestremenu-network
 
@@ -122,13 +122,13 @@ services:
         MODULE_NAME: pedido-service
     container_name: pedido-service
     ports:
-      - "8083:8080"
-      - "5003:5005"
+      - "5007:5005"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      SERVER_PORT: 8080
       SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-docker}
       JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -Duser.timezone=America/Sao_Paulo"
       TZ: America/Sao_Paulo
@@ -147,14 +147,15 @@ services:
         MODULE_NAME: pagamento-service
     container_name: pagamento-service
     ports:
-      - "8084:8080"
-      - "5004:5005"
+      - "5008:5005"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      SPRING_JPA_HIBERNATE_DDL_AUTO: validate
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
       PAGAMENTO_EXTERNO_URL: http://procpag:8080
+      SERVER_PORT: 8080
       SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-docker}
       JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -Duser.timezone=America/Sao_Paulo"
       TZ: America/Sao_Paulo
@@ -174,7 +175,7 @@ services:
     container_name: gateway-service
     ports:
       - "8090:8080"
-      - "5005:5005"
+      - "5009:5005"
     environment:
       USUARIO_SERVICE_URL: http://usuario-service:8080
       RESTAURANTE_SERVICE_URL: http://restaurante-service:8080
@@ -195,6 +196,7 @@ services:
       interval: 15s
       timeout: 5s
       retries: 5
+      start_period: 60s
     networks:
       - mestremenu-network
 
@@ -205,6 +207,7 @@ services:
       - "9090:9090"
     volumes:
       - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./monitoring/alerting_rules.yml:/etc/prometheus/alerting_rules.yml:ro
     depends_on:
       usuario-service:
         condition: service_healthy

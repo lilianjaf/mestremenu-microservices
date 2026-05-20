@@ -42,15 +42,14 @@ public class ConfirmarPedidoUseCaseImpl implements ConfirmarPedidoUseCase {
         Usuario usuarioLogado = obterUsuarioLogadoGateway.obterUsuarioLogado()
                 .orElseThrow(() -> new UsuarioNaoAutenticadoException("Usuário não autenticado."));
 
-        Pedido pedido = pedidoRepository.buscarPorId(pedidoId)
-                .orElseThrow(() -> new PedidoNaoEncontradoException("Pedido não encontrado: " + pedidoId));
-
-        ConfirmarPedidoContext context = new ConfirmarPedidoContext(usuarioLogado, pedido);
-
-        permissaoRules.forEach(rule -> rule.validar(context));
-        businessRules.forEach(rule -> rule.validar(context));
-
         return transactionGateway.execute(() -> {
+            Pedido pedido = pedidoRepository.buscarPorId(pedidoId)
+                    .orElseThrow(() -> new PedidoNaoEncontradoException("Pedido não encontrado: " + pedidoId));
+
+            ConfirmarPedidoContext context = new ConfirmarPedidoContext(usuarioLogado, pedido);
+            permissaoRules.forEach(rule -> rule.validar(context));
+            businessRules.forEach(rule -> rule.validar(context));
+
             pedido.confirmar();
             Pedido pedidoSalvo = pedidoRepository.salvar(pedido);
             outboxGateway.salvarEventoPedidoCriado(pedidoSalvo);
