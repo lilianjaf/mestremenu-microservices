@@ -1,6 +1,5 @@
 package com.github.lilianjaf.usuario_service.infra.config;
 
-import com.github.lilianjaf.usuario_service.core.api.UsuarioModuleFacade;
 import com.github.lilianjaf.usuario_service.core.gateway.*;
 import com.github.lilianjaf.usuario_service.core.rules.*;
 import com.github.lilianjaf.usuario_service.core.usecase.*;
@@ -130,8 +129,4 @@ public class UsuarioConfig {
         );
     }
 
-    @Bean
-    public UsuarioModuleFacade usuarioModuleFacade(BuscarUsuarioUsecase buscarUsuarioUsecase) {
-        return new UsuarioModuleFacadeImpl(buscarUsuarioUsecase);
-    }
 }

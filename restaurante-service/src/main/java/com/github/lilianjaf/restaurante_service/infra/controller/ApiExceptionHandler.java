@@ -3,15 +3,16 @@ package com.github.lilianjaf.restaurante_service.infra.controller;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.PropertyBindingException;
-import com.github.lilianjaf.usuario_service.core.exception.RegistroNaoEncontradoException;
+import com.github.lilianjaf.restaurante_service.core.exception.DomainException;
+import com.github.lilianjaf.restaurante_service.core.exception.RegistroNaoEncontradoException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -20,7 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     private static final Logger log = LoggerFactory.getLogger(ApiExceptionHandler.class);
@@ -41,32 +42,30 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(BadCredentialsException.class)
-    public ProblemDetail handleCredenciaisInvalidas(Exception ex) {
+    public ResponseEntity<ProblemDetail> handleCredenciaisInvalidas(Exception ex) {
         log.warn("Tentativa de login com credenciais inválidas: {}", ex.getMessage());
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED, "Login ou senha inválidos");
         problemDetail.setTitle("Credenciais inválidas");
         problemDetail.setType(URI.create("https://mestremenu.com.br/erros/credenciais-invalidas"));
-        return problemDetail;
-    }
-
-    @ExceptionHandler({
-        com.github.lilianjaf.restaurante_service.core.exception.DomainException.class
-    })
-    public ProblemDetail handleRegraDeNegocio(RuntimeException ex) {
-        log.warn("Violação de regra de negócio/domínio: {}", ex.getMessage());
-        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
-        problemDetail.setTitle("Regra de negócio violada");
-        problemDetail.setType(URI.create("https://mestremenu.com.br/erros/erro-de-negocio"));
-        return problemDetail;
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(problemDetail);
     }
 
     @ExceptionHandler(RegistroNaoEncontradoException.class)
-    public ProblemDetail handleRegistroNaoEncontrado(RegistroNaoEncontradoException ex) {
+    public ResponseEntity<ProblemDetail> handleRegistroNaoEncontrado(RegistroNaoEncontradoException ex) {
         log.warn("Recurso não encontrado: {}", ex.getMessage());
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
         problemDetail.setTitle("Recurso não encontrado");
         problemDetail.setType(URI.create("https://mestremenu.com.br/erros/recurso-nao-encontrado"));
-        return problemDetail;
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(problemDetail);
+    }
+
+    @ExceptionHandler(DomainException.class)
+    public ResponseEntity<ProblemDetail> handleRegraDeNegocio(RuntimeException ex) {
+        log.warn("Violação de regra de negócio/domínio: {}", ex.getMessage());
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
+        problemDetail.setTitle("Regra de negócio violada");
+        problemDetail.setType(URI.create("https://mestremenu.com.br/erros/erro-de-negocio"));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(problemDetail);
     }
 
     @Override

@@ -50,12 +50,11 @@ class RestauranteControllerTest {
     @Test
     @DisplayName("Deve criar um restaurante com sucesso")
     void deveCriarRestauranteComSucesso() {
-        UUID idDono = UUID.randomUUID();
         EnderecoJson enderecoJson = new EnderecoJson("Rua A", "123", "Apto 1", "Bairro X", "Cidade Y", "12345678", "UF");
-        CriarRestauranteJson json = new CriarRestauranteJson("Restaurante Teste", enderecoJson, "Italiana", "08:00 - 22:00", idDono);
-        
+        CriarRestauranteJson json = new CriarRestauranteJson("Restaurante Teste", enderecoJson, "Italiana", "08:00 - 22:00");
+
         Endereco endereco = new Endereco("Rua A", "123", "Apto 1", "Bairro X", "Cidade Y", "12345678", "UF");
-        Restaurante restaurante = new Restaurante("Restaurante Teste", endereco, "Italiana", "08:00 - 22:00", idDono);
+        Restaurante restaurante = new Restaurante("Restaurante Teste", endereco, "Italiana", "08:00 - 22:00", UUID.randomUUID());
         
         when(criarRestauranteUseCase.executar(any(DadosCriacaoRestaurante.class))).thenReturn(restaurante);
 

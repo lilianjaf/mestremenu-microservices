@@ -55,8 +55,7 @@ public class RestauranteController {
                 json.nome(),
                 enderecoDomain,
                 json.tipoCozinha(),
-                json.horarioFuncionamento(),
-                json.idDono()
+                json.horarioFuncionamento()
         );
 
         Restaurante restauranteCriado = criarRestauranteUseCase.executar(dados);

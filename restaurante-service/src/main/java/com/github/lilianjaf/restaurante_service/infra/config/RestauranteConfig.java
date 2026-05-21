@@ -4,7 +4,6 @@ import com.github.lilianjaf.restaurante_service.core.api.RestauranteModuleFacade
 import com.github.lilianjaf.restaurante_service.core.gateway.ObterUsuarioLogadoGateway;
 import com.github.lilianjaf.restaurante_service.core.gateway.RestauranteRepository;
 import com.github.lilianjaf.restaurante_service.core.gateway.TransactionGateway;
-import com.github.lilianjaf.restaurante_service.core.gateway.UsuarioGateway;
 import com.github.lilianjaf.restaurante_service.core.rules.*;
 import com.github.lilianjaf.restaurante_service.core.usecase.*;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +16,6 @@ public class RestauranteConfig {
 
     @Bean
     public CriarRestauranteUseCase criarRestauranteUseCase(RestauranteRepository restauranteRepository,
-                                                           UsuarioGateway usuarioGateway,
                                                            ObterUsuarioLogadoGateway obterUsuarioLogadoRestauranteGateway,
                                                            TransactionGateway transactionGateway) {
         List<ValidadorCriacaoRestauranteRule> permissaoRules = List.of(
@@ -26,7 +24,7 @@ public class RestauranteConfig {
         List<ValidadorCriacaoRestauranteRule> rules = List.of(
                 new RestauranteDeveTerDonoVinculadoRule()
         );
-        return new CriarRestauranteUseCaseImpl(restauranteRepository, usuarioGateway, obterUsuarioLogadoRestauranteGateway, transactionGateway, permissaoRules, rules);
+        return new CriarRestauranteUseCaseImpl(restauranteRepository, obterUsuarioLogadoRestauranteGateway, transactionGateway, permissaoRules, rules);
     }
 
     @Bean

@@ -3,10 +3,7 @@ package com.github.lilianjaf.restaurante_service;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages = {
-		"com.github.lilianjaf.restaurante_service",
-		"com.github.lilianjaf.usuario_service"
-})
+@SpringBootApplication
 public class RestauranteServiceApplication {
 
 	public static void main(String[] args) {

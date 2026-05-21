@@ -34,7 +34,8 @@ public class AutenticacaoController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         UsuarioDetailsAdapter principal = (UsuarioDetailsAdapter) authentication.getPrincipal();
-        String token = tokenService.gerarToken(authentication.getName(), principal.getUsuario().getId());
+        String tipoNativo = principal.getUsuario().getTipoCustomizado().getTipoNativo().name();
+        String token = tokenService.gerarToken(authentication.getName(), principal.getUsuario().getId(), tipoNativo);
 
         return new TokenResponse(token);
     }

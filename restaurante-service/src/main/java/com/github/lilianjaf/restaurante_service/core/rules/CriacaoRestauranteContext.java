@@ -5,7 +5,6 @@ import com.github.lilianjaf.restaurante_service.core.dto.DadosCriacaoRestaurante
 
 public record CriacaoRestauranteContext(
         Usuario usuarioLogado,
-        Usuario dono,
         DadosCriacaoRestaurante dados
 ) {
     public boolean isUsuarioLogadoTipoDono() {
@@ -13,6 +12,6 @@ public record CriacaoRestauranteContext(
     }
 
     public boolean hasDonoVinculado() {
-        return dono != null;
+        return usuarioLogado != null;
     }
 }

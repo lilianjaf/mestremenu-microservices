@@ -8,7 +8,6 @@ import com.github.lilianjaf.restaurante_service.core.exception.UsuarioLogadoNaoE
 import com.github.lilianjaf.restaurante_service.core.gateway.ObterUsuarioLogadoGateway;
 import com.github.lilianjaf.restaurante_service.core.gateway.RestauranteRepository;
 import com.github.lilianjaf.restaurante_service.core.gateway.TransactionGateway;
-import com.github.lilianjaf.restaurante_service.core.gateway.UsuarioGateway;
 import com.github.lilianjaf.restaurante_service.core.rules.CriacaoRestauranteContext;
 import com.github.lilianjaf.restaurante_service.core.rules.ValidadorCriacaoRestauranteRule;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,9 +35,6 @@ class CriarRestauranteUseCaseImplTest {
     private RestauranteRepository restauranteRepository;
 
     @Mock
-    private UsuarioGateway usuarioGateway;
-
-    @Mock
     private ObterUsuarioLogadoGateway obterUsuarioLogadoRestauranteGateway;
 
     @Mock
@@ -61,7 +57,6 @@ class CriarRestauranteUseCaseImplTest {
 
         criarRestauranteUseCase = new CriarRestauranteUseCaseImpl(
                 restauranteRepository,
-                usuarioGateway,
                 obterUsuarioLogadoRestauranteGateway,
                 transactionGateway,
                 List.of(permissaoRule),
@@ -74,15 +69,14 @@ class CriarRestauranteUseCaseImplTest {
     void deveCriarRestauranteComSucesso() {
         UUID idDono = UUID.randomUUID();
         Usuario usuarioLogado = mock(Usuario.class);
-        Usuario dono = mock(Usuario.class);
         Endereco endereco = new Endereco(
                 "Rua Teste", "123", null, "Bairro Teste", "Cidade Teste", "12345-678", "TS"
         );
-        DadosCriacaoRestaurante dados = new DadosCriacaoRestaurante("Restaurante Teste", endereco, "Italiana", "08:00-22:00", idDono);
-        Restaurante restauranteSalvo = new Restaurante(dados.nome(), dados.endereco(), dados.tipoCozinha(), dados.horarioFuncionamento(), dados.idDono());
+        DadosCriacaoRestaurante dados = new DadosCriacaoRestaurante("Restaurante Teste", endereco, "Italiana", "08:00-22:00");
+        Restaurante restauranteSalvo = new Restaurante(dados.nome(), dados.endereco(), dados.tipoCozinha(), dados.horarioFuncionamento(), idDono);
 
         when(obterUsuarioLogadoRestauranteGateway.obterUsuarioLogado()).thenReturn(Optional.of(usuarioLogado));
-        when(usuarioGateway.buscarPorId(idDono)).thenReturn(Optional.of(dono));
+        when(usuarioLogado.getId()).thenReturn(idDono);
         when(restauranteRepository.salvar(any(Restaurante.class))).thenReturn(restauranteSalvo);
 
         Restaurante restauranteCriado = criarRestauranteUseCase.executar(dados);
@@ -100,7 +94,7 @@ class CriarRestauranteUseCaseImplTest {
         Endereco endereco = new Endereco(
                 "Rua Teste", "123", null, "Bairro Teste", "Cidade Teste", "12345-678", "TS"
         );
-        DadosCriacaoRestaurante dados = new DadosCriacaoRestaurante("Restaurante Teste", endereco, "Italiana", "08:00-22:00", UUID.randomUUID());
+        DadosCriacaoRestaurante dados = new DadosCriacaoRestaurante("Restaurante Teste", endereco, "Italiana", "08:00-22:00");
 
         when(obterUsuarioLogadoRestauranteGateway.obterUsuarioLogado()).thenReturn(Optional.empty());
 
@@ -110,16 +104,13 @@ class CriarRestauranteUseCaseImplTest {
     @Test
     @DisplayName("Deve lançar exceção quando uma regra de permissão for violada")
     void deveLancarExcecaoQuandoRegraDePermissaoForViolada() {
-        UUID idDono = UUID.randomUUID();
         Usuario usuarioLogado = mock(Usuario.class);
-        Usuario dono = mock(Usuario.class);
         Endereco endereco = new Endereco(
                 "Rua Teste", "123", null, "Bairro Teste", "Cidade Teste", "12345-678", "TS"
         );
-        DadosCriacaoRestaurante dados = new DadosCriacaoRestaurante("Restaurante Teste", endereco, "Italiana", "08:00-22:00", idDono);
+        DadosCriacaoRestaurante dados = new DadosCriacaoRestaurante("Restaurante Teste", endereco, "Italiana", "08:00-22:00");
 
         when(obterUsuarioLogadoRestauranteGateway.obterUsuarioLogado()).thenReturn(Optional.of(usuarioLogado));
-        when(usuarioGateway.buscarPorId(idDono)).thenReturn(Optional.of(dono));
         doThrow(new RuntimeException("Permissão negada")).when(permissaoRule).validar(any(CriacaoRestauranteContext.class));
 
         assertThrows(RuntimeException.class, () -> criarRestauranteUseCase.executar(dados));
@@ -128,16 +119,13 @@ class CriarRestauranteUseCaseImplTest {
     @Test
     @DisplayName("Deve lançar exceção quando uma regra de negócio for violada")
     void deveLancarExcecaoQuandoRegraDeNegocioForViolada() {
-        UUID idDono = UUID.randomUUID();
         Usuario usuarioLogado = mock(Usuario.class);
-        Usuario dono = mock(Usuario.class);
         Endereco endereco = new Endereco(
                 "Rua Teste", "123", null, "Bairro Teste", "Cidade Teste", "12345-678", "TS"
         );
-        DadosCriacaoRestaurante dados = new DadosCriacaoRestaurante("Restaurante Teste", endereco, "Italiana", "08:00-22:00", idDono);
+        DadosCriacaoRestaurante dados = new DadosCriacaoRestaurante("Restaurante Teste", endereco, "Italiana", "08:00-22:00");
 
         when(obterUsuarioLogadoRestauranteGateway.obterUsuarioLogado()).thenReturn(Optional.of(usuarioLogado));
-        when(usuarioGateway.buscarPorId(idDono)).thenReturn(Optional.of(dono));
         doThrow(new RuntimeException("Regra de negócio violada")).when(regraDeNegocio).validar(any(CriacaoRestauranteContext.class));
 
         assertThrows(RuntimeException.class, () -> criarRestauranteUseCase.executar(dados));
