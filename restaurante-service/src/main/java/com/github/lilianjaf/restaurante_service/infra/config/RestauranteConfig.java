@@ -21,9 +21,7 @@ public class RestauranteConfig {
         List<ValidadorCriacaoRestauranteRule> permissaoRules = List.of(
                 new ApenasDonoPodeCriarRestauranteRule()
         );
-        List<ValidadorCriacaoRestauranteRule> rules = List.of(
-                new RestauranteDeveTerDonoVinculadoRule()
-        );
+        List<ValidadorCriacaoRestauranteRule> rules = List.of();
         return new CriarRestauranteUseCaseImpl(restauranteRepository, obterUsuarioLogadoRestauranteGateway, transactionGateway, permissaoRules, rules);
     }
 
