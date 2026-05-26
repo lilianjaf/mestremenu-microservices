@@ -72,11 +72,10 @@ class CriarRestauranteUseCaseImplTest {
         Endereco endereco = new Endereco(
                 "Rua Teste", "123", null, "Bairro Teste", "Cidade Teste", "12345-678", "TS"
         );
-        DadosCriacaoRestaurante dados = new DadosCriacaoRestaurante("Restaurante Teste", endereco, "Italiana", "08:00-22:00");
+        DadosCriacaoRestaurante dados = new DadosCriacaoRestaurante("Restaurante Teste", endereco, "Italiana", "08:00-22:00", idDono);
         Restaurante restauranteSalvo = new Restaurante(dados.nome(), dados.endereco(), dados.tipoCozinha(), dados.horarioFuncionamento(), idDono);
 
         when(obterUsuarioLogadoRestauranteGateway.obterUsuarioLogado()).thenReturn(Optional.of(usuarioLogado));
-        when(usuarioLogado.getId()).thenReturn(idDono);
         when(restauranteRepository.salvar(any(Restaurante.class))).thenReturn(restauranteSalvo);
 
         Restaurante restauranteCriado = criarRestauranteUseCase.executar(dados);
@@ -94,7 +93,7 @@ class CriarRestauranteUseCaseImplTest {
         Endereco endereco = new Endereco(
                 "Rua Teste", "123", null, "Bairro Teste", "Cidade Teste", "12345-678", "TS"
         );
-        DadosCriacaoRestaurante dados = new DadosCriacaoRestaurante("Restaurante Teste", endereco, "Italiana", "08:00-22:00");
+        DadosCriacaoRestaurante dados = new DadosCriacaoRestaurante("Restaurante Teste", endereco, "Italiana", "08:00-22:00", UUID.randomUUID());
 
         when(obterUsuarioLogadoRestauranteGateway.obterUsuarioLogado()).thenReturn(Optional.empty());
 
@@ -108,7 +107,7 @@ class CriarRestauranteUseCaseImplTest {
         Endereco endereco = new Endereco(
                 "Rua Teste", "123", null, "Bairro Teste", "Cidade Teste", "12345-678", "TS"
         );
-        DadosCriacaoRestaurante dados = new DadosCriacaoRestaurante("Restaurante Teste", endereco, "Italiana", "08:00-22:00");
+        DadosCriacaoRestaurante dados = new DadosCriacaoRestaurante("Restaurante Teste", endereco, "Italiana", "08:00-22:00", UUID.randomUUID());
 
         when(obterUsuarioLogadoRestauranteGateway.obterUsuarioLogado()).thenReturn(Optional.of(usuarioLogado));
         doThrow(new RuntimeException("Permissão negada")).when(permissaoRule).validar(any(CriacaoRestauranteContext.class));
@@ -123,7 +122,7 @@ class CriarRestauranteUseCaseImplTest {
         Endereco endereco = new Endereco(
                 "Rua Teste", "123", null, "Bairro Teste", "Cidade Teste", "12345-678", "TS"
         );
-        DadosCriacaoRestaurante dados = new DadosCriacaoRestaurante("Restaurante Teste", endereco, "Italiana", "08:00-22:00");
+        DadosCriacaoRestaurante dados = new DadosCriacaoRestaurante("Restaurante Teste", endereco, "Italiana", "08:00-22:00", UUID.randomUUID());
 
         when(obterUsuarioLogadoRestauranteGateway.obterUsuarioLogado()).thenReturn(Optional.of(usuarioLogado));
         doThrow(new RuntimeException("Regra de negócio violada")).when(regraDeNegocio).validar(any(CriacaoRestauranteContext.class));

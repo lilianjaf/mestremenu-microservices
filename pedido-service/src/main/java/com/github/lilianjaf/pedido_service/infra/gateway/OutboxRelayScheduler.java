@@ -42,7 +42,7 @@ public class OutboxRelayScheduler {
         for (OutboxEventEntity evento : pendentes) {
             try {
                 String topico = resolverTopico(evento.getEventType());
-                kafkaTemplate.send(topico, evento.getAggregateId().toString(), evento.getPayload());
+                kafkaTemplate.send(topico, evento.getAggregateId().toString(), evento.getPayload()).join();
                 evento.setProcessado(true);
                 outboxRepository.save(evento);
                 log.info("Evento {} ({}) publicado no tópico {}", evento.getId(), evento.getEventType(), topico);

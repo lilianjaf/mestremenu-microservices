@@ -7,6 +7,7 @@ import com.github.lilianjaf.restaurante_service.core.dto.DadosCriacaoRestaurante
 import com.github.lilianjaf.restaurante_service.core.usecase.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,7 +38,8 @@ public class RestauranteController {
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, UUID>> criarRestaurante(@RequestBody CriarRestauranteJson json) {
+    public ResponseEntity<Map<String, UUID>> criarRestaurante(@RequestBody CriarRestauranteJson json,
+                                                              @AuthenticationPrincipal UUID idDono) {
         Endereco enderecoDomain = null;
         if (json.endereco() != null) {
             enderecoDomain = new Endereco(
@@ -55,7 +57,8 @@ public class RestauranteController {
                 json.nome(),
                 enderecoDomain,
                 json.tipoCozinha(),
-                json.horarioFuncionamento()
+                json.horarioFuncionamento(),
+                idDono
         );
 
         Restaurante restauranteCriado = criarRestauranteUseCase.executar(dados);

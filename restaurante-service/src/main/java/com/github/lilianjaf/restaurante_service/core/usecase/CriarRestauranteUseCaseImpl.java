@@ -48,7 +48,7 @@ public class CriarRestauranteUseCaseImpl implements CriarRestauranteUseCase {
                     dados.endereco(),
                     dados.tipoCozinha(),
                     dados.horarioFuncionamento(),
-                    usuarioLogado.getId()
+                    dados.idDono()
             );
 
             return restauranteRepository.salvar(restaurante);
