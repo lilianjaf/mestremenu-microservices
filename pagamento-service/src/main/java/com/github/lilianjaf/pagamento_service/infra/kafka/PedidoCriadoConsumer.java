@@ -32,10 +32,11 @@ public class PedidoCriadoConsumer {
         try {
             JsonNode payload = objectMapper.readTree(record.value());
             UUID pedidoId = UUID.fromString(payload.get("pedidoId").asText());
+            UUID clienteId = UUID.fromString(payload.get("clienteId").asText());
             BigDecimal valorTotal = new BigDecimal(payload.get("valorTotal").asText());
 
             log.info("Evento pedido.criado recebido — pedidoId: {}", pedidoId);
-            processarPagamentoUseCase.executar(new DadosProcessamentoPagamento(pedidoId, valorTotal));
+            processarPagamentoUseCase.executar(new DadosProcessamentoPagamento(pedidoId, clienteId, valorTotal));
         } catch (Exception e) {
             log.error("Erro ao processar evento pedido.criado: {}", record.value(), e);
         }

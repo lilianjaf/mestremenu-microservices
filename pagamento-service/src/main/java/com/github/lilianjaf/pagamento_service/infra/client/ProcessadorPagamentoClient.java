@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(name = "procpag", url = "${pagamento.externo.url}")
 public interface ProcessadorPagamentoClient {
 
-    @PostMapping("/api/v1/pagamentos")
+    @PostMapping("/requisicao")
     RespostaPagamentoDto processar(@RequestBody SolicitacaoPagamentoDto solicitacao);
 }

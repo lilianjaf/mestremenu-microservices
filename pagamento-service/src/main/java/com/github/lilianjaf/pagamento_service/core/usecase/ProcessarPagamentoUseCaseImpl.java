@@ -52,12 +52,12 @@ public class ProcessarPagamentoUseCaseImpl implements ProcessarPagamentoUseCase 
             log.info("Reprocessando pagamento existente para pedido {}", dados.pedidoId());
             tentarProcessar(p);
         } else {
-            tentarProcessar(new Pagamento(dados.pedidoId(), dados.valorTotal()));
+            tentarProcessar(new Pagamento(dados.pedidoId(), dados.clienteId(), dados.valorTotal()));
         }
     }
 
     private void tentarProcessar(Pagamento pagamento) {
-        boolean aprovado = processadorGateway.processar(pagamento.getPedidoId(), pagamento.getValorTotal());
+        boolean aprovado = processadorGateway.processar(pagamento.getPedidoId(), pagamento.getClienteId(), pagamento.getValorTotal());
 
         // Gateway retornou false pode ser um timeout: verifica se pagamento já foi salvo como APROVADO
         if (!aprovado) {

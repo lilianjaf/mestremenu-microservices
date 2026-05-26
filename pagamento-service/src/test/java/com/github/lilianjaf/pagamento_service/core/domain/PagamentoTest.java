@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PagamentoTest {
 
     private Pagamento novoPagamento() {
-        return new Pagamento(UUID.randomUUID(), new BigDecimal("150.00"));
+        return new Pagamento(UUID.randomUUID(), UUID.randomUUID(), new BigDecimal("150.00"));
     }
 
     @Test

@@ -9,6 +9,7 @@ public class PagamentoEntityMapper {
         return new Pagamento(
                 entity.getId(),
                 entity.getPedidoId(),
+                entity.getClienteId(),
                 entity.getValorTotal(),
                 entity.getStatus(),
                 entity.getTentativas(),
@@ -21,6 +22,7 @@ public class PagamentoEntityMapper {
         return new PagamentoEntity(
                 domain.getId(),
                 domain.getPedidoId(),
+                domain.getClienteId(),
                 domain.getValorTotal(),
                 domain.getStatus(),
                 domain.getTentativas(),

@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
@@ -28,22 +29,23 @@ public class ProcessadorPagamentoGatewayImpl implements ProcessadorPagamentoGate
     @CircuitBreaker(name = "procpag", fallbackMethod = "fallbackAsync")
     @Retry(name = "procpag")
     @TimeLimiter(name = "procpag")
-    public CompletableFuture<Boolean> processarAsync(UUID pedidoId, BigDecimal valorTotal) {
+    public CompletableFuture<Boolean> processarAsync(UUID pedidoId, UUID clienteId, BigDecimal valorTotal) {
         return CompletableFuture.supplyAsync(() -> {
-            client.processar(new SolicitacaoPagamentoDto(pedidoId.toString(), valorTotal));
+            long valorInt = valorTotal.setScale(0, RoundingMode.HALF_UP).longValue();
+            client.processar(new SolicitacaoPagamentoDto(pedidoId.toString(), clienteId.toString(), valorInt));
             return true;
         });
     }
 
-    public CompletableFuture<Boolean> fallbackAsync(UUID pedidoId, BigDecimal valorTotal, Throwable t) {
+    public CompletableFuture<Boolean> fallbackAsync(UUID pedidoId, UUID clienteId, BigDecimal valorTotal, Throwable t) {
         log.warn("Fallback ativado para pedido {} — causa: {}", pedidoId, t.getMessage());
         return CompletableFuture.completedFuture(false);
     }
 
     @Override
-    public boolean processar(UUID pedidoId, BigDecimal valorTotal) {
+    public boolean processar(UUID pedidoId, UUID clienteId, BigDecimal valorTotal) {
         try {
-            return processarAsync(pedidoId, valorTotal).get();
+            return processarAsync(pedidoId, clienteId, valorTotal).get();
         } catch (Exception e) {
             log.error("Erro irrecuperável ao processar pagamento do pedido {}", pedidoId, e);
             return false;

@@ -36,7 +36,7 @@ public class ReprocessarPagamentosPendentesScheduler {
         for (Pagamento pagamento : pendentes) {
             try {
                 processarPagamentoUseCase.executar(
-                        new DadosProcessamentoPagamento(pagamento.getPedidoId(), pagamento.getValorTotal()));
+                        new DadosProcessamentoPagamento(pagamento.getPedidoId(), pagamento.getClienteId(), pagamento.getValorTotal()));
             } catch (Exception e) {
                 log.error("Erro ao reprocessar pagamento do pedido {}", pagamento.getPedidoId(), e);
             }

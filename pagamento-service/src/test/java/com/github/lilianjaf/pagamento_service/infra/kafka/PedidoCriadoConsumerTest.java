@@ -36,8 +36,9 @@ class PedidoCriadoConsumerTest {
     @DisplayName("Deve chamar use case com dados corretos para JSON válido")
     void deveChamarUseCaseComJsonValido() {
         UUID pedidoId = UUID.randomUUID();
+        UUID clienteId = UUID.randomUUID();
         String json = String.format(
-                "{\"pedidoId\":\"%s\",\"valorTotal\":\"150.00\"}", pedidoId);
+                "{\"pedidoId\":\"%s\",\"clienteId\":\"%s\",\"valorTotal\":\"150.00\"}", pedidoId, clienteId);
 
         consumer.consumir(record(json));
 
@@ -45,6 +46,7 @@ class PedidoCriadoConsumerTest {
                 ArgumentCaptor.forClass(DadosProcessamentoPagamento.class);
         verify(processarPagamentoUseCase).executar(captor.capture());
         assertEquals(pedidoId, captor.getValue().pedidoId());
+        assertEquals(clienteId, captor.getValue().clienteId());
         assertEquals(new BigDecimal("150.00"), captor.getValue().valorTotal());
     }
 
@@ -59,8 +61,9 @@ class PedidoCriadoConsumerTest {
     @DisplayName("Deve silenciar erro quando use case lança exceção")
     void deveSilenciarErroQuandoUseCaseFalha() {
         UUID pedidoId = UUID.randomUUID();
+        UUID clienteId = UUID.randomUUID();
         String json = String.format(
-                "{\"pedidoId\":\"%s\",\"valorTotal\":\"50.00\"}", pedidoId);
+                "{\"pedidoId\":\"%s\",\"clienteId\":\"%s\",\"valorTotal\":\"50.00\"}", pedidoId, clienteId);
         doThrow(new RuntimeException("DB error")).when(processarPagamentoUseCase).executar(any());
 
         assertDoesNotThrow(() -> consumer.consumir(record(json)));

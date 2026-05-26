@@ -4,5 +4,5 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 public interface ProcessadorPagamentoGateway {
-    boolean processar(UUID pedidoId, BigDecimal valorTotal);
+    boolean processar(UUID pedidoId, UUID clienteId, BigDecimal valorTotal);
 }

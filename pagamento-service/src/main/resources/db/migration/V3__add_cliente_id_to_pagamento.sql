@@ -1,0 +1,1 @@
+ALTER TABLE pagamento ADD COLUMN IF NOT EXISTS cliente_id UUID;

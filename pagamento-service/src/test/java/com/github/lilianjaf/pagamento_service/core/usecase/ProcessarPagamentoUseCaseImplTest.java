@@ -40,7 +40,8 @@ class ProcessarPagamentoUseCaseImplTest {
     private static final BigDecimal VALOR = new BigDecimal("100.00");
 
     private final UUID pedidoId = UUID.randomUUID();
-    private final DadosProcessamentoPagamento dados = new DadosProcessamentoPagamento(pedidoId, VALOR);
+    private final UUID clienteId = UUID.randomUUID();
+    private final DadosProcessamentoPagamento dados = new DadosProcessamentoPagamento(pedidoId, clienteId, VALOR);
 
     @BeforeEach
     void setUp() {
@@ -55,7 +56,7 @@ class ProcessarPagamentoUseCaseImplTest {
     }
 
     private Pagamento pagamentoComStatus(StatusPagamento status, int tentativas) {
-        return new Pagamento(UUID.randomUUID(), pedidoId, VALOR, status,
+        return new Pagamento(UUID.randomUUID(), pedidoId, clienteId, VALOR, status,
                 tentativas, LocalDateTime.now(), null);
     }
 
@@ -63,7 +64,7 @@ class ProcessarPagamentoUseCaseImplTest {
     @DisplayName("Deve aprovar pagamento novo quando processador retorna sucesso")
     void deveAprovarPagamentoNovo() {
         when(pagamentoRepository.buscarPorPedidoId(pedidoId)).thenReturn(Optional.empty());
-        when(processadorGateway.processar(eq(pedidoId), eq(VALOR))).thenReturn(true);
+        when(processadorGateway.processar(eq(pedidoId), eq(clienteId), eq(VALOR))).thenReturn(true);
 
         ArgumentCaptor<Pagamento> captor = ArgumentCaptor.forClass(Pagamento.class);
         when(pagamentoRepository.salvar(captor.capture())).thenAnswer(i -> i.getArgument(0));
@@ -80,7 +81,7 @@ class ProcessarPagamentoUseCaseImplTest {
     @DisplayName("Deve marcar como PENDENTE na primeira rejeição (tentativa 1 de 3)")
     void deveMarcarPendenteNaPrimeiraRejeicao() {
         when(pagamentoRepository.buscarPorPedidoId(pedidoId)).thenReturn(Optional.empty());
-        when(processadorGateway.processar(eq(pedidoId), eq(VALOR))).thenReturn(false);
+        when(processadorGateway.processar(eq(pedidoId), eq(clienteId), eq(VALOR))).thenReturn(false);
 
         ArgumentCaptor<Pagamento> captor = ArgumentCaptor.forClass(Pagamento.class);
         when(pagamentoRepository.salvar(captor.capture())).thenAnswer(i -> i.getArgument(0));
@@ -101,7 +102,7 @@ class ProcessarPagamentoUseCaseImplTest {
         when(pagamentoRepository.buscarPorPedidoId(pedidoId))
                 .thenReturn(Optional.of(pendente))
                 .thenReturn(Optional.empty());
-        when(processadorGateway.processar(eq(pedidoId), eq(VALOR))).thenReturn(false);
+        when(processadorGateway.processar(eq(pedidoId), eq(clienteId), eq(VALOR))).thenReturn(false);
 
         ArgumentCaptor<Pagamento> captor = ArgumentCaptor.forClass(Pagamento.class);
         when(pagamentoRepository.salvar(captor.capture())).thenAnswer(i -> i.getArgument(0));
@@ -123,7 +124,7 @@ class ProcessarPagamentoUseCaseImplTest {
 
         useCase.executar(dados);
 
-        verify(processadorGateway, never()).processar(any(), any());
+        verify(processadorGateway, never()).processar(any(), any(), any());
         verify(outboxGateway).salvarEventoPagamentoAprovado(aprovado);
         verify(pagamentoRepository, never()).salvar(any());
     }
@@ -136,7 +137,7 @@ class ProcessarPagamentoUseCaseImplTest {
 
         useCase.executar(dados);
 
-        verify(processadorGateway, never()).processar(any(), any());
+        verify(processadorGateway, never()).processar(any(), any(), any());
         verify(outboxGateway, never()).salvarEventoPagamentoFalhou(any());
         verify(pagamentoRepository, never()).salvar(any());
     }
@@ -148,7 +149,7 @@ class ProcessarPagamentoUseCaseImplTest {
         when(pagamentoRepository.buscarPorPedidoId(pedidoId))
                 .thenReturn(Optional.empty())
                 .thenReturn(Optional.of(aprovadoNoDB));
-        when(processadorGateway.processar(eq(pedidoId), eq(VALOR))).thenReturn(false);
+        when(processadorGateway.processar(eq(pedidoId), eq(clienteId), eq(VALOR))).thenReturn(false);
 
         useCase.executar(dados);
 
@@ -162,7 +163,7 @@ class ProcessarPagamentoUseCaseImplTest {
     void deveAprovarPagamentoPendenteReprocessadoComSucesso() {
         Pagamento pendente = pagamentoComStatus(StatusPagamento.PENDENTE, 1);
         when(pagamentoRepository.buscarPorPedidoId(pedidoId)).thenReturn(Optional.of(pendente));
-        when(processadorGateway.processar(eq(pedidoId), eq(VALOR))).thenReturn(true);
+        when(processadorGateway.processar(eq(pedidoId), eq(clienteId), eq(VALOR))).thenReturn(true);
 
         ArgumentCaptor<Pagamento> captor = ArgumentCaptor.forClass(Pagamento.class);
         when(pagamentoRepository.salvar(captor.capture())).thenAnswer(i -> i.getArgument(0));

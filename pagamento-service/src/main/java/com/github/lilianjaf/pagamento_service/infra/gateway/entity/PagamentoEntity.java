@@ -18,6 +18,9 @@ public class PagamentoEntity implements Persistable<UUID> {
     @Column(name = "pedido_id", nullable = false, unique = true)
     private UUID pedidoId;
 
+    @Column(name = "cliente_id")
+    private UUID clienteId;
+
     @Column(name = "valor_total", nullable = false, precision = 10, scale = 2)
     private BigDecimal valorTotal;
 
@@ -39,11 +42,12 @@ public class PagamentoEntity implements Persistable<UUID> {
 
     protected PagamentoEntity() {}
 
-    public PagamentoEntity(UUID id, UUID pedidoId, BigDecimal valorTotal,
+    public PagamentoEntity(UUID id, UUID pedidoId, UUID clienteId, BigDecimal valorTotal,
                            StatusPagamento status, int tentativas,
                            LocalDateTime criadoEm, LocalDateTime processadoEm) {
         this.id = id;
         this.pedidoId = pedidoId;
+        this.clienteId = clienteId;
         this.valorTotal = valorTotal;
         this.status = status;
         this.tentativas = tentativas;
@@ -62,6 +66,7 @@ public class PagamentoEntity implements Persistable<UUID> {
     void markNotNew() { this.isNew = false; }
 
     public UUID getPedidoId() { return pedidoId; }
+    public UUID getClienteId() { return clienteId; }
     public BigDecimal getValorTotal() { return valorTotal; }
     public StatusPagamento getStatus() { return status; }
     public void setStatus(StatusPagamento status) { this.status = status; }

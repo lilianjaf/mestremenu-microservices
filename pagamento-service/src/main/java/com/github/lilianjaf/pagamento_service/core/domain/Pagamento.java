@@ -8,25 +8,28 @@ public class Pagamento {
 
     private UUID id;
     private UUID pedidoId;
+    private UUID clienteId;
     private BigDecimal valorTotal;
     private StatusPagamento status;
     private int tentativas;
     private LocalDateTime criadoEm;
     private LocalDateTime processadoEm;
 
-    public Pagamento(UUID pedidoId, BigDecimal valorTotal) {
+    public Pagamento(UUID pedidoId, UUID clienteId, BigDecimal valorTotal) {
         this.id = UUID.randomUUID();
         this.pedidoId = pedidoId;
+        this.clienteId = clienteId;
         this.valorTotal = valorTotal;
         this.status = StatusPagamento.AGUARDANDO;
         this.tentativas = 0;
         this.criadoEm = LocalDateTime.now();
     }
 
-    public Pagamento(UUID id, UUID pedidoId, BigDecimal valorTotal, StatusPagamento status,
+    public Pagamento(UUID id, UUID pedidoId, UUID clienteId, BigDecimal valorTotal, StatusPagamento status,
                      int tentativas, LocalDateTime criadoEm, LocalDateTime processadoEm) {
         this.id = id;
         this.pedidoId = pedidoId;
+        this.clienteId = clienteId;
         this.valorTotal = valorTotal;
         this.status = status;
         this.tentativas = tentativas;
@@ -54,6 +57,7 @@ public class Pagamento {
 
     public UUID getId() { return id; }
     public UUID getPedidoId() { return pedidoId; }
+    public UUID getClienteId() { return clienteId; }
     public BigDecimal getValorTotal() { return valorTotal; }
     public StatusPagamento getStatus() { return status; }
     public int getTentativas() { return tentativas; }

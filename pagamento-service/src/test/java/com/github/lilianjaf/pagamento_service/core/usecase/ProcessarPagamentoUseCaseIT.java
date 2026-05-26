@@ -39,9 +39,10 @@ class ProcessarPagamentoUseCaseIT {
     @DisplayName("Deve salvar pagamento APROVADO e evento outbox quando processador aprova")
     void deveSalvarPagamentoAprovado() {
         UUID pedidoId = UUID.randomUUID();
-        when(processadorGateway.processar(eq(pedidoId), any())).thenReturn(true);
+        UUID clienteId = UUID.randomUUID();
+        when(processadorGateway.processar(eq(pedidoId), eq(clienteId), any())).thenReturn(true);
 
-        processarPagamentoUseCase.executar(new DadosProcessamentoPagamento(pedidoId, BigDecimal.valueOf(100)));
+        processarPagamentoUseCase.executar(new DadosProcessamentoPagamento(pedidoId, clienteId, BigDecimal.valueOf(100)));
 
         Optional<PagamentoEntity> saved = pagamentoRepository.findByPedidoId(pedidoId);
         assertTrue(saved.isPresent());
@@ -57,9 +58,10 @@ class ProcessarPagamentoUseCaseIT {
     @DisplayName("Deve salvar pagamento PENDENTE quando processador rejeita na primeira tentativa")
     void deveSalvarPagamentoPendente() {
         UUID pedidoId = UUID.randomUUID();
-        when(processadorGateway.processar(eq(pedidoId), any())).thenReturn(false);
+        UUID clienteId = UUID.randomUUID();
+        when(processadorGateway.processar(eq(pedidoId), eq(clienteId), any())).thenReturn(false);
 
-        processarPagamentoUseCase.executar(new DadosProcessamentoPagamento(pedidoId, BigDecimal.valueOf(50)));
+        processarPagamentoUseCase.executar(new DadosProcessamentoPagamento(pedidoId, clienteId, BigDecimal.valueOf(50)));
 
         Optional<PagamentoEntity> saved = pagamentoRepository.findByPedidoId(pedidoId);
         assertTrue(saved.isPresent());
@@ -75,8 +77,9 @@ class ProcessarPagamentoUseCaseIT {
     @DisplayName("Deve salvar pagamento FALHOU ao atingir max tentativas e atualizar registro existente")
     void deveSalvarPagamentoFalhouEAtualizarRegistroExistente() {
         UUID pedidoId = UUID.randomUUID();
-        when(processadorGateway.processar(eq(pedidoId), any())).thenReturn(false);
-        DadosProcessamentoPagamento dados = new DadosProcessamentoPagamento(pedidoId, BigDecimal.valueOf(75));
+        UUID clienteId = UUID.randomUUID();
+        when(processadorGateway.processar(eq(pedidoId), eq(clienteId), any())).thenReturn(false);
+        DadosProcessamentoPagamento dados = new DadosProcessamentoPagamento(pedidoId, clienteId, BigDecimal.valueOf(75));
 
         // First attempt → PENDENTE (tentativas=1, max=2)
         processarPagamentoUseCase.executar(dados);
@@ -97,8 +100,9 @@ class ProcessarPagamentoUseCaseIT {
     @DisplayName("Deve republificar evento quando pagamento já está APROVADO")
     void deveRepublicarEventoQuandoJaAprovado() {
         UUID pedidoId = UUID.randomUUID();
-        when(processadorGateway.processar(eq(pedidoId), any())).thenReturn(true);
-        DadosProcessamentoPagamento dados = new DadosProcessamentoPagamento(pedidoId, BigDecimal.valueOf(200));
+        UUID clienteId = UUID.randomUUID();
+        when(processadorGateway.processar(eq(pedidoId), eq(clienteId), any())).thenReturn(true);
+        DadosProcessamentoPagamento dados = new DadosProcessamentoPagamento(pedidoId, clienteId, BigDecimal.valueOf(200));
 
         processarPagamentoUseCase.executar(dados);
         long eventosAntes = outboxRepository.findByProcessadoFalse().stream()
@@ -116,9 +120,10 @@ class ProcessarPagamentoUseCaseIT {
     @DisplayName("Deve retornar lista de pagamentos por status")
     void deveBuscarPagamentosPorStatus() {
         UUID pedidoId = UUID.randomUUID();
-        when(processadorGateway.processar(eq(pedidoId), any())).thenReturn(false);
+        UUID clienteId = UUID.randomUUID();
+        when(processadorGateway.processar(eq(pedidoId), eq(clienteId), any())).thenReturn(false);
 
-        processarPagamentoUseCase.executar(new DadosProcessamentoPagamento(pedidoId, BigDecimal.valueOf(30)));
+        processarPagamentoUseCase.executar(new DadosProcessamentoPagamento(pedidoId, clienteId, BigDecimal.valueOf(30)));
 
         var pendentes = pagamentoRepository.findByStatus(StatusPagamento.PENDENTE);
         assertFalse(pendentes.isEmpty());

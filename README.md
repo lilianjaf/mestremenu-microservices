@@ -20,7 +20,7 @@ Ele cobre todo o ciclo de um pedido gastronômico: cadastro de usuários e resta
 - **Resilience4j** — Circuit Breaker e retry (wiring disponível em pedido/pagamento)
 
 ### Infraestrutura
-- **PostgreSQL 16** — Banco relacional (schemas isolados por serviço via Flyway)
+- **PostgreSQL 16** — Três instâncias: banco compartilhado (usuario + restaurante) e bancos dedicados para pedido e pagamento
 - **Apache Kafka** (Confluent Platform 7.4.0, modo KRaft — sem Zookeeper)
 - **Docker** + **Docker Compose** — Containerização multi-stage com imagem JRE mínima
 - **Gradle** (multi-module) — Build e gerenciamento de dependências
@@ -53,7 +53,9 @@ Ele cobre todo o ciclo de um pedido gastronômico: cadastro de usuários e resta
 
 | Container | Porta (host) | Descrição |
 | :--- | :--- | :--- |
-| **PostgreSQL** | `5432` | Banco de dados relacional compartilhado. |
+| **PostgreSQL** (`db`) | `5432` | Banco compartilhado — `usuario-service` e `restaurante-service`. |
+| **PostgreSQL** (`db-pedido`) | `5433` | Banco dedicado — `pedido-service`. |
+| **PostgreSQL** (`db-pagamento`) | `5434` | Banco dedicado — `pagamento-service`. |
 | **Kafka** | `9092` | Broker de mensagens para comunicação assíncrona. |
 | **ProcPag** | `8089` | Mock do processador de pagamentos externo. |
 | **Prometheus** | `9090` | Coleta de métricas dos serviços. |
@@ -158,12 +160,21 @@ Em seguida, preencha as variáveis:
 
 ### `POSTGRES_DB` / `POSTGRES_USER` / `POSTGRES_PASSWORD` *(obrigatório)*
 
-Credenciais do banco PostgreSQL. Em desenvolvimento, qualquer valor serve.
+Credenciais do banco compartilhado (usuario-service e restaurante-service). Em desenvolvimento, qualquer valor serve.
 
 ```env
 POSTGRES_DB=mestremenu
 POSTGRES_USER=mestremenu
 POSTGRES_PASSWORD=suasenha
+```
+
+### `PEDIDO_DB` / `PAGAMENTO_DB` *(obrigatório)*
+
+Nomes dos bancos dedicados para pedido-service e pagamento-service. Reutilizam `POSTGRES_USER` e `POSTGRES_PASSWORD`.
+
+```env
+PEDIDO_DB=mestremenu_pedido
+PAGAMENTO_DB=mestremenu_pagamento
 ```
 
 ### `JWT_SECRET` *(obrigatório)*
@@ -248,7 +259,7 @@ Após subir, a API estará disponível em:
 Suba apenas a infraestrutura necessária:
 
 ```bash
-docker compose up -d db kafka procpag
+docker compose up -d db db-pedido db-pagamento kafka procpag
 ```
 
 Execute o serviço desejado via Gradle com o perfil `dev`:

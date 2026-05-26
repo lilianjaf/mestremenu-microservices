@@ -1,8 +1,9 @@
 package com.github.lilianjaf.pagamento_service.infra.client;
 
-import java.math.BigDecimal;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public record SolicitacaoPagamentoDto(
-        String pedidoId,
-        BigDecimal valor
+        @JsonProperty("pagamento_id") String pagamentoId,
+        @JsonProperty("cliente_id")   String clienteId,
+        @JsonProperty("valor")        long valor
 ) {}

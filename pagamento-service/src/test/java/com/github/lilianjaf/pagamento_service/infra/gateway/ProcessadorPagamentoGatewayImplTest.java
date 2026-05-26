@@ -30,7 +30,7 @@ class ProcessadorPagamentoGatewayImplTest {
         when(client.processar(any(SolicitacaoPagamentoDto.class)))
                 .thenReturn(new RespostaPagamentoDto("APROVADO", "ok"));
 
-        boolean resultado = gateway.processar(UUID.randomUUID(), BigDecimal.valueOf(100));
+        boolean resultado = gateway.processar(UUID.randomUUID(), UUID.randomUUID(), BigDecimal.valueOf(100));
 
         assertTrue(resultado);
         verify(client).processar(any(SolicitacaoPagamentoDto.class));
@@ -42,7 +42,7 @@ class ProcessadorPagamentoGatewayImplTest {
         when(client.processar(any(SolicitacaoPagamentoDto.class)))
                 .thenThrow(new RuntimeException("connection refused"));
 
-        boolean resultado = gateway.processar(UUID.randomUUID(), BigDecimal.valueOf(50));
+        boolean resultado = gateway.processar(UUID.randomUUID(), UUID.randomUUID(), BigDecimal.valueOf(50));
 
         assertFalse(resultado);
     }
@@ -52,7 +52,7 @@ class ProcessadorPagamentoGatewayImplTest {
     void fallbackAsyncDeveRetornarFalse() throws Exception {
         UUID pedidoId = UUID.randomUUID();
         CompletableFuture<Boolean> resultado = gateway.fallbackAsync(
-                pedidoId, BigDecimal.valueOf(10), new RuntimeException("timeout"));
+                pedidoId, UUID.randomUUID(), BigDecimal.valueOf(10), new RuntimeException("timeout"));
 
         assertFalse(resultado.get());
     }
@@ -60,9 +60,10 @@ class ProcessadorPagamentoGatewayImplTest {
     @Test
     @DisplayName("SolicitacaoPagamentoDto deve armazenar pedidoId e valor")
     void solicitacaoDtoDeveArmazenarDados() {
-        SolicitacaoPagamentoDto dto = new SolicitacaoPagamentoDto("id-123", BigDecimal.valueOf(99));
-        assertEquals("id-123", dto.pedidoId());
-        assertEquals(BigDecimal.valueOf(99), dto.valor());
+        SolicitacaoPagamentoDto dto = new SolicitacaoPagamentoDto("id-123", "client-456", 99L);
+        assertEquals("id-123", dto.pagamentoId());
+        assertEquals("client-456", dto.clienteId());
+        assertEquals(99L, dto.valor());
     }
 
     @Test

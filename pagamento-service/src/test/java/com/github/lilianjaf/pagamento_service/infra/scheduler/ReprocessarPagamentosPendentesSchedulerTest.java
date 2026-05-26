@@ -30,7 +30,7 @@ class ReprocessarPagamentosPendentesSchedulerTest {
     @Mock private ProcessarPagamentoUseCase processarPagamentoUseCase;
 
     private Pagamento buildPagamento(UUID pedidoId, BigDecimal valor) {
-        return new Pagamento(UUID.randomUUID(), pedidoId, valor, StatusPagamento.PENDENTE,
+        return new Pagamento(UUID.randomUUID(), pedidoId, UUID.randomUUID(), valor, StatusPagamento.PENDENTE,
                 1, LocalDateTime.now(), null);
     }
 

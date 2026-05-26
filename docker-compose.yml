@@ -51,6 +51,46 @@ services:
     networks:
       - mestremenu-network
 
+  db-pedido:
+    image: postgres:16-alpine
+    container_name: mestremenu-db-pedido
+    environment:
+      POSTGRES_DB: ${PEDIDO_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      TZ: America/Sao_Paulo
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata_pedido:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - mestremenu-network
+
+  db-pagamento:
+    image: postgres:16-alpine
+    container_name: mestremenu-db-pagamento
+    environment:
+      POSTGRES_DB: ${PAGAMENTO_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      TZ: America/Sao_Paulo
+    ports:
+      - "5434:5432"
+    volumes:
+      - pgdata_pagamento:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - mestremenu-network
+
   procpag:
     image: docker.io/erickemprobr/procpag:latest
     container_name: procpag
@@ -132,7 +172,7 @@ services:
     ports:
       - "5007:5005"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db-pedido:5432/${PEDIDO_DB}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
@@ -141,7 +181,7 @@ services:
       JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -Duser.timezone=America/Sao_Paulo"
       TZ: America/Sao_Paulo
     depends_on:
-      db:
+      db-pedido:
         condition: service_healthy
       kafka:
         condition: service_healthy
@@ -157,7 +197,7 @@ services:
     ports:
       - "5008:5005"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db-pagamento:5432/${PAGAMENTO_DB}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
       SPRING_JPA_HIBERNATE_DDL_AUTO: validate
@@ -168,7 +208,7 @@ services:
       JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -Duser.timezone=America/Sao_Paulo"
       TZ: America/Sao_Paulo
     depends_on:
-      db:
+      db-pagamento:
         condition: service_healthy
       kafka:
         condition: service_healthy
@@ -251,6 +291,10 @@ services:
 
 volumes:
   pgdata:
+    driver: local
+  pgdata_pedido:
+    driver: local
+  pgdata_pagamento:
     driver: local
   grafana_data:
     driver: local
