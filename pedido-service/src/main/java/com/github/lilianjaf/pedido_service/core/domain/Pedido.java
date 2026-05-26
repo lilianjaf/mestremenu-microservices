@@ -46,6 +46,9 @@ public class Pedido {
     }
 
     public void atualizarStatus(StatusPedido novoStatus) {
+        if (this.status == novoStatus) {
+            return;
+        }
         boolean transicaoValida = switch (novoStatus) {
             case PAGO -> this.status == StatusPedido.CRIADO || this.status == StatusPedido.PENDENTE_PAGAMENTO;
             case PENDENTE_PAGAMENTO -> this.status == StatusPedido.CRIADO;

@@ -1,7 +1,7 @@
 package com.github.lilianjaf.restaurante_service.infra.gateway;
 
 import com.github.lilianjaf.restaurante_service.core.domain.ItemCardapio;
-import com.github.lilianjaf.restaurante_service.core.exception.CardapioException;
+import com.github.lilianjaf.restaurante_service.core.exception.RegistroNaoEncontradoException;
 import com.github.lilianjaf.restaurante_service.core.gateway.ItemCardapioRepository;
 import com.github.lilianjaf.restaurante_service.infra.gateway.entity.CardapioEntity;
 import com.github.lilianjaf.restaurante_service.infra.gateway.entity.ItemCardapioEntity;
@@ -33,7 +33,7 @@ public class ItemCardapioRepositoryJpaImpl implements ItemCardapioRepository {
 
         if (item.getId() != null && springDataRepository.existsById(item.getId())) {
             entity = springDataRepository.findById(item.getId())
-                    .orElseThrow(() -> new CardapioException("Item do cardápio não encontrado para atualização."));
+                    .orElseThrow(() -> new RegistroNaoEncontradoException("Item do cardápio não encontrado para atualização."));
 
             ItemCardapioEntityMapper.atualizarEntity(item, entity);
 
@@ -42,7 +42,7 @@ public class ItemCardapioRepositoryJpaImpl implements ItemCardapioRepository {
 
         } else {
             CardapioEntity cardapioEntity = springDataCardapioRepository.findById(item.getIdCardapio())
-                    .orElseThrow(() -> new CardapioException("Cardápio não encontrado para persistência do item."));
+                    .orElseThrow(() -> new RegistroNaoEncontradoException("Cardápio não encontrado para persistência do item."));
 
             entity = ItemCardapioEntityMapper.toEntity(item, cardapioEntity);
             springDataRepository.save(entity);

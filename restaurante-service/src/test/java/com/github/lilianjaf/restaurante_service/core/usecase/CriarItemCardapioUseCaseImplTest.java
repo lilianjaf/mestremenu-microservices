@@ -3,7 +3,7 @@ package com.github.lilianjaf.restaurante_service.core.usecase;
 import com.github.lilianjaf.restaurante_service.core.domain.*;
 import com.github.lilianjaf.restaurante_service.core.dto.DadosCriacaoItemCardapio;
 import com.github.lilianjaf.restaurante_service.core.dto.ItemCardapioRuleContext;
-import com.github.lilianjaf.restaurante_service.core.exception.CardapioException;
+import com.github.lilianjaf.restaurante_service.core.exception.RegistroNaoEncontradoException;
 import com.github.lilianjaf.restaurante_service.core.exception.UsuarioLogadoNaoEncontradoException;
 import com.github.lilianjaf.restaurante_service.core.gateway.*;
 import com.github.lilianjaf.restaurante_service.core.rules.ValidadorItemCardapioRule;
@@ -108,7 +108,7 @@ class CriarItemCardapioUseCaseImplTest {
         when(obterUsuarioLogadoGateway.obterUsuarioLogado()).thenReturn(Optional.of(usuarioLogado));
         when(cardapioRepository.findById(idCardapio)).thenReturn(Optional.empty());
 
-        assertThrows(CardapioException.class, () -> criarItemCardapioUseCase.executar(dados));
+        assertThrows(RegistroNaoEncontradoException.class, () -> criarItemCardapioUseCase.executar(dados));
 
         verifyNoInteractions(restauranteGateway);
         verifyNoInteractions(itemCardapioRepository);

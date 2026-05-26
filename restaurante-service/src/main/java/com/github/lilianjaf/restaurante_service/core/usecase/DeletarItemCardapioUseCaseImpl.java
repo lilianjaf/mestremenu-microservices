@@ -4,7 +4,7 @@ import com.github.lilianjaf.restaurante_service.core.domain.ItemCardapio;
 import com.github.lilianjaf.restaurante_service.core.domain.Restaurante;
 import com.github.lilianjaf.restaurante_service.core.domain.Usuario;
 import com.github.lilianjaf.restaurante_service.core.dto.DeletarItemCardapioRuleContextDto;
-import com.github.lilianjaf.restaurante_service.core.exception.CardapioException;
+import com.github.lilianjaf.restaurante_service.core.exception.RegistroNaoEncontradoException;
 import com.github.lilianjaf.restaurante_service.core.exception.UsuarioLogadoNaoEncontradoException;
 import com.github.lilianjaf.restaurante_service.core.gateway.*;
 import com.github.lilianjaf.restaurante_service.core.rules.ValidadorPermissaoCardapioRule;
@@ -41,13 +41,13 @@ public class DeletarItemCardapioUseCaseImpl implements DeletarItemCardapioUseCas
     @Override
     public void executar(UUID idItem) {
         ItemCardapio item = itemCardapioRepository.findById(idItem)
-                .orElseThrow(() -> new CardapioException("Item do cardápio não encontrado para exclusão."));
+                .orElseThrow(() -> new RegistroNaoEncontradoException("Item do cardápio não encontrado para exclusão."));
 
         var cardapio = cardapioRepository.findById(item.getIdCardapio())
-                .orElseThrow(() -> new CardapioException("Cardápio associado não encontrado."));
+                .orElseThrow(() -> new RegistroNaoEncontradoException("Cardápio associado não encontrado."));
 
         Restaurante restaurante = restauranteGateway.buscarPorId(cardapio.getIdRestaurante())
-                .orElseThrow(() -> new CardapioException("Restaurante não encontrado."));
+                .orElseThrow(() -> new RegistroNaoEncontradoException("Restaurante não encontrado."));
 
         Usuario usuarioLogado = obterUsuarioLogadoGateway.obterUsuarioLogado()
                 .orElseThrow(() -> new UsuarioLogadoNaoEncontradoException("Usuário logado não encontrado"));

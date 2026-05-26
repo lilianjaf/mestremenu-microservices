@@ -7,7 +7,7 @@ import com.github.lilianjaf.restaurante_service.core.domain.Usuario;
 import com.github.lilianjaf.restaurante_service.core.dto.AlterarCardapioRuleContextDto;
 import com.github.lilianjaf.restaurante_service.core.dto.DadosAtualizacaoCardapio;
 import com.github.lilianjaf.restaurante_service.core.dto.DadosCriacaoItemCardapio;
-import com.github.lilianjaf.restaurante_service.core.exception.CardapioException;
+import com.github.lilianjaf.restaurante_service.core.exception.RegistroNaoEncontradoException;
 import com.github.lilianjaf.restaurante_service.core.exception.UsuarioLogadoNaoEncontradoException;
 import com.github.lilianjaf.restaurante_service.core.gateway.CardapioRepository;
 import com.github.lilianjaf.restaurante_service.core.gateway.ObterUsuarioLogadoGateway;
@@ -109,7 +109,7 @@ class AlterarCardapioUseCaseImplTest {
 
         when(cardapioRepository.findById(idCardapio)).thenReturn(Optional.empty());
 
-        assertThrows(CardapioException.class, () -> alterarCardapioUseCase.executar(dados));
+        assertThrows(RegistroNaoEncontradoException.class, () -> alterarCardapioUseCase.executar(dados));
 
         verify(cardapioRepository, never()).salvar(any());
     }

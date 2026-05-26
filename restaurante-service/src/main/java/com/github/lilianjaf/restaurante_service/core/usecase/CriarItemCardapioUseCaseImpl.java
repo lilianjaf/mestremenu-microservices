@@ -6,7 +6,7 @@ import com.github.lilianjaf.restaurante_service.core.domain.Usuario;
 import com.github.lilianjaf.restaurante_service.core.dto.CriarItemCardapioRuleContextDto;
 import com.github.lilianjaf.restaurante_service.core.dto.DadosCriacaoItemCardapio;
 import com.github.lilianjaf.restaurante_service.core.dto.ItemCardapioRuleContext;
-import com.github.lilianjaf.restaurante_service.core.exception.CardapioException;
+import com.github.lilianjaf.restaurante_service.core.exception.RegistroNaoEncontradoException;
 import com.github.lilianjaf.restaurante_service.core.exception.UsuarioLogadoNaoEncontradoException;
 import com.github.lilianjaf.restaurante_service.core.gateway.*;
 import com.github.lilianjaf.restaurante_service.core.rules.ValidadorItemCardapioRule;
@@ -46,7 +46,7 @@ public class CriarItemCardapioUseCaseImpl implements CriarItemCardapioUseCase {
                 .orElseThrow(() -> new UsuarioLogadoNaoEncontradoException("Usuário logado não encontrado"));
 
         var cardapio = cardapioRepository.findById(dados.idCardapio())
-                .orElseThrow(() -> new CardapioException("Cardápio não encontrado."));
+                .orElseThrow(() -> new RegistroNaoEncontradoException("Cardápio não encontrado."));
 
         Restaurante restaurante = restauranteGateway.buscarPorId(cardapio.getIdRestaurante())
                 .orElse(null);

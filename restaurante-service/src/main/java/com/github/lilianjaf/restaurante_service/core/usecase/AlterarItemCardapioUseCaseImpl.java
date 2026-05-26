@@ -5,7 +5,7 @@ import com.github.lilianjaf.restaurante_service.core.domain.Usuario;
 import com.github.lilianjaf.restaurante_service.core.dto.AlterarItemCardapioRuleContextDto;
 import com.github.lilianjaf.restaurante_service.core.dto.DadosAtualizacaoItemCardapio;
 import com.github.lilianjaf.restaurante_service.core.dto.ItemCardapioRuleContext;
-import com.github.lilianjaf.restaurante_service.core.exception.CardapioException;
+import com.github.lilianjaf.restaurante_service.core.exception.RegistroNaoEncontradoException;
 import com.github.lilianjaf.restaurante_service.core.exception.UsuarioLogadoNaoEncontradoException;
 import com.github.lilianjaf.restaurante_service.core.gateway.*;
 import com.github.lilianjaf.restaurante_service.core.rules.ValidadorItemCardapioRule;
@@ -42,10 +42,10 @@ public class AlterarItemCardapioUseCaseImpl implements AlterarItemCardapioUseCas
     @Override
     public ItemCardapio executar(DadosAtualizacaoItemCardapio dados) {
         ItemCardapio item = itemCardapioRepository.findById(dados.idItemCardapio())
-                .orElseThrow(() -> new CardapioException("Item do cardápio não encontrado."));
+                .orElseThrow(() -> new RegistroNaoEncontradoException("Item do cardápio não encontrado."));
 
         var cardapio = cardapioRepository.findById(item.getIdCardapio())
-                .orElseThrow(() -> new CardapioException("Cardápio associado não encontrado."));
+                .orElseThrow(() -> new RegistroNaoEncontradoException("Cardápio associado não encontrado."));
 
         var restauranteOpt = restauranteGateway.buscarPorId(cardapio.getIdRestaurante());
         

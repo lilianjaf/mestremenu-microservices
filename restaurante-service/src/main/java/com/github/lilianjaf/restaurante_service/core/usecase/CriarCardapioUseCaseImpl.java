@@ -6,7 +6,7 @@ import com.github.lilianjaf.restaurante_service.core.domain.Restaurante;
 import com.github.lilianjaf.restaurante_service.core.domain.Usuario;
 import com.github.lilianjaf.restaurante_service.core.dto.CriarCardapioRuleContextDto;
 import com.github.lilianjaf.restaurante_service.core.dto.DadosCriacaoCardapio;
-import com.github.lilianjaf.restaurante_service.core.exception.CardapioException;
+import com.github.lilianjaf.restaurante_service.core.exception.RegistroNaoEncontradoException;
 import com.github.lilianjaf.restaurante_service.core.exception.UsuarioLogadoNaoEncontradoException;
 import com.github.lilianjaf.restaurante_service.core.gateway.CardapioRepository;
 import com.github.lilianjaf.restaurante_service.core.gateway.ObterUsuarioLogadoGateway;
@@ -46,7 +46,7 @@ public class CriarCardapioUseCaseImpl implements CriarCardapioUseCase {
                                 .orElseThrow(() -> new UsuarioLogadoNaoEncontradoException("Usuário logado não encontrado"));
 
                 Restaurante restaurante = restauranteGateway.buscarPorId(dados.idRestaurante())
-                                .orElseThrow(() -> new CardapioException("Restaurante não encontrado."));
+                                .orElseThrow(() -> new RegistroNaoEncontradoException("Restaurante não encontrado."));
 
                 boolean nomeUnico = !cardapioRepository.existeNomeParaRestaurante(dados.nome(), dados.idRestaurante());
 

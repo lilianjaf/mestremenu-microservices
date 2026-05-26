@@ -66,6 +66,149 @@
 			]
 		},
 		{
+			"name": "5. Restaurantes",
+			"item": [
+				{
+					"name": "Criar Restaurante",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code deve ser 201 Created\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"pm.test(\"Salvar UUID do restaurante na variável\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property(\"id\");",
+									"    pm.collectionVariables.set(\"restaurante_id\", jsonData.id);",
+									"});",
+									"var token = pm.collectionVariables.get(\"jwt_token\");",
+									"var base64 = token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/');",
+									"while (base64.length % 4) base64 += '=';",
+									"var payload = JSON.parse(atob(base64));",
+									"pm.collectionVariables.set(\"usuario_id_com_restaurante\", payload.userId);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Restaurante do Teste\",\n    \"tipoCozinha\": \"Brasileira\",\n    \"horarioFuncionamento\": \"08:00 - 22:00\",\n    \"endereco\": {\n        \"logradouro\": \"Rua de Teste\",\n        \"numero\": \"123\",\n        \"bairro\": \"Centro\",\n        \"cidade\": \"Atibaia\",\n        \"cep\": \"12940-000\",\n        \"uf\": \"SP\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{gateway_base_url}}/api/v1/restaurantes",
+							"host": [
+								"{{gateway_base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"restaurantes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Restaurante",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code deve ser 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway_base_url}}/api/v1/restaurantes/{{restaurante_id}}",
+							"host": [
+								"{{gateway_base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"restaurantes",
+								"{{restaurante_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Restaurante",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code deve ser 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Restaurante do Teste Atualizado\",\n    \"tipoCozinha\": \"Italiana\"\n}"
+						},
+						"url": {
+							"raw": "{{gateway_base_url}}/api/v1/restaurantes/{{restaurante_id}}",
+							"host": [
+								"{{gateway_base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"restaurantes",
+								"{{restaurante_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{jwt_token}}",
+						"type": "string"
+					}
+				]
+			}
+		},
+		{
 			"name": "4. Cadastro Público",
 			"item": [
 				{
@@ -1719,144 +1862,6 @@
 								"v1",
 								"tipos-usuario",
 								"{{tipo_aux_id}}"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"auth": {
-				"type": "bearer",
-				"bearer": [
-					{
-						"key": "token",
-						"value": "{{jwt_token}}",
-						"type": "string"
-					}
-				]
-			}
-		},
-		{
-			"name": "5. Restaurantes",
-			"item": [
-				{
-					"name": "Criar Restaurante",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code deve ser 201 Created\", function () {",
-									"    pm.response.to.have.status(201);",
-									"});",
-									"pm.test(\"Salvar UUID do restaurante na variável\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData).to.have.property(\"id\");",
-									"    pm.collectionVariables.set(\"restaurante_id\", jsonData.id);",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"nome\": \"Restaurante do Teste\",\n    \"tipoCozinha\": \"Brasileira\",\n    \"horarioFuncionamento\": \"08:00 - 22:00\",\n    \"idDono\": \"8c9c7e0c-84d4-4a4e-862d-0b70c3c54d3d\",\n    \"endereco\": {\n        \"logradouro\": \"Rua de Teste\",\n        \"numero\": \"123\",\n        \"bairro\": \"Centro\",\n        \"cidade\": \"Atibaia\",\n        \"cep\": \"12940-000\",\n        \"uf\": \"SP\"\n    }\n}"
-						},
-						"url": {
-							"raw": "{{gateway_base_url}}/api/v1/restaurantes",
-							"host": [
-								"{{gateway_base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"restaurantes"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Buscar Restaurante",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code deve ser 200 OK\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{gateway_base_url}}/api/v1/restaurantes/{{restaurante_id}}",
-							"host": [
-								"{{gateway_base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"restaurantes",
-								"{{restaurante_id}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Atualizar Restaurante",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code deve ser 200 OK\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"nome\": \"Restaurante do Teste Atualizado\",\n    \"tipoCozinha\": \"Italiana\"\n}"
-						},
-						"url": {
-							"raw": "{{gateway_base_url}}/api/v1/restaurantes/{{restaurante_id}}",
-							"host": [
-								"{{gateway_base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"restaurantes",
-								"{{restaurante_id}}"
 							]
 						}
 					},

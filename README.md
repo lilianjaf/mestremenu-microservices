@@ -42,10 +42,12 @@ Ele cobre todo o ciclo de um pedido gastronômico: cadastro de usuários e resta
 | Serviço | Porta (host) | Responsabilidade |
 | :--- | :--- | :--- |
 | **gateway-service** | `8090` | Único ponto de entrada público. Valida JWT e roteia para os serviços internos. |
-| **usuario-service** | `8081` | Autenticação, cadastro de usuários e tipos de usuário (roles). |
-| **restaurante-service** | `8082` | Restaurantes, cardápios e itens de cardápio. |
-| **pedido-service** | `8083` | Criação e consulta de pedidos (produtor Kafka). |
-| **pagamento-service** | `8084` | Processamento de pagamentos (consumidor Kafka + chamada ao processador externo). |
+| **usuario-service** | via gateway | Autenticação, cadastro de usuários e tipos de usuário (roles). |
+| **restaurante-service** | via gateway | Restaurantes, cardápios e itens de cardápio. |
+| **pedido-service** | via gateway | Criação e consulta de pedidos (produtor Kafka). |
+| **pagamento-service** | — | Processamento de pagamentos (consumidor Kafka + chamada ao processador externo). |
+
+> Os serviços internos não expõem sua porta HTTP ao host — todo o tráfego passa pelo gateway em `8090`. Cada serviço expõe apenas sua porta de debug JDWP (`5005`–`5009` no host).
 
 ### Infraestrutura
 
@@ -53,7 +55,7 @@ Ele cobre todo o ciclo de um pedido gastronômico: cadastro de usuários e resta
 | :--- | :--- | :--- |
 | **PostgreSQL** | `5432` | Banco de dados relacional compartilhado. |
 | **Kafka** | `9092` | Broker de mensagens para comunicação assíncrona. |
-| **ProcPag** | `8080` | Mock do processador de pagamentos externo. |
+| **ProcPag** | `8089` | Mock do processador de pagamentos externo. |
 | **Prometheus** | `9090` | Coleta de métricas dos serviços. |
 | **Grafana** | `3000` | Visualização de métricas (`admin` / `GRAFANA_PASSWORD`). |
 
@@ -78,7 +80,7 @@ gateway-service :8090  ──── valida JWT ────► usuario-service :
                                                pagamento-service :8084
                                                         │
                                                         ▼
-                                               ProcPag (mock) :8080
+                                               ProcPag (mock) :8089
 ```
 
 > **Nota:** `restaurante-service` e `usuario-service` são **completamente independentes em runtime**. O `restaurante-service` resolve a identidade do usuário logado lendo os claims do JWT (user ID e role) diretamente do `SecurityContextHolder` via `SpringSecurityUsuarioLogadoAdapter` — sem chamadas HTTP nem dependência compile-time entre os serviços.

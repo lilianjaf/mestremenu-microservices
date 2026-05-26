@@ -3,6 +3,7 @@ package com.github.lilianjaf.restaurante_service.core.usecase;
 import com.github.lilianjaf.restaurante_service.core.domain.Restaurante;
 import com.github.lilianjaf.restaurante_service.core.domain.Usuario;
 import com.github.lilianjaf.restaurante_service.core.exception.DomainException;
+import com.github.lilianjaf.restaurante_service.core.exception.RegistroNaoEncontradoException;
 import com.github.lilianjaf.restaurante_service.core.exception.UsuarioLogadoNaoEncontradoException;
 import com.github.lilianjaf.restaurante_service.core.gateway.ObterUsuarioLogadoGateway;
 import com.github.lilianjaf.restaurante_service.core.gateway.RestauranteRepository;
@@ -39,7 +40,7 @@ public class BuscarRestaurantePorIdUseCaseImpl implements BuscarRestaurantePorId
         }
 
         Restaurante restaurante = restauranteRepository.findById(id)
-                .orElseThrow(() -> new DomainException("Restaurante não encontrado."));
+                .orElseThrow(() -> new RegistroNaoEncontradoException("Restaurante não encontrado."));
 
         BuscarRestauranteRuleContextDto context = new BuscarRestauranteRuleContextDto(usuarioLogado, restaurante);
 

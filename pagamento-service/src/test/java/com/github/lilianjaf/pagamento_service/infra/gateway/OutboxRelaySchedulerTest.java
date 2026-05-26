@@ -12,6 +12,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -35,6 +36,8 @@ class OutboxRelaySchedulerTest {
     void devePublicarEventoComSucesso() {
         OutboxEventEntity evento = buildEvento("pagamento.aprovado");
         when(outboxRepository.findByProcessadoFalse()).thenReturn(List.of(evento));
+        when(kafkaTemplate.send(anyString(), anyString(), anyString()))
+                .thenReturn(CompletableFuture.completedFuture(null));
 
         scheduler.processarEventosPendentes();
 
@@ -73,6 +76,8 @@ class OutboxRelaySchedulerTest {
         OutboxEventEntity e1 = buildEvento("pagamento.aprovado");
         OutboxEventEntity e2 = buildEvento("pagamento.falhou");
         when(outboxRepository.findByProcessadoFalse()).thenReturn(List.of(e1, e2));
+        when(kafkaTemplate.send(anyString(), anyString(), anyString()))
+                .thenReturn(CompletableFuture.completedFuture(null));
 
         scheduler.processarEventosPendentes();
 

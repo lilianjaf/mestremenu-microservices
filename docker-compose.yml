@@ -55,7 +55,13 @@ services:
     image: docker.io/erickemprobr/procpag:latest
     container_name: procpag
     ports:
-      - "8080:8080"
+      - "8089:8089"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8089/openapi.yml > /dev/null 2>&1 || curl -sf http://localhost:8089/openapi.yml > /dev/null 2>&1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
     networks:
       - mestremenu-network
 
@@ -106,7 +112,7 @@ services:
       JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -Duser.timezone=America/Sao_Paulo"
       TZ: America/Sao_Paulo
     depends_on:
-      db:
+      usuario-service:
         condition: service_healthy
     healthcheck:
       test: ["CMD-SHELL", "wget -qO- http://localhost:8080/actuator/health | grep -q '\"status\":\"UP\"' "]
@@ -156,7 +162,7 @@ services:
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
       SPRING_JPA_HIBERNATE_DDL_AUTO: validate
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
-      PAGAMENTO_EXTERNO_URL: http://procpag:8080
+      PAGAMENTO_EXTERNO_URL: http://procpag:8089
       SERVER_PORT: 8080
       SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-docker}
       JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -Duser.timezone=America/Sao_Paulo"
@@ -165,6 +171,8 @@ services:
       db:
         condition: service_healthy
       kafka:
+        condition: service_healthy
+      procpag:
         condition: service_healthy
     networks:
       - mestremenu-network

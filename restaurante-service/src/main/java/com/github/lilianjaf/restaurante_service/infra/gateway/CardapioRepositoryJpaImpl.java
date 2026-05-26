@@ -1,7 +1,7 @@
 package com.github.lilianjaf.restaurante_service.infra.gateway;
 
 import com.github.lilianjaf.restaurante_service.core.domain.Cardapio;
-import com.github.lilianjaf.restaurante_service.core.exception.CardapioException;
+import com.github.lilianjaf.restaurante_service.core.exception.RegistroNaoEncontradoException;
 import com.github.lilianjaf.restaurante_service.core.gateway.CardapioRepository;
 import com.github.lilianjaf.restaurante_service.infra.gateway.entity.CardapioEntity;
 import com.github.lilianjaf.restaurante_service.infra.gateway.mapper.CardapioEntityMapper;
@@ -29,7 +29,7 @@ public class CardapioRepositoryJpaImpl implements CardapioRepository {
 
         if (cardapioDomain.getId() != null && springDataRepository.existsById(cardapioDomain.getId())) {
             entity = springDataRepository.findById(cardapioDomain.getId())
-                    .orElseThrow(() -> new CardapioException("Cardápio não encontrado para atualização"));
+                    .orElseThrow(() -> new RegistroNaoEncontradoException("Cardápio não encontrado para atualização"));
 
             CardapioEntityMapper.atualizarEntity(cardapioDomain, entity);
 

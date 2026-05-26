@@ -27,13 +27,13 @@ public class AtualizarStatusPedidoUseCaseImpl implements AtualizarStatusPedidoUs
 
     @Override
     public Pedido executar(UUID pedidoId, StatusPedido novoStatus) {
-        Pedido pedido = pedidoRepository.buscarPorId(pedidoId)
-                .orElseThrow(() -> new PedidoNaoEncontradoException("Pedido não encontrado: " + pedidoId));
-
-        AtualizarStatusPedidoContext context = new AtualizarStatusPedidoContext(pedido, novoStatus);
-        businessRules.forEach(rule -> rule.validar(context));
-
         return transactionGateway.execute(() -> {
+            Pedido pedido = pedidoRepository.buscarPorId(pedidoId)
+                    .orElseThrow(() -> new PedidoNaoEncontradoException("Pedido não encontrado: " + pedidoId));
+
+            AtualizarStatusPedidoContext context = new AtualizarStatusPedidoContext(pedido, novoStatus);
+            businessRules.forEach(rule -> rule.validar(context));
+
             pedido.atualizarStatus(novoStatus);
             return pedidoRepository.salvar(pedido);
         });

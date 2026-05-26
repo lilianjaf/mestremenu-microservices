@@ -4,7 +4,7 @@ import com.github.lilianjaf.restaurante_service.core.domain.ItemCardapio;
 import com.github.lilianjaf.restaurante_service.core.domain.TipoNativo;
 import com.github.lilianjaf.restaurante_service.core.domain.Usuario;
 import com.github.lilianjaf.restaurante_service.core.dto.BuscarItemCardapioPorIdRuleContextDto;
-import com.github.lilianjaf.restaurante_service.core.exception.CardapioException;
+import com.github.lilianjaf.restaurante_service.core.exception.RegistroNaoEncontradoException;
 import com.github.lilianjaf.restaurante_service.core.exception.UsuarioLogadoNaoEncontradoException;
 import com.github.lilianjaf.restaurante_service.core.gateway.ItemCardapioRepository;
 import com.github.lilianjaf.restaurante_service.core.gateway.ObterUsuarioLogadoGateway;
@@ -102,7 +102,7 @@ class BuscarItemCardapioPorIdUseCaseImplTest {
             return supplier.get();
         });
 
-        assertThrows(CardapioException.class, () -> buscarItemCardapioPorIdUseCase.executar(idItem));
+        assertThrows(RegistroNaoEncontradoException.class, () -> buscarItemCardapioPorIdUseCase.executar(idItem));
 
         verify(permissaoRule).validar(any());
         verify(itemCardapioRepository).findById(idItem);
