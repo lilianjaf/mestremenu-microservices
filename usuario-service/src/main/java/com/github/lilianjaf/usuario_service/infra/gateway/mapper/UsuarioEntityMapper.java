@@ -6,8 +6,6 @@ import com.github.lilianjaf.usuario_service.infra.gateway.entity.EnderecoEmbedda
 import com.github.lilianjaf.usuario_service.infra.gateway.entity.TipoUsuarioEntity;
 import com.github.lilianjaf.usuario_service.infra.gateway.entity.UsuarioEntity;
 
-import java.util.ArrayList;
-
 public class UsuarioEntityMapper {
 
     public static UsuarioEntity toEntity(UsuarioBase domain) {
@@ -102,8 +100,7 @@ public class UsuarioEntityMapper {
                     tipoDomain,
                     enderecoDomain,
                     entity.getDataUltimaAlteracao(),
-                    entity.getAtivo(),
-                    new ArrayList<>()
+                    entity.getAtivo()
             );
         }
 

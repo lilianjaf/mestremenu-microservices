@@ -27,7 +27,7 @@ class ApenasDonoPodeCriarNovosUsuariosRuleTest {
     private static Dono dono() {
         Endereco endereco = new Endereco("Rua A", "1", "", "Bairro", "Cidade", "01310-000", "SP");
         return new Dono("Dono", "d@e.com", "dono", "senha",
-                new TipoUsuario("DONO", TipoNativo.DONO), endereco, List.of());
+                new TipoUsuario("DONO", TipoNativo.DONO), endereco);
     }
 
     @Test

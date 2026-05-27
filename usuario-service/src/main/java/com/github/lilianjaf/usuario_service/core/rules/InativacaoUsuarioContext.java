@@ -19,11 +19,4 @@ public record InativacaoUsuarioContext(
         return isUsuarioLogadoDono() || isUsuarioLogadoProprioUsuarioAlvo();
     }
 
-    public boolean isUsuarioAlvoDonoComRestaurantes() {
-        if (usuarioAlvo.isDono()) {
-            Dono dono = (Dono) usuarioAlvo;
-            return dono.getRestaurantes() != null && !dono.getRestaurantes().isEmpty();
-        }
-        return false;
-    }
 }

@@ -37,7 +37,6 @@ class UsuarioFactoryTest {
         assertNotNull(usuario);
         assertInstanceOf(Dono.class, usuario);
         assertEquals(dados.nome(), usuario.getNome());
-        assertTrue(((Dono) usuario).getRestaurantes().isEmpty());
     }
 
     @Test

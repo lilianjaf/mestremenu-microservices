@@ -23,8 +23,7 @@ public class UsuarioFactory {
                     dados.login(),
                     dados.senha(),
                     dados.tipoCustomizado(),
-                    dados.endereco(),
-                    null
+                    dados.endereco()
             )
     );
 

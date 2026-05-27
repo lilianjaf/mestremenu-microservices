@@ -115,9 +115,7 @@ public class UsuarioConfig {
                 new ApenasDonoOuProprioUsuarioPodeInativarRule()
         );
 
-        List<ValidadorInativacaoUsuarioRule> rules = List.of(
-                new UsuarioSemRestauranteVinculadoRule()
-        );
+        List<ValidadorInativacaoUsuarioRule> rules = List.of();
 
         return new InativarUsuarioUsecaseImpl(
                 buscarUsuarioUsecase,

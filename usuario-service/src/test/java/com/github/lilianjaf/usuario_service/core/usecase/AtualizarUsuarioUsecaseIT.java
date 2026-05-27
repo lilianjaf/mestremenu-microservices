@@ -51,7 +51,7 @@ class AtualizarUsuarioUsecaseIT {
         TipoUsuario tipoDono = new TipoUsuario("DONO_" + UUID.randomUUID(), TipoNativo.DONO);
         tipoUsuarioRepository.salvar(tipoDono);
         Endereco endereco = new Endereco("Rua", "123", null, "Bairro", "Cidade", "12345678", "SP");
-        Dono dono = new Dono("Dono Teste", email, login, "senha", tipoDono, endereco, null);
+        Dono dono = new Dono("Dono Teste", email, login, "senha", tipoDono, endereco);
         usuarioRepository.salvar(dono);
         return dono;
     }
