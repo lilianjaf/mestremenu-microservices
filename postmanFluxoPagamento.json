@@ -1,0 +1,184 @@
+{
+  "info": {
+    "name": "MestreMenu — Fluxo de Pagamento",
+    "description": "Demonstra o fluxo assíncrono completo: criar pedido → confirmar → pagamento via Kafka → resultado.\n\nComo usar:\n1. Importe esta coleção no Postman.\n2. Execute via Collection Runner com delay de 3000 ms entre requisições.\n3. O passo [5] faz polling até o status terminal. Execute várias vezes para observar PAGO e CANCELADO.\n\nResultados possíveis:\n- PAGO → procpag aprovou o pagamento (HTTP 200)\n- PENDENTE_PAGAMENTO → procpag rejeitou (408/502); scheduler vai retentar até MAX_TENTATIVAS\n- CANCELADO → todas as tentativas falharam; pedido é cancelado via evento pagamento.falhou",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "gateway_base_url", "value": "http://localhost:8090" },
+    { "key": "jwt_token",        "value": "" },
+    { "key": "restaurante_id",   "value": "" },
+    { "key": "pedido_id",        "value": "" },
+    { "key": "poll_attempts",    "value": "0" }
+  ],
+  "item": [
+    {
+      "name": "[1] Login",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "{{gateway_base_url}}/api/v1/login", "host": ["{{gateway_base_url}}"], "path": ["api","v1","login"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"login\": \"admin\",\n    \"senha\": \"admin\"\n}"
+        },
+        "description": "Autentica como admin. O JWT é salvo em jwt_token e usado nos próximos passos."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Login OK', () => pm.response.to.have.status(200));",
+              "const token = pm.response.json().token;",
+              "pm.collectionVariables.set('jwt_token', token);",
+              "console.log('JWT salvo.');"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "[2] Criar Restaurante",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type",  "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+        ],
+        "url": { "raw": "{{gateway_base_url}}/api/v1/restaurantes", "host": ["{{gateway_base_url}}"], "path": ["api","v1","restaurantes"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"nome\": \"Restaurante Demo Pagamento\",\n    \"tipoCozinha\": \"Italiana\",\n    \"horarioFuncionamento\": \"11:00 - 23:00\",\n    \"endereco\": {\n        \"logradouro\": \"Rua da Demo\",\n        \"numero\": \"42\",\n        \"bairro\": \"Centro\",\n        \"cidade\": \"São Paulo\",\n        \"cep\": \"01310-100\",\n        \"uf\": \"SP\"\n    }\n}"
+        },
+        "description": "Cria um restaurante para associar ao pedido. O ID é salvo em restaurante_id.\nSe já existir um restaurante de execuções anteriores, basta atualizar a variável restaurante_id manualmente e pular este passo."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Restaurante criado', () => pm.response.to.have.status(201));",
+              "const id = pm.response.json().id;",
+              "pm.collectionVariables.set('restaurante_id', id);",
+              "console.log('restaurante_id:', id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "[3] Criar Pedido (Rascunho)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type",  "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+        ],
+        "url": { "raw": "{{gateway_base_url}}/api/v1/pedidos", "host": ["{{gateway_base_url}}"], "path": ["api","v1","pedidos"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"restauranteId\": \"{{restaurante_id}}\",\n    \"itens\": [\n        { \"descricao\": \"Pizza Margherita\", \"quantidade\": 2, \"preco\": 45.00 },\n        { \"descricao\": \"Água Mineral\",     \"quantidade\": 1, \"preco\": 8.00  }\n    ]\n}"
+        },
+        "description": "Cria o pedido no status RASCUNHO. O cliente é extraído do JWT.\nvalor_total = 2×45 + 1×8 = 98 reais, enviado ao procpag como inteiro (98)."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Pedido criado (201)', () => pm.response.to.have.status(201));",
+              "const body = pm.response.json();",
+              "pm.collectionVariables.set('pedido_id', body.id);",
+              "pm.collectionVariables.set('poll_attempts', '0');",
+              "console.log('pedido_id:', body.id);",
+              "console.log('valorTotal:', body.valorTotal);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "[4] Confirmar Pedido → Dispara Pagamento",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+        ],
+        "url": {
+          "raw": "{{gateway_base_url}}/api/v1/pedidos/{{pedido_id}}/confirmar",
+          "host": ["{{gateway_base_url}}"],
+          "path": ["api","v1","pedidos","{{pedido_id}}","confirmar"]
+        },
+        "description": "Confirma o pedido: status muda para CRIADO e o evento pedido.criado é publicado no Kafka.\npagamento-service consome esse evento e chama o procpag (mock externo).\n\nA partir daqui o fluxo é assíncrono:\n- procpag retorna 200  → pagamento APROVADO → pedido PAGO\n- procpag retorna 408/502 → pagamento PENDENTE → scheduler retenta até MAX_TENTATIVAS (padrão: 3)\n  - Se alguma retentativa aprovar → PAGO\n  - Se esgotar tentativas  → pagamento FALHOU → pedido CANCELADO"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Pedido confirmado (200)', () => pm.response.to.have.status(200));",
+              "const status = pm.response.json().status;",
+              "pm.test('Status é CRIADO', () => pm.expect(status).to.equal('CRIADO'));",
+              "pm.collectionVariables.set('poll_attempts', '0');",
+              "console.log('Pedido confirmado. Aguardando processamento do pagamento...');"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "[5] Verificar Status do Pagamento",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+        ],
+        "url": {
+          "raw": "{{gateway_base_url}}/api/v1/pedidos/{{pedido_id}}",
+          "host": ["{{gateway_base_url}}"],
+          "path": ["api","v1","pedidos","{{pedido_id}}"]
+        },
+        "description": "Faz polling do status do pedido até atingir estado terminal.\nNo Collection Runner, configure delay ≥ 3000 ms entre requisições.\n\nEstados intermediários:\n- CRIADO            → evento enviado ao Kafka, aguardando pagamento-service processar\n- PENDENTE_PAGAMENTO → procpag rejeitou; scheduler vai retentar (a cada ~30s por padrão)\n\nEstados terminais:\n- PAGO     → pagamento aprovado pelo procpag\n- CANCELADO → todas as tentativas falharam"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const body       = pm.response.json();",
+              "const status     = body.status;",
+              "const attempts   = parseInt(pm.collectionVariables.get('poll_attempts') || '0') + 1;",
+              "pm.collectionVariables.set('poll_attempts', String(attempts));",
+              "",
+              "console.log('[Poll ' + attempts + '] Status do pedido: ' + status);",
+              "",
+              "if (status === 'PAGO') {",
+              "    pm.test('✅ Pagamento APROVADO — pedido PAGO', () => pm.expect(status).to.equal('PAGO'));",
+              "    console.log('Pagamento aprovado pelo processador externo (procpag retornou HTTP 200).');",
+              "} else if (status === 'CANCELADO') {",
+              "    pm.test('❌ Pagamento FALHOU — pedido CANCELADO', () => pm.expect(status).to.equal('CANCELADO'));",
+              "    console.log('Todas as tentativas falharam (procpag retornou 408/502 em todas). Saga compensou: pedido cancelado.');",
+              "} else if (attempts >= 30) {",
+              "    pm.test('⚠️ Timeout: status ainda ' + status + ' após 30 polls', () => pm.expect(false).to.be.true);",
+              "    console.log('Verifique os logs do pagamento-service e do scheduler.');",
+              "} else {",
+              "    if (status === 'PENDENTE_PAGAMENTO') {",
+              "        console.log('Pagamento pendente. Scheduler vai retentar em ~30s. Aguarde mais um ciclo...');",
+              "    } else {",
+              "        console.log('Pagamento ainda sendo processado...');",
+              "    }",
+              "    pm.execution.setNextRequest('[5] Verificar Status do Pagamento');",
+              "}"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
