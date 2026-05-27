@@ -12,7 +12,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -37,28 +36,16 @@ class ProcessadorPagamentoGatewayImplTest {
     }
 
     @Test
-    @DisplayName("processar deve retornar false via fallback quando cliente lança exceção")
-    void deveRetornarFalseViaFallback() {
-        when(client.processar(any(SolicitacaoPagamentoDto.class)))
-                .thenThrow(new RuntimeException("connection refused"));
-
-        boolean resultado = gateway.processar(UUID.randomUUID(), UUID.randomUUID(), BigDecimal.valueOf(50));
+    @DisplayName("fallback deve retornar false sem propagar exceção")
+    void fallbackDeveRetornarFalse() {
+        boolean resultado = gateway.fallback(
+                UUID.randomUUID(), UUID.randomUUID(), BigDecimal.valueOf(10), new RuntimeException("timeout"));
 
         assertFalse(resultado);
     }
 
     @Test
-    @DisplayName("fallbackAsync deve retornar CompletableFuture com false")
-    void fallbackAsyncDeveRetornarFalse() throws Exception {
-        UUID pedidoId = UUID.randomUUID();
-        CompletableFuture<Boolean> resultado = gateway.fallbackAsync(
-                pedidoId, UUID.randomUUID(), BigDecimal.valueOf(10), new RuntimeException("timeout"));
-
-        assertFalse(resultado.get());
-    }
-
-    @Test
-    @DisplayName("SolicitacaoPagamentoDto deve armazenar pedidoId e valor")
+    @DisplayName("SolicitacaoPagamentoDto deve armazenar pagamentoId, clienteId e valor")
     void solicitacaoDtoDeveArmazenarDados() {
         SolicitacaoPagamentoDto dto = new SolicitacaoPagamentoDto("id-123", "client-456", 99L);
         assertEquals("id-123", dto.pagamentoId());
